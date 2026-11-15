@@ -1,0 +1,3724 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Maria Essindi Bidjo — 2026 Chrome Portfolio</title>
+
+  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            obsidian: {
+              950: '#07080b',
+              900: '#0b0c10',
+              850: '#101218',
+              800: '#161922',
+              700: '#1f2430',
+            },
+            chrome: {
+              100: '#f5f7fa',
+              200: '#e4e8ef',
+              300: '#d8dde6',
+              400: '#b0b8c6',
+              500: '#848e9f',
+              600: '#596273',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- jsPDF for Instant Downloadable PDF CV -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Three.js r128 for 3D Liquid Chrome WebGL Studio -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    :root {
+      --bg-obsidian: #0b0c10;
+      --surface-glass: rgba(14, 17, 24, 0.74);
+      --surface-elevated: rgba(24, 28, 38, 0.84);
+      --border-chrome: rgba(216, 221, 230, 0.16);
+      --border-chrome-hover: rgba(216, 221, 230, 0.42);
+      --text-silver: #d8dde6;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-obsidian);
+      color: var(--text-silver);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Subtle 2026 Brushed Obsidian Background Texture */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(216, 221, 230, 0.07) 0%, transparent 42%),
+        radial-gradient(circle at 85% 85%, rgba(148, 163, 184, 0.06) 0%, transparent 45%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.012) 0px,
+          rgba(255, 255, 255, 0.012) 1px,
+          transparent 1px,
+          transparent 4px
+        ),
+        #0b0c10;
+      pointer-events: none;
+    }
+
+    /* Liquid Chrome Metallic Text Gradient */
+    .liquid-chrome-text {
+      background: linear-gradient(135deg, #ffffff 0%, #d8dde6 32%, #8e98aa 62%, #eef2f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Brushed Silver Metallic Button / Pill */
+    .chrome-btn-primary {
+      background: linear-gradient(135deg, #f3f5f8 0%, #d8dde6 48%, #aeb7c7 100%);
+      color: #0b0c10;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 4px 20px rgba(216, 221, 230, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .chrome-btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 26px rgba(216, 221, 230, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      filter: brightness(1.04);
+    }
+
+    .chrome-btn-primary:active {
+      transform: translateY(0px) scale(0.98);
+    }
+
+    /* Glassmorphic Obsidian Bento Card floating over 3D Liquid Chrome Canvas */
+    .bento-card {
+      background: var(--surface-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-chrome);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.28s ease;
+    }
+
+    .bento-card-interactive:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-chrome-hover);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(216, 221, 230, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    /* Custom Subtle Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0c10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b313f;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475066;
+    }
+
+    /* Equalizer Bar Animation for Music Dock */
+    @keyframes eqPulse {
+      0%, 100% { height: 4px; }
+      50% { height: 14px; }
+    }
+    .eq-bar {
+      width: 2.5px;
+      border-radius: 999px;
+      background: #d8dde6;
+      height: 5px;
+    }
+    .eq-playing .eq-bar:nth-child(1) { animation: eqPulse 0.75s ease-in-out infinite; }
+    .eq-playing .eq-bar:nth-child(2) { animation: eqPulse 0.55s ease-in-out 0.15s infinite; }
+    .eq-playing .eq-bar:nth-child(3) { animation: eqPulse 0.85s ease-in-out 0.3s infinite; }
+    .eq-playing .eq-bar:nth-child(4) { animation: eqPulse 0.65s ease-in-out 0.1s infinite; }
+
+    /* Tactile D-Pad Buttons */
+    .dpad-btn {
+      background: linear-gradient(145deg, rgba(35, 40, 52, 0.92), rgba(18, 21, 28, 0.95));
+      border: 1px solid rgba(216, 221, 230, 0.24);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      color: #e4e8ef;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+      transition: transform 0.08s ease, background 0.12s ease, border-color 0.12s ease;
+    }
+    .dpad-btn:active, .dpad-btn.is-pressed {
+      transform: scale(0.92);
+      background: linear-gradient(145deg, #d8dde6, #9ea7b8);
+      color: #0b0c10;
+      border-color: #ffffff;
+    }
+
+    /* Full-Viewport 3D WebGL Canvas & Floating Holographic Station Labels */
+    #three-bg-container canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    .station-holo-label {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      pointer-events: auto;
+      cursor: pointer;
+      transition: opacity 0.25s ease, transform 0.18s ease, background-color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .station-holo-label:hover {
+      transform: translate(-50%, -106%) scale(1.04);
+    }
+
+    /* Modal Entrance Animation */
+    @keyframes modalReveal {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .modal-animate {
+      animation: modalReveal 0.26s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-chrome-300 selection:text-obsidian-950">
+
+  <!-- ===================================================================== -->
+  <!-- PERSISTENT 3D LIQUID CHROME WEBGL SCENE (LIVE BEHIND HUB & STUDIO)    -->
+  <!-- ===================================================================== -->
+  <div id="three-bg-container" class="fixed inset-0 z-0"></div>
+  <div id="holo-labels-layer" class="fixed inset-0 z-10 pointer-events-none overflow-hidden opacity-0 transition-opacity duration-300"></div>
+
+  <!-- ===================================================================== -->
+  <!-- STICKY TOP NAVIGATION HEADER & DON TOLIVER "NO IDEA" MUSIC DOCK       -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 border-b border-chrome-300/15 bg-obsidian-900/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
+
+      <!-- Left: Brand Identity + Hub / Studio Switcher -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <button onclick="switchMode('hub')" class="flex items-center gap-2.5 text-left group">
+          <div class="w-9 h-9 rounded-xl p-[1px] bg-gradient-to-br from-chrome-100 via-chrome-400 to-chrome-600 shadow-md">
+            <div class="w-full h-full rounded-[11px] bg-obsidian-900 flex items-center justify-center font-display font-bold text-xs tracking-wider text-chrome-100 group-hover:bg-obsidian-800 transition-colors">
+              MEB
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <div class="font-display font-bold text-sm tracking-tight text-chrome-100 leading-none">MARIA ESSINDI BIDJO</div>
+            <div class="font-mono text-[10px] text-chrome-400 tracking-widest uppercase mt-0.5">2026 CHROME EDITION</div>
+          </div>
+        </button>
+
+        <!-- Mode Toggle Pills (Hub Bento vs Interactive Studio) -->
+        <nav class="flex items-center p-1 rounded-xl bg-obsidian-850/90 border border-chrome-300/15">
+          <button id="nav-hub-btn" onclick="switchMode('hub')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all bg-chrome-200 text-obsidian-950 shadow-sm">
+            <span data-i18n="navHub">Hub Bento</span>
+          </button>
+          <button id="nav-studio-btn" onclick="switchMode('studio')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all text-chrome-300 hover:text-white flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span data-i18n="navStudio">Studio 2026</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Right: Don Toliver "No Idea" Music Dock + Trilingual Switcher -->
+      <div class="flex items-center gap-2 sm:gap-3">
+
+        <!-- Don Toliver - "No Idea" Music Dock -->
+        <div class="relative">
+          <div id="music-dock-pill" class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-obsidian-850/95 border border-chrome-300/20 hover:border-chrome-300/40 transition-colors">
+            <button id="music-play-btn" onclick="toggleMusicPlay()" title="Play / Pause" class="w-7 h-7 rounded-lg bg-chrome-200/15 hover:bg-chrome-200/25 text-chrome-100 flex items-center justify-center transition-colors">
+              <svg id="icon-play" class="w-3.5 h-3.5 translate-x-[0.5px]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg id="icon-pause" class="w-3.5 h-3.5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+
+            <div class="hidden sm:flex flex-col leading-tight max-w-[130px]">
+              <span class="text-[11px] font-semibold text-chrome-100 truncate">No Idea</span>
+              <span class="text-[10px] font-mono text-chrome-400 truncate">Don Toliver</span>
+            </div>
+
+            <div id="music-eq" class="flex items-end gap-[2px] h-3.5 px-0.5">
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+              <span class="eq-bar"></span>
+            </div>
+
+            <button onclick="toggleSpotifyDrawer()" title="Spotify Player" class="px-2 py-1 rounded-lg bg-chrome-200/10 hover:bg-chrome-200 hover:text-obsidian-950 text-[10px] font-mono font-semibold text-chrome-200 transition-colors">
+              SPOTIFY
+            </button>
+          </div>
+
+          <!-- Expandable Spotify Embed / Audio Source Popover -->
+          <div id="spotify-popover" class="hidden absolute right-0 mt-2 w-[300px] sm:w-[320px] rounded-2xl bento-card p-3 z-50 shadow-2xl">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-chrome-300">2026 Studio Audio Dock</span>
+              <button onclick="toggleSpotifyDrawer()" class="text-chrome-400 hover:text-white text-xs px-1.5 py-0.5 rounded">✕</button>
+            </div>
+            <iframe
+              style="border-radius:12px"
+              src="https://open.spotify.com/embed/track/3VyjsVV24RmBIbWJAeUJQg?utm_source=generator&theme=0"
+              width="100%"
+              height="80"
+              frameBorder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
+            <div class="mt-2 flex items-center justify-between text-[10px] font-mono text-chrome-400">
+              <span id="audio-mode-label">Spotify / Synth Ambient</span>
+              <button onclick="toggleSynthFallback()" class="underline hover:text-chrome-100">Synth Loop</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trilingual Switcher (FR | EN | ES) -->
+        <div class="flex items-center p-1 rounded-xl bg-obsidian-850/90 border border-chrome-300/15 font-mono text-xs">
+          <button onclick="setLanguage('fr')" id="lang-fr" class="px-2 py-1 rounded-lg font-semibold transition-all bg-chrome-200 text-obsidian-950">FR</button>
+          <button onclick="setLanguage('en')" id="lang-en" class="px-2 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white">EN</button>
+          <button onclick="setLanguage('es')" id="lang-es" class="px-2 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white">ES</button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- MODE 1: HOMEPAGE HUB (DEFAULT 2026 BENTO GRID OVER LIVE 3D CHROME)    -->
+  <!-- ===================================================================== -->
+  <main id="hub-view" class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
+
+    <!-- Top Bento Row: Hero Introduction + Quick Contact & Socials -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+      <!-- Hero Card (8 cols) -->
+      <section class="lg:col-span-8 bento-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+        <!-- Subtle Metallic Corner Accent -->
+        <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-gradient-to-br from-chrome-200/10 to-transparent blur-2xl pointer-events-none"></div>
+
+        <div class="space-y-4 relative z-10">
+          <!-- Status & Location Pills -->
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-chrome-200/10 border border-chrome-300/25 text-xs font-mono text-chrome-100">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span id="hero-status">Recherche de stage • Disponible à partir de Juin 2027 | Alternance Systèmes & Réseaux / Support IT</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-obsidian-800/90 border border-chrome-300/15 text-xs font-mono text-chrome-300">
+              <svg class="w-3.5 h-3.5 text-chrome-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span>Villenave-d'Ornon (33), Bordeaux, France</span>
+            </span>
+          </div>
+
+          <!-- Name & Role -->
+          <div class="pt-1">
+            <h1 class="font-display text-3xl sm:text-5xl font-bold tracking-tight liquid-chrome-text">
+              MARIA ESSINDI BIDJO
+            </h1>
+            <p id="hero-title" class="mt-2 font-display text-base sm:text-xl font-medium text-chrome-200">
+              Étudiante en Informatique • Administration Systèmes & Réseaux / Support Informatique
+            </p>
+          </div>
+
+          <!-- Bio Summary -->
+          <p id="hero-bio" class="text-sm sm:text-[15px] leading-relaxed text-chrome-300/90 max-w-3xl">
+            Étudiante en 2e année de Bachelor Développeur en IA à l'ECE École d'Ingénieurs de Bordeaux, je recherche une alternance ou un stage (dès Juin 2027) en administration systèmes & réseaux / support informatique. Mon stage chez SNT SUMA m'a permis d'acquérir une solide expérience terrain en support utilisateurs, diagnostic matériel, réseaux et études techniques télécoms.
+          </p>
+        </div>
+
+        <!-- Primary Action Row -->
+        <div class="mt-7 pt-5 border-t border-chrome-300/10 flex flex-wrap items-center justify-between gap-4 relative z-10">
+          <div class="flex flex-wrap items-center gap-3">
+            <button onclick="switchMode('studio')" class="chrome-btn-primary px-5 py-3 rounded-2xl text-sm font-display flex items-center gap-2.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span data-i18n="ctaExploreStudio">Explorer le Studio 2026</span>
+            </button>
+
+            <button onclick="downloadCV()" class="px-4 py-3 rounded-2xl text-sm font-medium bg-obsidian-800/90 hover:bg-obsidian-700 text-chrome-100 border border-chrome-300/20 hover:border-chrome-300/40 transition-all flex items-center gap-2">
+              <svg class="w-4 h-4 text-chrome-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              <span data-i18n="ctaDownloadCv">Télécharger CV PDF</span>
+            </button>
+          </div>
+
+          <!-- Mini Avatar Preview Badge -->
+          <button onclick="switchMode('studio')" class="flex items-center gap-3 px-3.5 py-2 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 hover:border-chrome-300/35 transition-all group">
+            <canvas id="mini-avatar-canvas" width="38" height="44" class="rounded-lg"></canvas>
+            <div class="text-left">
+              <div class="text-xs font-semibold text-chrome-100 group-hover:text-white" data-i18n="avatarBadgeTitle">2026 Beanie Girl</div>
+              <div class="text-[11px] font-mono text-chrome-400" data-i18n="avatarBadgeSub">Cliquer pour piloter →</div>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- Quick Contact & Socials Card (4 cols) -->
+      <aside class="lg:col-span-4 bento-card rounded-3xl p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs uppercase tracking-widest text-chrome-400" data-i18n="quickContactLabel">Contact & Liens Rapides</span>
+            <span class="px-2 py-0.5 rounded-md bg-chrome-200/10 font-mono text-[10px] text-chrome-200">FR / EN / ES</span>
+          </div>
+
+          <div class="space-y-2.5">
+            <!-- Email Pill -->
+            <div class="p-3 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
+              <a href="mailto:essindibidjomaria@gmail.com" class="flex items-center gap-2.5 min-w-0 group">
+                <div class="w-8 h-8 rounded-xl bg-chrome-200/10 flex items-center justify-center text-chrome-200 shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div class="truncate">
+                  <div class="text-[10px] font-mono uppercase text-chrome-400">Email</div>
+                  <div class="text-xs font-medium text-chrome-100 group-hover:underline truncate">essindibidjomaria@gmail.com</div>
+                </div>
+              </a>
+              <button onclick="copyText('essindibidjomaria@gmail.com', 'Email')" class="px-2.5 py-1.5 rounded-xl bg-obsidian-800 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-300 text-[11px] font-mono border border-chrome-300/15 transition-colors shrink-0">
+                <span data-i18n="copyBtn">Copier</span>
+              </button>
+            </div>
+
+            <!-- Phone Pill -->
+            <div class="p-3 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
+              <a href="tel:+33766043784" class="flex items-center gap-2.5 min-w-0 group">
+                <div class="w-8 h-8 rounded-xl bg-chrome-200/10 flex items-center justify-center text-chrome-200 shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                  </svg>
+                </div>
+                <div class="truncate">
+                  <div class="text-[10px] font-mono uppercase text-chrome-400" data-i18n="phoneLabel">Téléphone</div>
+                  <div class="text-xs font-medium text-chrome-100 group-hover:underline">07 66 04 37 84</div>
+                </div>
+              </a>
+              <button onclick="copyText('07 66 04 37 84', 'Téléphone')" class="px-2.5 py-1.5 rounded-xl bg-obsidian-800 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-300 text-[11px] font-mono border border-chrome-300/15 transition-colors shrink-0">
+                <span data-i18n="copyBtn">Copier</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Socials & Direct CV Row -->
+        <div class="mt-4 pt-4 border-t border-chrome-300/10 grid grid-cols-2 gap-2.5">
+          <a id="hub-linkedin-link" href="#" target="_blank" rel="noopener noreferrer" class="p-3 rounded-2xl bg-obsidian-850/90 hover:bg-obsidian-800 border border-chrome-300/15 hover:border-chrome-300/35 flex items-center justify-center gap-2 text-xs font-medium text-chrome-100 transition-all">
+            <svg class="w-4 h-4 text-chrome-200" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <a id="hub-github-link" href="#" target="_blank" rel="noopener noreferrer" class="p-3 rounded-2xl bg-obsidian-850/90 hover:bg-obsidian-800 border border-chrome-300/15 hover:border-chrome-300/35 flex items-center justify-center gap-2 text-xs font-medium text-chrome-100 transition-all">
+            <svg class="w-4 h-4 text-chrome-200" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Section Header for the 5 Interactive Hub Cards -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2">
+      <div>
+        <h2 class="font-display text-lg sm:text-xl font-bold text-chrome-100" data-i18n="hubGridHeading">
+          Stations Interactives du Portfolio
+        </h2>
+        <p class="text-xs sm:text-sm text-chrome-400" data-i18n="hubGridSub">
+          Sélectionnez une carte pour guider automatiquement l'avatar vers la station correspondante dans le Studio 2026.
+        </p>
+      </div>
+      <span class="font-mono text-xs text-chrome-400">05 MODULES • STUDIO READY</span>
+    </div>
+
+    <!-- 5 Interactive Bento Hub Cards -->
+    <div id="hub-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Populated dynamically by renderHubCards() -->
+    </div>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- MODE 2: INTERACTIVE 3D CHROME STUDIO HUD                              -->
+  <!-- ===================================================================== -->
+  <section id="studio-view" class="hidden fixed inset-x-0 top-16 bottom-0 z-20 pointer-events-none select-none">
+
+    <!-- Studio Top Overlay HUD -->
+    <div class="absolute top-3 left-3 right-3 sm:top-5 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-2 pointer-events-none z-20">
+
+      <!-- Left: Studio Status & Quick Station Pills -->
+      <div class="pointer-events-auto flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-obsidian-900/85 backdrop-blur-xl border border-chrome-300/20 shadow-xl">
+        <button onclick="switchMode('hub')" class="px-3 py-1.5 rounded-xl bg-obsidian-800 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 text-xs font-mono transition-colors flex items-center gap-1.5">
+          <span>←</span>
+          <span data-i18n="backToHub">Hub</span>
+        </button>
+
+        <div id="studio-quick-pills" class="flex flex-wrap items-center gap-1">
+          <!-- Populated dynamically with 01..05 pills -->
+        </div>
+      </div>
+
+      <!-- Right: Camera Mode Toggle + Controls Hint Pill -->
+      <div class="pointer-events-auto flex items-center gap-2">
+        <button id="camera-mode-btn" onclick="Studio3DEngine.toggleCameraMode()" class="px-3.5 py-2 rounded-2xl bg-obsidian-900/85 hover:bg-chrome-200 hover:text-obsidian-950 backdrop-blur-xl border border-chrome-300/25 font-mono text-[11px] font-semibold text-chrome-100 transition-colors flex items-center gap-2 shadow-xl">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+          </svg>
+          <span id="camera-mode-label">Cam: Follow</span>
+        </button>
+
+        <div class="hidden lg:flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-obsidian-900/80 backdrop-blur-xl border border-chrome-300/15 font-mono text-[11px] text-chrome-300">
+          <span class="px-1.5 py-0.5 rounded bg-obsidian-800 border border-chrome-300/20 text-chrome-100">WASD / ↑↓←→</span>
+          <span data-i18n="studioHintMove">ou Cliquer au sol 3D</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Proximity Action Prompt (Appears when 3D Beanie Girl is near a station) -->
+    <div id="proximity-prompt" class="hidden pointer-events-auto absolute bottom-36 sm:bottom-8 left-1/2 -translate-x-1/2 z-20">
+      <button onclick="openNearestStation()" class="chrome-btn-primary px-5 py-2.5 rounded-full text-xs sm:text-sm font-display flex items-center gap-2 shadow-2xl">
+        <span id="proximity-station-title">Ouvrir la station</span>
+        <span class="font-mono text-[11px] px-1.5 py-0.5 rounded bg-obsidian-950/15">ENTER</span>
+      </button>
+    </div>
+
+    <!-- On-Screen Tactile Chrome D-Pad Controls (Bottom Right) -->
+    <div class="pointer-events-auto absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex flex-col items-center gap-1.5 p-2.5 rounded-3xl bg-obsidian-900/80 backdrop-blur-xl border border-chrome-300/20 shadow-2xl">
+      <div class="grid grid-cols-3 gap-1.5">
+        <div></div>
+        <button id="dpad-up" data-dir="up" aria-label="Up" class="dpad-btn w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+        </button>
+        <div></div>
+
+        <button id="dpad-left" data-dir="left" aria-label="Left" class="dpad-btn w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+
+        <button id="dpad-action" onclick="openNearestStation()" aria-label="Open Station" title="Ouvrir la station proche" class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-chrome-200/15 hover:bg-chrome-200/30 border border-chrome-300/30 text-chrome-100 flex items-center justify-center font-mono text-[10px] font-bold">
+          OK
+        </button>
+
+        <button id="dpad-right" data-dir="right" aria-label="Right" class="dpad-btn w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
+
+        <div></div>
+        <button id="dpad-down" data-dir="down" aria-label="Down" class="dpad-btn w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- STATION DETAIL DRAWER / MODAL                                         -->
+  <!-- ===================================================================== -->
+  <div id="station-modal" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 bg-obsidian-950/75 backdrop-blur-md">
+    <div id="station-modal-card" class="modal-animate w-full max-w-4xl max-h-[90vh] sm:max-h-[86vh] rounded-t-3xl sm:rounded-3xl bg-obsidian-900/95 border border-chrome-300/25 shadow-2xl flex flex-col overflow-hidden">
+
+      <!-- Modal Header -->
+      <div class="px-5 sm:px-7 py-4 border-b border-chrome-300/15 flex items-center justify-between gap-4 bg-obsidian-850/90">
+        <div class="flex items-center gap-3 min-w-0">
+          <span id="modal-station-num" class="px-2.5 py-1 rounded-xl bg-chrome-200 text-obsidian-950 font-mono text-xs font-bold shrink-0">01</span>
+          <div class="truncate">
+            <h3 id="modal-station-title" class="font-display text-lg sm:text-xl font-bold text-chrome-100 truncate">Profil & Formation</h3>
+            <p id="modal-station-subtitle" class="text-xs font-mono text-chrome-400 truncate">ECE École d'Ingénieurs Bordeaux</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="navigateModalStation(-1)" title="Station précédente" class="p-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-chrome-300/15 text-chrome-200 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button onclick="navigateModalStation(1)" title="Station suivante" class="p-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-chrome-300/15 text-chrome-200 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <button onclick="closeStationModal()" aria-label="Fermer" class="ml-1 p-2 rounded-xl bg-chrome-200/10 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-100 border border-chrome-300/20 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Scrollable Body -->
+      <div id="modal-body" class="p-5 sm:p-7 overflow-y-auto space-y-6 flex-1">
+        <!-- Injected dynamically based on active station -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- LIQUID CHROME TOAST NOTIFICATION                                      -->
+  <!-- ===================================================================== -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 translate-y-2">
+    <div class="px-4 py-2.5 rounded-full bg-chrome-100 text-obsidian-950 font-mono text-xs font-semibold shadow-2xl border border-white flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-obsidian-950"></span>
+      <span id="toast-message">Copié !</span>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION SCRIPT                                                    -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * =========================================================================
+     * PORTFOLIO_CONFIG — EASY PERSONALIZATION FOR MARIA ESSINDI BIDJO
+     * =========================================================================
+     * 1. Paste your LinkedIn URL in `socials.linkedin`
+     * 2. Paste your GitHub URL in `socials.github`
+     * 3. Put your PDF resume in the same folder and set `cvPdfUrl: "./CV_Maria_Essindi_Bidjo_ATS.pdf"`
+     *    (or leave "" to auto-generate a clean downloadable PDF via jsPDF)
+     * 4. Put "no-idea.mp3" in the same folder and set `music.mp3Url: "./no-idea.mp3"`
+     * 5. Add or edit any personal/school projects inside `projects: [ ... ]` below!
+     */
+    const PORTFOLIO_CONFIG = {
+      name: "Maria Essindi Bidjo",
+      location: "Villenave-d'Ornon (33), France",
+      email: "essindibidjomaria@gmail.com",
+      phoneDisplay: "07 66 04 37 84",
+      phoneHref: "+33766043784",
+
+      socials: {
+        // Paste your exact LinkedIn profile URL below:
+        linkedin: "https://www.linkedin.com/search/results/all/?keywords=Maria%20Essindi%20Bidjo",
+        // Paste your exact GitHub profile URL below:
+        github: "https://github.com/search?q=Maria+Essindi+Bidjo&type=users"
+      },
+
+      // Optional: Set "./CV_Maria_Essindi_Bidjo_ATS.pdf" if you place your PDF in the same folder.
+      // Leave empty ("") to automatically generate a formatted PDF CV on click!
+      cvPdfUrl: "",
+
+      // Music Dock settings ("Don Toliver - No Idea"):
+      music: {
+        title: "No Idea",
+        artist: "Don Toliver",
+        // Optional: Set "./no-idea.mp3" if you place the local MP3 file next to index.html
+        mp3Url: "",
+        spotifyEmbedUrl: "https://open.spotify.com/embed/track/3VyjsVV24RmBIbWJAeUJQg?utm_source=generator&theme=0"
+      },
+
+      // Add or edit your featured projects here — they appear automatically in Station 02!
+      projects: [
+        {
+          title: {
+            fr: "Concours Robot Sumo Autonome — ECE Bordeaux",
+            en: "Autonomous Sumo Robot Competition — ECE Bordeaux",
+            es: "Concurso Robot Sumo Autónomo — ECE Burdeos"
+          },
+          period: "07 Mars 2026",
+          description: {
+            fr: "Conception en équipe d'un robot autonome : programmation des capteurs de détection, logique d'esquive et d'attaque, tests sur arène et optimisation des performances.",
+            en: "Team design of an autonomous sumo robot: sensor programming, edge/opponent detection logic, arena testing, and performance optimization.",
+            es: "Diseño en equipo de un robot autónomo de sumo: programación de sensores, lógica de movimiento, pruebas y optimización."
+          },
+          tags: ["C / C++", "Capteurs", "Systèmes Embarqués", "ECE Bordeaux"],
+          githubUrl: ""
+        },
+        {
+          title: {
+            fr: "Architecture Réseau & Virtualisation Multi-VM",
+            en: "Enterprise Network Topology & Virtualization Lab",
+            es: "Arquitectura de Red y Virtualización Multi-VM"
+          },
+          period: "2025 – 2026",
+          description: {
+            fr: "Simulation d'infrastructures sous Cisco Packet Tracer (plan d'adressage IPv4, serveur DHCP, routage inter-réseaux) et déploiement de postes virtuels sous Oracle VirtualBox.",
+            en: "Network infrastructure simulation in Cisco Packet Tracer (IPv4 addressing, DHCP server, routing) and virtual workstation deployment on Oracle VirtualBox.",
+            es: "Simulación de redes en Cisco Packet Tracer (direccionamiento IPv4, DHCP, enrutamiento) y máquinas virtuales en Oracle VirtualBox."
+          },
+          tags: ["Cisco Packet Tracer", "DHCP / TCP-IP", "Oracle VirtualBox"],
+          githubUrl: ""
+        }
+      ]
+    };
+
+    /**
+     * =========================================================================
+     * TRILINGUAL RESUME DATA & UI STRINGS (FR / EN / ES)
+     * Populated directly from CV_Maria_Essindi_Bidjo_ATS.pdf
+     * =========================================================================
+     */
+    const I18N = {
+      fr: {
+        navHub: "Hub Bento",
+        navStudio: "Studio 2026",
+        backToHub: "Hub",
+        studioHintMove: "ou Cliquer au sol",
+        heroStatus: "Recherche de stage • Disponible à partir de Juin 2027 | Alternance Systèmes & Réseaux / Support IT",
+        heroTitle: "Étudiante en Informatique • Administration Systèmes & Réseaux / Support Informatique",
+        heroBio: "Étudiante en Bachelor Développeur en IA à l'ECE École d'Ingénieurs de Bordeaux (2e année), je recherche une opportunité en administration systèmes et réseaux / support informatique (alternance ou stage dès Juin 2027). Mon stage chez SNT SUMA m'a permis d'acquérir une solide expérience en support utilisateurs, diagnostic matériel, réseaux et études techniques télécoms. Curieuse, rigoureuse et autonome, j'aime comprendre les problématiques techniques et proposer des solutions adaptées.",
+        ctaExploreStudio: "Explorer le Studio 2026",
+        ctaDownloadCv: "Télécharger CV PDF",
+        avatarBadgeTitle: "2026 Beanie Girl",
+        avatarBadgeSub: "Cliquer pour piloter →",
+        quickContactLabel: "Contact & Liens Rapides",
+        phoneLabel: "Téléphone",
+        copyBtn: "Copier",
+        copiedToast: "copié dans le presse-papiers !",
+        pdfGeneratedToast: "CV_Maria_Essindi_Bidjo.pdf téléchargé !",
+        hubGridHeading: "Stations Interactives du Portfolio",
+        hubGridSub: "Sélectionnez une carte pour guider automatiquement l'avatar vers la station correspondante dans le Studio 2026.",
+        openStationBtn: "Ouvrir la station",
+        walkToStationBtn: "Aller à la station →",
+
+        stations: [
+          {
+            id: "profile",
+            num: "01",
+            shortLabel: "01 Profil",
+            title: "Profil & Formation",
+            subtitle: "ECE École d'Ingénieurs Bordeaux • Bachelor Développeur en IA",
+            cardSummary: "Parcours académique à l'ECE Bordeaux (2025–2028), objectif stage Juin 2027 / alternance Systèmes & Réseaux, langues et centres d'intérêt.",
+            tags: ["ECE Bordeaux", "Bachelor IA 2A", "Stage Juin 2027"]
+          },
+          {
+            id: "experience",
+            num: "02",
+            shortLabel: "02 Expériences",
+            title: "Expériences & Projets",
+            subtitle: "SNT SUMA • Robot Sumo ECE • Délégation Éducation Cameroun",
+            cardSummary: "Stage support IT & réseaux chez SNT SUMA, concours Robot Sumo autonome à l'ECE Bordeaux, maintenance informatique et labs Packet Tracer.",
+            tags: ["SNT SUMA", "Support IT", "Robot Sumo", "Télécoms"]
+          },
+          {
+            id: "skills",
+            num: "03",
+            shortLabel: "03 Compétences",
+            title: "Compétences IT & Réseaux",
+            subtitle: "Windows 10/11 • TCP/IP & DHCP • Packet Tracer • Python / C++ / SQL",
+            cardSummary: "Administration Windows, diagnostic matériel (RAM/BIOS), routage & DHCP, Microsoft 365, VirtualBox et développement Python, C, C++, SQL.",
+            tags: ["Windows 10/11", "TCP/IP", "M365", "Python / C++"]
+          },
+          {
+            id: "quiz",
+            num: "04",
+            shortLabel: "04 Anime Quiz",
+            title: "Anime & Manga Quiz",
+            subtitle: "Mini-jeu interactif • Devinez l'anime à partir du portrait illustré",
+            cardSummary: "Un clin d'œil interactif à ma passion pour les mangas et animes : identifiez 8 personnages iconiques dessinés sur mesure.",
+            tags: ["Mini-Jeu", "8 Personnages", "Mangas & Animes"]
+          },
+          {
+            id: "contact",
+            num: "05",
+            shortLabel: "05 Contact & CV",
+            title: "Contact & CV PDF",
+            subtitle: "Villenave-d'Ornon (33) • Disponible dès Juin 2027",
+            cardSummary: "Coordonnées directes (email, téléphone), profils LinkedIn & GitHub, et téléchargement instantané de mon CV au format PDF.",
+            tags: ["Email", "07 66 04 37 84", "CV PDF", "Bordeaux"]
+          }
+        ],
+
+        // Detailed Station Content
+        profileData: {
+          headingProfile: "Profil Professionnel",
+          headingEdu: "Formation Académique",
+          eduSchool: "ECE École d'Ingénieurs — Bordeaux",
+          eduPeriod: "2025 – 2028",
+          eduDegree: "Bachelor Développeur en IA (2e année)",
+          eduModules: ["Python", "C", "C++", "Réseaux", "DevOps", "Développement Web", "Bases de données", "SQL"],
+          highlights: [
+            { label: "Disponibilité", value: "Stage dès Juin 2027 & Alternance" },
+            { label: "Localisation", value: "Villenave-d'Ornon (33) / Bordeaux" },
+            { label: "Langues", value: "Bilingue Français / Anglais (maternel), Espagnol" },
+            { label: "Centres d'intérêt", value: "Mangas, Animes, Volley-ball, Voyages" }
+          ]
+        },
+
+        experiencesData: [
+          {
+            role: "Stage — Support Informatique & Réseaux",
+            company: "SNT SUMA (Société Nouvelle Transport SUMA)",
+            period: "Juin 2026 – Juillet 2026",
+            category: "IT & Réseaux",
+            bullets: [
+              "Support informatique : assistance aux utilisateurs sur postes Windows, diagnostic et résolution de pannes matérielles/logicielles, installation et configuration de postes (écrans, connectique HDMI, VGA, DisplayPort).",
+              "Maintenance matérielle : diagnostic de pannes (RAM, BIOS, cartes mères, alimentations), démontage/remontage de composants, participation aux décisions de remplacement de matériel.",
+              "Réseaux : vérification des connexions (ping, adressage IP), paramétrage DHCP / IP statique, consultation des interfaces d'administration de routeurs.",
+              "Cloud & Microsoft 365 : suivi de la synchronisation Google Drive, contrôle des sauvegardes, assistance sur Teams, OneDrive et SharePoint.",
+              "Gestion documentaire & data : conversion de documents PDF vers Google Sheets, structuration de tableaux, création de tableaux de bord Excel (suivi du parc automobile, ancienneté des salariés).",
+              "Étude visioconférence Lifesize Icon 600 : vérification et mise en route du matériel existant (caméra, codec, téléphone) et recherche d'utilisation sans abonnement Cloud (connexion possible à Teams).",
+              "Étude comparative téléphonie fixe : analyse et ajustement d'une proposition fournisseur (licences utilisateurs, numéros SDA, conservation du parc IP Snom existant) et demande de devis SFR vs Free Coms Pro.",
+              "Projet bornes de recharge électrique : étude comparative (Virta / AMPECO / EV Map), échanges fournisseurs, demandes de devis, communication multi-dépôts et rédaction de comptes rendus techniques."
+            ],
+            badges: ["Windows 10/11", "Diagnostic RAM/BIOS", "DHCP / IP", "Microsoft 365", "Lifesize Icon 600", "Téléphonie IP Snom"]
+          },
+          {
+            role: "Concours Robot Sumo — Projet d'Équipe",
+            company: "ECE École d'Ingénieurs Bordeaux",
+            period: "07 Mars 2026",
+            category: "Robotique & Dev",
+            bullets: [
+              "Conception en équipe d'un robot autonome de combat sumo.",
+              "Programmation des capteurs de détection d'adversaire et de bordure de piste.",
+              "Développement de la logique de déplacement autonome, tests terrain et optimisation des performances."
+            ],
+            badges: ["C / C++", "Capteurs", "Logique Embarquée", "Travail d'équipe"]
+          },
+          {
+            role: "Stage — Maintenance Informatique & Web",
+            company: "Délégation Régionale de l'Éducation de Base (Cameroun)",
+            period: "Août 2024",
+            category: "IT & Réseaux",
+            bullets: [
+              "Maintenance informatique préventive et corrective sur le parc de postes.",
+              "Gestion et mise à jour du site internet institutionnel.",
+              "Assistance aux utilisateurs, résolution d'incidents quotidiens et mise à jour du parc informatique."
+            ],
+            badges: ["Maintenance PC", "Support Utilisateurs", "WordPress / Web", "Gestion de Parc"]
+          },
+          {
+            role: "Architecture Réseau & Virtualisation (Projets Académiques)",
+            company: "ECE Bordeaux — Travaux Pratiques & Labs",
+            period: "2025 – 2026",
+            category: "IT & Réseaux",
+            bullets: [
+              "Simulation d'architectures réseaux locales sous Cisco Packet Tracer : plan d'adressage IP, configuration DHCP, routage et tests de connectivité.",
+              "Déploiement et configuration de machines virtuelles sous Oracle VirtualBox.",
+              "Développement d'outils et scripts en Python, C, C++ et requêtage de bases de données SQL."
+            ],
+            badges: ["Cisco Packet Tracer", "Oracle VirtualBox", "Python", "SQL", "Routage"]
+          }
+        ],
+
+        skillsCategories: [
+          {
+            title: "Systèmes & Matériel",
+            items: ["Windows 10 / 11", "Support utilisateurs N1/N2", "Diagnostic matériel (RAM, BIOS, Carte mère, Alim)", "Installation & déploiement de postes", "Connectique HDMI / VGA / DisplayPort"]
+          },
+          {
+            title: "Réseaux & Infrastructure",
+            items: ["TCP/IP & Adressage IP", "DHCP & IP Statique", "Routage & Ping", "Administration de routeurs", "Cisco Packet Tracer"]
+          },
+          {
+            title: "Cloud & Productivité",
+            items: ["Microsoft 365 (Teams, SharePoint, OneDrive)", "Google Workspace & Google Drive", "Excel (Tableaux de bord & Data)", "Google Sheets", "WordPress"]
+          },
+          {
+            title: "Développement & Outils",
+            items: ["Python", "C / C++", "SQL & Bases de données", "Développement Web (HTML/CSS/JS)", "Oracle VirtualBox", "VS Code / VS Codium", "Ninite", "Git (notions)"]
+          },
+          {
+            title: "Qualités & Langues",
+            items: ["Bilingue Français / Anglais (maternel)", "Espagnol", "Esprit d'analyse", "Sens du service", "Autonomie & Rigueur", "Communication professionnelle"]
+          }
+        ],
+
+        quizUI: {
+          intro: "Testez votre culture anime & manga ! Identifiez l'œuvre d'origine de chacun des 8 personnages illustrés.",
+          scoreLabel: "Score",
+          streakLabel: "Série",
+          questionPrefix: "De quel anime / manga vient ce personnage ?",
+          correctMsg: "Exact ! Bien joué !",
+          wrongMsg: "Pas tout à fait — C'était :",
+          nextBtn: "Personnage suivant →",
+          finishTitle: "Quiz Terminé !",
+          finishSub: "Merci d'avoir exploré l'univers manga & anime de Maria.",
+          restartBtn: "Rejouer le Quiz"
+        },
+
+        contactUI: {
+          heading: "Entrons en contact",
+          sub: "Disponible pour un stage à partir de Juin 2027 ou une alternance en administration systèmes & réseaux / support informatique sur Bordeaux et ses environs.",
+          emailAction: "Envoyer un email",
+          callAction: "Appeler directement",
+          downloadAction: "Télécharger le CV complet (PDF)"
+        }
+      },
+
+      en: {
+        navHub: "Bento Hub",
+        navStudio: "2026 Studio",
+        backToHub: "Hub",
+        studioHintMove: "or Click Floor",
+        heroStatus: "Seeking Internship • Available from June 2027 | Systems & Network Admin / IT Support",
+        heroTitle: "Computer Science Student • Systems & Network Administration / IT Support",
+        heroBio: "2nd-year Bachelor in AI Development student at ECE School of Engineering in Bordeaux, seeking an internship (from June 2027) or apprenticeship in systems & network administration / IT support. My internship at SNT SUMA gave me hands-on experience in user support, hardware diagnostics, networking, and telecom technical studies. Curious, rigorous, and autonomous.",
+        ctaExploreStudio: "Explore 2026 Studio",
+        ctaDownloadCv: "Download PDF CV",
+        avatarBadgeTitle: "2026 Beanie Girl",
+        avatarBadgeSub: "Click to explore →",
+        quickContactLabel: "Quick Contact & Links",
+        phoneLabel: "Phone",
+        copyBtn: "Copy",
+        copiedToast: "copied to clipboard!",
+        pdfGeneratedToast: "CV_Maria_Essindi_Bidjo.pdf downloaded!",
+        hubGridHeading: "Interactive Portfolio Stations",
+        hubGridSub: "Select any card to automatically guide the avatar to its matching station inside the 2026 Studio.",
+        openStationBtn: "Open station",
+        walkToStationBtn: "Go to station →",
+
+        stations: [
+          {
+            id: "profile",
+            num: "01",
+            shortLabel: "01 Profile",
+            title: "Profile & Education",
+            subtitle: "ECE School of Engineering Bordeaux • Bachelor in AI Development",
+            cardSummary: "Academic path at ECE Bordeaux (2025–2028), June 2027 internship / Systems & Networks apprenticeship goal, languages, and interests.",
+            tags: ["ECE Bordeaux", "2nd Yr AI Bachelor", "June 2027"]
+          },
+          {
+            id: "experience",
+            num: "02",
+            shortLabel: "02 Experience",
+            title: "Experience & Projects",
+            subtitle: "SNT SUMA • ECE Robot Sumo • Regional Education Delegation",
+            cardSummary: "IT support & network internship at SNT SUMA, autonomous Robot Sumo competition at ECE Bordeaux, IT maintenance, and Packet Tracer labs.",
+            tags: ["SNT SUMA", "IT Support", "Robot Sumo", "Telecom"]
+          },
+          {
+            id: "skills",
+            num: "03",
+            shortLabel: "03 Skills",
+            title: "IT & Network Skills",
+            subtitle: "Windows 10/11 • TCP/IP & DHCP • Packet Tracer • Python / C++ / SQL",
+            cardSummary: "Windows administration, hardware diagnostics (RAM/BIOS), routing & DHCP, Microsoft 365, VirtualBox, and Python, C, C++, SQL development.",
+            tags: ["Windows 10/11", "TCP/IP", "M365", "Python / C++"]
+          },
+          {
+            id: "quiz",
+            num: "04",
+            shortLabel: "04 Anime Quiz",
+            title: "Anime & Manga Quiz",
+            subtitle: "Interactive mini-game • Guess the anime from custom portraits",
+            cardSummary: "An interactive tribute to my passion for manga and anime: identify 8 iconic custom-illustrated characters.",
+            tags: ["Mini-Game", "8 Characters", "Manga & Anime"]
+          },
+          {
+            id: "contact",
+            num: "05",
+            shortLabel: "05 Contact & CV",
+            title: "Contact & PDF CV",
+            subtitle: "Villenave-d'Ornon (33), France • Available June 2027",
+            cardSummary: "Direct contact details (email, phone), LinkedIn & GitHub profiles, and instant ATS-ready PDF CV download.",
+            tags: ["Email", "07 66 04 37 84", "PDF CV", "Bordeaux"]
+          }
+        ],
+
+        profileData: {
+          headingProfile: "Professional Summary",
+          headingEdu: "Education",
+          eduSchool: "ECE School of Engineering — Bordeaux",
+          eduPeriod: "2025 – 2028",
+          eduDegree: "Bachelor in AI Development (2nd Year)",
+          eduModules: ["Python", "C", "C++", "Networking", "DevOps", "Web Development", "Databases", "SQL"],
+          highlights: [
+            { label: "Availability", value: "Internship from June 2027 & Apprenticeship" },
+            { label: "Location", value: "Villenave-d'Ornon (33) / Bordeaux, France" },
+            { label: "Languages", value: "Bilingual French / English (Native), Spanish" },
+            { label: "Interests", value: "Manga, Anime, Volleyball, Travel" }
+          ]
+        },
+
+        experiencesData: [
+          {
+            role: "IT Support & Networking Intern",
+            company: "SNT SUMA (Société Nouvelle Transport SUMA)",
+            period: "June 2026 – July 2026",
+            category: "IT & Networks",
+            bullets: [
+              "IT Support: Windows workstation user assistance, hardware/software troubleshooting, workstation setup (monitors, HDMI, VGA, DisplayPort).",
+              "Hardware Maintenance: component diagnostics (RAM, BIOS, motherboards, PSUs), disassembly/reassembly, hardware replacement recommendations.",
+              "Networking: connectivity verification (ping, IP addressing), DHCP / static IP configuration, router administration interfaces.",
+              "Cloud & Microsoft 365: Google Drive sync monitoring, backup verification, user support on Teams, OneDrive, and SharePoint.",
+              "Data & Documentation: PDF to Google Sheets conversion, structured Excel dashboards (vehicle fleet tracking, employee seniority).",
+              "Lifesize Icon 600 Videoconferencing Study: testing existing hardware (camera, codec, phone) and researching Cloud-free usage with Microsoft Teams connectivity.",
+              "Fixed Telephony Benchmark: vendor proposal analysis (user licenses, DDI numbers, retaining existing Snom IP phones) and quote comparison between SFR and Free Coms Pro.",
+              "EV Charging Station Project: benchmark study (Virta / AMPECO / EV Map), vendor communication, quote requests, and technical reporting across depots."
+            ],
+            badges: ["Windows 10/11", "RAM/BIOS Diagnostics", "DHCP / IP", "Microsoft 365", "Lifesize Icon 600", "Snom IP Phones"]
+          },
+          {
+            role: "Robot Sumo Competition — Team Project",
+            company: "ECE School of Engineering Bordeaux",
+            period: "March 07, 2026",
+            category: "Robotics & Dev",
+            bullets: [
+              "Team design and engineering of an autonomous sumo robot.",
+              "Programming opponent-detection and arena-edge sensors.",
+              "Implementing autonomous movement decision logic, field testing, and performance optimization."
+            ],
+            badges: ["C / C++", "Sensors", "Embedded Logic", "Teamwork"]
+          },
+          {
+            role: "IT Maintenance & Web Intern",
+            company: "Regional Delegation of Basic Education (Cameroon)",
+            period: "August 2024",
+            category: "IT & Networks",
+            bullets: [
+              "Preventive and corrective IT hardware maintenance across office workstations.",
+              "Management and updates of the organization's website.",
+              "User technical assistance, daily incident resolution, and IT fleet updates."
+            ],
+            badges: ["PC Maintenance", "User Support", "WordPress / Web", "Fleet Updates"]
+          },
+          {
+            role: "Network Architecture & Virtualization Labs",
+            company: "ECE Bordeaux — Academic Labs",
+            period: "2025 – 2026",
+            category: "IT & Networks",
+            bullets: [
+              "Local network topology simulation in Cisco Packet Tracer: IP addressing plans, DHCP setup, routing, and connectivity verification.",
+              "Deployment and configuration of virtual machines on Oracle VirtualBox.",
+              "Scripting and software development in Python, C, C++, and SQL database querying."
+            ],
+            badges: ["Cisco Packet Tracer", "Oracle VirtualBox", "Python", "SQL", "Routing"]
+          }
+        ],
+
+        skillsCategories: [
+          {
+            title: "Systems & Hardware",
+            items: ["Windows 10 / 11", "L1/L2 User Support", "Hardware Diagnostics (RAM, BIOS, Motherboard, PSU)", "Workstation Deployment", "HDMI / VGA / DisplayPort"]
+          },
+          {
+            title: "Networking & Infrastructure",
+            items: ["TCP/IP & IP Addressing", "DHCP & Static IP", "Routing & Ping", "Router Administration", "Cisco Packet Tracer"]
+          },
+          {
+            title: "Cloud & Productivity",
+            items: ["Microsoft 365 (Teams, SharePoint, OneDrive)", "Google Workspace & Google Drive", "Excel (Dashboards & Data)", "Google Sheets", "WordPress"]
+          },
+          {
+            title: "Development & Tools",
+            items: ["Python", "C / C++", "SQL & Databases", "Web Development (HTML/CSS/JS)", "Oracle VirtualBox", "VS Code / VS Codium", "Ninite", "Git (basics)"]
+          },
+          {
+            title: "Soft Skills & Languages",
+            items: ["Bilingual French / English (Native)", "Spanish", "Analytical Mindset", "Service-Oriented", "Autonomy & Rigor", "Professional Communication"]
+          }
+        ],
+
+        quizUI: {
+          intro: "Test your anime & manga knowledge! Identify the series for each of the 8 custom-illustrated characters.",
+          scoreLabel: "Score",
+          streakLabel: "Streak",
+          questionPrefix: "Which anime / manga is this character from?",
+          correctMsg: "Spot on! Great job!",
+          wrongMsg: "Not quite — It was:",
+          nextBtn: "Next Character →",
+          finishTitle: "Quiz Complete!",
+          finishSub: "Thanks for exploring Maria's manga & anime universe.",
+          restartBtn: "Play Again"
+        },
+
+        contactUI: {
+          heading: "Let's Connect",
+          sub: "Available for an internship starting June 2027 or an apprenticeship in systems & network administration / IT support in Bordeaux.",
+          emailAction: "Send an Email",
+          callAction: "Call Directly",
+          downloadAction: "Download Full CV (PDF)"
+        }
+      },
+
+      es: {
+        navHub: "Hub Bento",
+        navStudio: "Estudio 2026",
+        backToHub: "Hub",
+        studioHintMove: "o Clic en el suelo",
+        heroStatus: "Buscando prácticas • Disponible desde Junio 2027 | Administración de Sistemas y Redes / Soporte IT",
+        heroTitle: "Estudiante de Informática • Administración de Sistemas y Redes / Soporte Informático",
+        heroBio: "Estudiante de 2º año del Bachelor en Desarrollo de IA en ECE Escuela de Ingenieros de Burdeos, busco prácticas (desde Junio 2027) o alternancia en administración de sistemas y redes / soporte informático. Mi experiencia en SNT SUMA me permitió desarrollar sólidas competencias en soporte a usuarios, diagnóstico de hardware, redes y estudios técnicos de telecomunicaciones.",
+        ctaExploreStudio: "Explorar Estudio 2026",
+        ctaDownloadCv: "Descargar CV PDF",
+        avatarBadgeTitle: "2026 Beanie Girl",
+        avatarBadgeSub: "Clic para explorar →",
+        quickContactLabel: "Contacto y Enlaces Rápidos",
+        phoneLabel: "Teléfono",
+        copyBtn: "Copiar",
+        copiedToast: "¡copiado al portapapeles!",
+        pdfGeneratedToast: "¡CV_Maria_Essindi_Bidjo.pdf descargado!",
+        hubGridHeading: "Estaciones Interactivas del Portafolio",
+        hubGridSub: "Selecciona una tarjeta para guiar automáticamente al avatar hacia su estación en el Estudio 2026.",
+        openStationBtn: "Abrir estación",
+        walkToStationBtn: "Ir a la estación →",
+
+        stations: [
+          {
+            id: "profile",
+            num: "01",
+            shortLabel: "01 Perfil",
+            title: "Perfil y Formación",
+            subtitle: "ECE Escuela de Ingenieros Burdeos • Bachelor Desarrollador en IA",
+            cardSummary: "Formación académica en ECE Burdeos (2025–2028), objetivo prácticas Junio 2027 / alternancia Sistemas y Redes, idiomas e intereses.",
+            tags: ["ECE Burdeos", "Bachelor IA 2º", "Junio 2027"]
+          },
+          {
+            id: "experience",
+            num: "02",
+            shortLabel: "02 Experiencia",
+            title: "Experiencia y Proyectos",
+            subtitle: "SNT SUMA • Robot Sumo ECE • Delegación Regional de Educación",
+            cardSummary: "Prácticas de soporte IT y redes en SNT SUMA, concurso Robot Sumo autónomo en ECE Burdeos, mantenimiento informático y laboratorios Packet Tracer.",
+            tags: ["SNT SUMA", "Soporte IT", "Robot Sumo", "Telecom"]
+          },
+          {
+            id: "skills",
+            num: "03",
+            shortLabel: "03 Habilidades",
+            title: "Competencias IT y Redes",
+            subtitle: "Windows 10/11 • TCP/IP y DHCP • Packet Tracer • Python / C++ / SQL",
+            cardSummary: "Administración Windows, diagnóstico de hardware (RAM/BIOS), enrutamiento y DHCP, Microsoft 365, VirtualBox y desarrollo en Python, C, C++, SQL.",
+            tags: ["Windows 10/11", "TCP/IP", "M365", "Python / C++"]
+          },
+          {
+            id: "quiz",
+            num: "04",
+            shortLabel: "04 Anime Quiz",
+            title: "Quiz de Anime y Manga",
+            subtitle: "Minijuego interactivo • Adivina el anime por su retrato ilustrado",
+            cardSummary: "Un homenaje interactivo a mi pasión por el manga y el anime: identifica 8 personajes icónicos ilustrados a medida.",
+            tags: ["Minijuego", "8 Personajes", "Manga y Anime"]
+          },
+          {
+            id: "contact",
+            num: "05",
+            shortLabel: "05 Contacto y CV",
+            title: "Contacto y CV PDF",
+            subtitle: "Villenave-d'Ornon (33), Francia • Disponible Junio 2027",
+            cardSummary: "Datos de contacto directos (correo, teléfono), perfiles de LinkedIn y GitHub, y descarga instantánea de mi CV en formato PDF.",
+            tags: ["Correo", "07 66 04 37 84", "CV PDF", "Burdeos"]
+          }
+        ],
+
+        profileData: {
+          headingProfile: "Perfil Profesional",
+          headingEdu: "Formación Académica",
+          eduSchool: "ECE Escuela de Ingenieros — Burdeos",
+          eduPeriod: "2025 – 2028",
+          eduDegree: "Bachelor Desarrollador en IA (2º año)",
+          eduModules: ["Python", "C", "C++", "Redes", "DevOps", "Desarrollo Web", "Bases de datos", "SQL"],
+          highlights: [
+            { label: "Disponibilidad", value: "Prácticas desde Junio 2027 y Alternancia" },
+            { label: "Ubicación", value: "Villenave-d'Ornon (33) / Burdeos, Francia" },
+            { label: "Idiomas", value: "Bilingüe Francés / Inglés (nativo), Español" },
+            { label: "Intereses", value: "Manga, Anime, Voleibol, Viajes" }
+          ]
+        },
+
+        experiencesData: [
+          {
+            role: "Prácticas — Soporte Informático y Redes",
+            company: "SNT SUMA (Société Nouvelle Transport SUMA)",
+            period: "Junio 2026 – Julio 2026",
+            category: "IT y Redes",
+            bullets: [
+              "Soporte informático: asistencia a usuarios en equipos Windows, diagnóstico y resolución de fallos de hardware/software, instalación de puestos (monitores, HDMI, VGA, DisplayPort).",
+              "Mantenimiento de hardware: diagnóstico de componentes (RAM, BIOS, placas base, fuentes de alimentación), desmontaje/montaje y propuestas de reemplazo.",
+              "Redes: verificación de conectividad (ping, direccionamiento IP), configuración DHCP / IP estática y administración de routers.",
+              "Cloud y Microsoft 365: seguimiento de sincronización Google Drive, control de copias de seguridad y soporte en Teams, OneDrive y SharePoint.",
+              "Gestión documental y datos: conversión de PDF a Google Sheets, creación de paneles en Excel (seguimiento de flota de vehículos y antigüedad del personal).",
+              "Estudio de videoconferencia Lifesize Icon 600: verificación del equipo existente y búsqueda de uso sin suscripción Cloud con conexión a Teams.",
+              "Estudio comparativo de telefonía fija: análisis de propuesta de proveedor (licencias, números DDI, conservación de teléfonos IP Snom) y comparativa SFR vs Free Coms Pro.",
+              "Proyecto de puntos de recarga eléctrica: comparativa Virta / AMPECO / EV Map, contacto con proveedores, solicitud de presupuestos e informes técnicos."
+            ],
+            badges: ["Windows 10/11", "Diagnóstico RAM/BIOS", "DHCP / IP", "Microsoft 365", "Lifesize Icon 600", "Telefonía IP Snom"]
+          },
+          {
+            role: "Concurso Robot Sumo — Proyecto en Equipo",
+            company: "ECE Escuela de Ingenieros Burdeos",
+            period: "07 de Marzo de 2026",
+            category: "Robótica y Dev",
+            bullets: [
+              "Diseño en equipo de un robot autónomo de combate sumo.",
+              "Programación de sensores de detección de oponente y borde de pista.",
+              "Lógica de desplazamiento autónomo, pruebas y optimización de rendimiento."
+            ],
+            badges: ["C / C++", "Sensores", "Lógica Embebida", "Trabajo en equipo"]
+          },
+          {
+            role: "Prácticas — Mantenimiento Informático y Web",
+            company: "Delegación Regional de Educación Básica (Camerún)",
+            period: "Agosto 2024",
+            category: "IT y Redes",
+            bullets: [
+              "Mantenimiento preventivo y correctivo del parque informático.",
+              "Gestión y actualización del sitio web institucional.",
+              "Asistencia a usuarios, resolución de incidencias y actualización de equipos."
+            ],
+            badges: ["Mantenimiento PC", "Soporte Usuarios", "WordPress / Web", "Inventario IT"]
+          },
+          {
+            role: "Arquitectura de Redes y Virtualización",
+            company: "ECE Burdeos — Laboratorios Académicos",
+            period: "2025 – 2026",
+            category: "IT y Redes",
+            bullets: [
+              "Simulación de topologías de red en Cisco Packet Tracer: direccionamiento IP, DHCP, enrutamiento y pruebas de conectividad.",
+              "Despliegue y configuración de máquinas virtuales en Oracle VirtualBox.",
+              "Programación y scripting en Python, C, C++ y consultas SQL."
+            ],
+            badges: ["Cisco Packet Tracer", "Oracle VirtualBox", "Python", "SQL", "Enrutamiento"]
+          }
+        ],
+
+        skillsCategories: [
+          {
+            title: "Sistemas y Hardware",
+            items: ["Windows 10 / 11", "Soporte a usuarios N1/N2", "Diagnóstico Hardware (RAM, BIOS, Placa base)", "Instalación de puestos", "HDMI / VGA / DisplayPort"]
+          },
+          {
+            title: "Redes e Infraestructura",
+            items: ["TCP/IP y Direccionamiento IP", "DHCP e IP Estática", "Enrutamiento y Ping", "Administración de routers", "Cisco Packet Tracer"]
+          },
+          {
+            title: "Cloud y Productividad",
+            items: ["Microsoft 365 (Teams, SharePoint, OneDrive)", "Google Workspace y Drive", "Excel (Paneles y Datos)", "Google Sheets", "WordPress"]
+          },
+          {
+            title: "Desarrollo y Herramientas",
+            items: ["Python", "C / C++", "SQL y Bases de datos", "Desarrollo Web (HTML/CSS/JS)", "Oracle VirtualBox", "VS Code / VS Codium", "Ninite", "Git (nociones)"]
+          },
+          {
+            title: "Cualidades e Idiomas",
+            items: ["Bilingüe Francés / Inglés (nativo)", "Español", "Capacidad analítica", "Vocación de servicio", "Autonomía y Rigor", "Comunicación profesional"]
+          }
+        ],
+
+        quizUI: {
+          intro: "¡Pon a prueba tus conocimientos de anime y manga! Identifica la serie de cada uno de los 8 personajes ilustrados.",
+          scoreLabel: "Puntuación",
+          streakLabel: "Racha",
+          questionPrefix: "¿De qué anime / manga es este personaje?",
+          correctMsg: "¡Exacto! ¡Muy bien!",
+          wrongMsg: "Casi — Era:",
+          nextBtn: "Siguiente personaje →",
+          finishTitle: "¡Quiz Completado!",
+          finishSub: "Gracias por explorar el universo manga y anime de Maria.",
+          restartBtn: "Jugar de nuevo"
+        },
+
+        contactUI: {
+          heading: "Conectemos",
+          sub: "Disponible para prácticas a partir de Junio 2027 o alternancia en administración de sistemas y redes / soporte informático en Burdeos.",
+          emailAction: "Enviar correo",
+          callAction: "Llamar directamente",
+          downloadAction: "Descargar CV completo (PDF)"
+        }
+      }
+    };
+
+    /**
+     * =========================================================================
+     * ILLUSTRATED ANIME & MANGA CHARACTER QUIZ DATA (8 CUSTOM SVG PORTRAITS)
+     * =========================================================================
+     */
+    const ANIME_CHARACTERS = [
+      {
+        id: "gojo",
+        name: "Satoru Gojo",
+        correctAnime: "Jujutsu Kaisen",
+        options: ["Jujutsu Kaisen", "Bleach", "Chainsaw Man", "Tokyo Ghoul"],
+        clue: { fr: "Sorciers & Fléaux • Bandeau noir", en: "Sorcerers & Curses • Black blindfold", es: "Hechiceros y Maldiciones • Venda negra" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <defs>
+              <radialGradient id="gojoAura" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#0b0c10" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="160" height="160" rx="24" fill="#11141d"/>
+            <circle cx="80" cy="80" r="68" fill="url(#gojoAura)"/>
+            <!-- High Collar Uniform -->
+            <path d="M42 155 L48 116 Q80 124 112 116 L118 155 Z" fill="#181b24" stroke="#334155" stroke-width="1.5"/>
+            <path d="M72 118 L80 132 L88 118" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+            <!-- Neck & Face -->
+            <rect x="70" y="96" width="20" height="22" rx="6" fill="#f3d2c1"/>
+            <path d="M54 64 Q54 104 80 108 Q106 104 106 64 Z" fill="#fae1d3"/>
+            <!-- Black Blindfold -->
+            <rect x="52" y="62" width="56" height="17" rx="4" fill="#090a0f" stroke="#475569" stroke-width="1"/>
+            <!-- Mouth subtle smirk -->
+            <path d="M73 94 Q80 98 88 93" fill="none" stroke="#8c5a4a" stroke-width="2" stroke-linecap="round"/>
+            <!-- Spiky White/Silver Hair -->
+            <path d="M48 66 L36 44 L54 50 L48 26 L67 40 L76 16 L86 39 L102 20 L101 44 L122 34 L111 58 L124 62 L108 68 Q80 56 52 68 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
+          </svg>`
+      },
+      {
+        id: "naruto",
+        name: "Naruto Uzumaki",
+        correctAnime: "Naruto Shippuden",
+        options: ["Naruto Shippuden", "Dragon Ball Z", "Black Clover", "My Hero Academia"],
+        clue: { fr: "Bandeau de Konoha • Marques sur les joues", en: "Hidden Leaf Headband • Cheek whiskers", es: "Banda de Konoha • Marcas en las mejillas" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#151412"/>
+            <circle cx="80" cy="80" r="65" fill="#f97316" fill-opacity="0.16"/>
+            <!-- Orange & Black Jacket -->
+            <path d="M38 155 L46 116 L114 116 L122 155 Z" fill="#ea580c"/>
+            <path d="M46 116 L66 116 L66 155 L40 155 Z" fill="#18181b"/>
+            <path d="M94 116 L114 116 L120 155 L94 155 Z" fill="#18181b"/>
+            <!-- Neck & Face -->
+            <rect x="70" y="96" width="20" height="22" rx="6" fill="#eab696"/>
+            <path d="M54 62 Q54 103 80 107 Q106 103 106 62 Z" fill="#f5c6a5"/>
+            <!-- Headband -->
+            <rect x="52" y="54" width="56" height="13" rx="3" fill="#1e293b"/>
+            <rect x="64" y="55" width="32" height="11" rx="2" fill="#cbd5e1" stroke="#64748b" stroke-width="1"/>
+            <path d="M77 60.5 Q80 57 83 60.5 Q80 64 77 60.5" fill="none" stroke="#334155" stroke-width="1.3"/>
+            <!-- Eyes & Whiskers -->
+            <circle cx="68" cy="76" r="3.5" fill="#2563eb"/>
+            <circle cx="92" cy="76" r="3.5" fill="#2563eb"/>
+            <line x1="57" y1="82" x2="65" y2="83" stroke="#9a6b52" stroke-width="1.5"/>
+            <line x1="57" y1="86" x2="65" y2="86" stroke="#9a6b52" stroke-width="1.5"/>
+            <line x1="95" y1="83" x2="103" y2="82" stroke="#9a6b52" stroke-width="1.5"/>
+            <line x1="95" y1="86" x2="103" y2="86" stroke="#9a6b52" stroke-width="1.5"/>
+            <path d="M71 93 Q80 100 89 93" fill="none" stroke="#7c4d38" stroke-width="2" stroke-linecap="round"/>
+            <!-- Spiky Blonde Hair -->
+            <path d="M48 56 L38 38 L55 43 L52 24 L69 36 L80 18 L91 36 L108 24 L105 43 L122 38 L112 56 Z" fill="#facc15" stroke="#eab308" stroke-width="1.2"/>
+          </svg>`
+      },
+      {
+        id: "luffy",
+        name: "Monkey D. Luffy",
+        correctAnime: "One Piece",
+        options: ["One Piece", "Fairy Tail", "Hunter x Hunter", "Gintama"],
+        clue: { fr: "Chapeau de paille • Cicatrice sous l'œil gauche", en: "Straw Hat • Scar under left eye", es: "Sombrero de paja • Cicatriz bajo el ojo" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#171313"/>
+            <circle cx="80" cy="82" r="64" fill="#ef4444" fill-opacity="0.16"/>
+            <!-- Red Vest -->
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#dc2626"/>
+            <path d="M72 116 L80 155 L88 116 Z" fill="#f3c19d"/>
+            <!-- Neck & Face -->
+            <rect x="70" y="96" width="20" height="22" rx="6" fill="#eab696"/>
+            <path d="M55 62 Q55 103 80 107 Q105 103 105 62 Z" fill="#f5c6a5"/>
+            <!-- Black Hair Tufts -->
+            <path d="M52 62 L46 74 L56 70 L58 78 L68 68 L80 75 L92 68 L102 78 L104 70 L114 74 L108 62 Z" fill="#111827"/>
+            <!-- Straw Hat -->
+            <ellipse cx="80" cy="54" rx="52" ry="11" fill="#eab308" stroke="#ca8a04" stroke-width="1.5"/>
+            <path d="M53 54 Q55 26 80 26 Q105 26 107 54 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/>
+            <path d="M54 48 Q80 52 106 48 L107 54 Q80 58 53 54 Z" fill="#dc2626"/>
+            <!-- Eyes, Scar & Big Grin -->
+            <circle cx="69" cy="78" r="3" fill="#0f172a"/>
+            <circle cx="91" cy="78" r="3" fill="#0f172a"/>
+            <path d="M88 84 L95 85" stroke="#991b1b" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M67 91 Q80 103 93 91 Z" fill="#ffffff" stroke="#7c4d38" stroke-width="1.5"/>
+          </svg>`
+      },
+      {
+        id: "nezuko",
+        name: "Nezuko Kamado",
+        correctAnime: "Demon Slayer (Kimetsu no Yaiba)",
+        options: ["Demon Slayer (Kimetsu no Yaiba)", "Spirited Away", "Inuyasha", "Fruits Basket"],
+        clue: { fr: "Bambou vert • Kimono rose à motifs", en: "Green bamboo • Pink patterned kimono", es: "Bambú verde • Kimono rosa" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#181216"/>
+            <circle cx="80" cy="80" r="65" fill="#f472b6" fill-opacity="0.16"/>
+            <!-- Long Dark Hair Back -->
+            <path d="M44 60 Q40 120 46 150 L114 150 Q120 120 116 60 Z" fill="#18181b"/>
+            <path d="M44 132 L46 150 L62 150 L58 132 Z" fill="#fb923c" fill-opacity="0.8"/>
+            <path d="M102 132 L98 150 L114 150 L116 132 Z" fill="#fb923c" fill-opacity="0.8"/>
+            <!-- Pink Kimono & Dark Haori -->
+            <path d="M42 155 L50 116 L110 116 L118 155 Z" fill="#1f242d"/>
+            <path d="M66 116 L80 142 L94 116 Z" fill="#f472b6"/>
+            <!-- Face -->
+            <path d="M56 60 Q56 102 80 106 Q104 102 104 60 Z" fill="#fde6da"/>
+            <!-- Pink Hair Ribbon -->
+            <path d="M96 42 L108 36 L105 49 Z" fill="#f472b6"/>
+            <!-- Bangs -->
+            <path d="M55 64 Q64 42 80 42 Q96 42 105 64 L96 68 L88 56 L80 68 L72 56 L64 68 Z" fill="#18181b"/>
+            <!-- Pink Eyes -->
+            <circle cx="69" cy="76" r="4" fill="#ec4899"/>
+            <circle cx="91" cy="76" r="4" fill="#ec4899"/>
+            <!-- Green Bamboo Muzzle -->
+            <rect x="65" y="86" width="30" height="9" rx="3" fill="#22c55e" stroke="#15803d" stroke-width="1.2"/>
+            <line x1="75" y1="86" x2="75" y2="95" stroke="#15803d" stroke-width="1.2"/>
+            <line x1="85" y1="86" x2="85" y2="95" stroke="#15803d" stroke-width="1.2"/>
+          </svg>`
+      },
+      {
+        id: "levi",
+        name: "Levi Ackerman",
+        correctAnime: "Attack on Titan",
+        options: ["Attack on Titan", "Vinland Saga", "Fullmetal Alchemist", "Death Note"],
+        clue: { fr: "Bataillon d'Exploration • Cravate blanche", en: "Survey Corps • White cravat", es: "Legión de Reconocimiento • Pañuelo blanco" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#111514"/>
+            <circle cx="80" cy="80" r="64" fill="#10b981" fill-opacity="0.14"/>
+            <!-- Survey Corps Cloak & Jacket -->
+            <path d="M38 155 L46 115 L114 115 L122 155 Z" fill="#15803d"/>
+            <path d="M56 115 L104 115 L108 155 L52 155 Z" fill="#78350f"/>
+            <!-- White Cravat -->
+            <path d="M72 114 L88 114 L85 134 L80 138 L75 134 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <!-- Face -->
+            <path d="M56 60 Q56 102 80 106 Q104 102 104 60 Z" fill="#f5dcd0"/>
+            <!-- Sharp Undercut Hair -->
+            <path d="M53 68 Q53 36 80 36 Q107 36 107 68 L98 62 L88 68 L80 58 L72 68 L62 62 Z" fill="#0f172a"/>
+            <!-- Sharp Steely Eyes -->
+            <line x1="63" y1="73" x2="74" y2="75" stroke="#0f172a" stroke-width="2"/>
+            <line x1="86" y1="75" x2="97" y2="73" stroke="#0f172a" stroke-width="2"/>
+            <circle cx="69" cy="77" r="2.8" fill="#475569"/>
+            <circle cx="91" cy="77" r="2.8" fill="#475569"/>
+            <line x1="74" y1="94" x2="86" y2="94" stroke="#8c6252" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "denji",
+        name: "Denji",
+        correctAnime: "Chainsaw Man",
+        options: ["Chainsaw Man", "Dandadan", "Mob Psycho 100", "Blue Lock"],
+        clue: { fr: "Chemise blanche & cravate • Cordon sur le torse", en: "White shirt & tie • Chest starter cord", es: "Camisa blanca y corbata • Cordón en el pecho" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#171212"/>
+            <circle cx="80" cy="80" r="64" fill="#ef4444" fill-opacity="0.16"/>
+            <!-- White Shirt & Black Tie -->
+            <path d="M40 155 L48 115 L112 115 L120 155 Z" fill="#f1f5f9"/>
+            <path d="M76 116 L84 116 L86 150 L80 155 L74 150 Z" fill="#18181b"/>
+            <!-- Starter Cord Ring -->
+            <circle cx="80" cy="134" r="6" fill="none" stroke="#dc2626" stroke-width="2.2"/>
+            <!-- Face -->
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f6d5c3"/>
+            <!-- Tousled Blonde Hair -->
+            <path d="M50 68 L44 46 L58 50 L62 32 L76 44 L86 30 L96 46 L112 42 L108 66 L96 60 L84 68 L74 58 L62 66 Z" fill="#fde047" stroke="#eab308" stroke-width="1.2"/>
+            <!-- Eyes & Sharp Grin -->
+            <circle cx="69" cy="76" r="3.2" fill="#92400e"/>
+            <circle cx="91" cy="76" r="3.2" fill="#92400e"/>
+            <path d="M68 91 Q80 101 92 91 Z" fill="#ffffff" stroke="#7c4d38" stroke-width="1.5"/>
+            <path d="M73 91 L75 96 L78 91 L80 96 L83 91 L86 96" fill="none" stroke="#7c4d38" stroke-width="1"/>
+          </svg>`
+      },
+      {
+        id: "killua",
+        name: "Killua Zoldyck",
+        correctAnime: "Hunter x Hunter",
+        options: ["Hunter x Hunter", "Yu Yu Hakusho", "Haikyuu!!", "Assassination Classroom"],
+        clue: { fr: "Cheveux argentés • Col roulé bleu & éclairs", en: "Silver hair • Blue turtleneck & lightning", es: "Cabello plateado • Cuello alto azul y rayos" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#11141c"/>
+            <circle cx="80" cy="80" r="65" fill="#38bdf8" fill-opacity="0.18"/>
+            <!-- White Tee & Blue Turtleneck -->
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#f8fafc"/>
+            <path d="M62 112 L98 112 L94 134 L66 134 Z" fill="#1d4ed8"/>
+            <!-- Face -->
+            <path d="M55 60 Q55 102 80 106 Q105 102 105 60 Z" fill="#fbe4d8"/>
+            <!-- Fluffy Silver Hair -->
+            <path d="M46 68 L38 52 L50 48 L46 32 L64 38 L76 24 L88 38 L106 30 L104 48 L118 52 L110 68 L98 62 L86 70 L78 60 L68 70 L58 62 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/>
+            <!-- Sapphire Eyes -->
+            <ellipse cx="69" cy="77" rx="4" ry="4.5" fill="#0284c7"/>
+            <ellipse cx="91" cy="77" rx="4" ry="4.5" fill="#0284c7"/>
+            <path d="M73 93 Q80 97 87 92" fill="none" stroke="#8c5a4a" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "spike",
+        name: "Spike Spiegel",
+        correctAnime: "Cowboy Bebop",
+        options: ["Cowboy Bebop", "Samurai Champloo", "Trigun", "Lupin III"],
+        clue: { fr: "Costume bleu & chemise jaune • Chasseur de primes spatial", en: "Blue suit & yellow shirt • Space bounty hunter", es: "Traje azul y camisa amarilla • Cazarrecompensas espacial" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#12141a"/>
+            <circle cx="80" cy="80" r="64" fill="#3b82f6" fill-opacity="0.16"/>
+            <!-- Blue Suit & Yellow Shirt -->
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#1e3a8a"/>
+            <path d="M68 116 L80 144 L92 116 Z" fill="#facc15"/>
+            <!-- Face -->
+            <path d="M56 60 Q56 104 80 108 Q104 104 104 60 Z" fill="#f2cbb5"/>
+            <!-- Fluffy Dark Green-Black Hair -->
+            <path d="M46 66 Q40 36 66 30 Q80 22 96 30 Q120 38 114 66 L102 60 L90 66 L80 58 L70 66 L58 60 Z" fill="#142420" stroke="#2c4a42" stroke-width="1.2"/>
+            <!-- Relaxed Eyes & Smirk -->
+            <circle cx="69" cy="77" r="3" fill="#422006"/>
+            <circle cx="91" cy="77" r="3" fill="#422006"/>
+            <path d="M72 93 Q81 97 88 92" fill="none" stroke="#7c4d38" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      }
+    ];
+
+    /**
+     * =========================================================================
+     * GLOBAL APPLICATION STATE
+     * =========================================================================
+     */
+    const state = {
+      lang: "fr",
+      mode: "hub", // 'hub' | 'studio'
+      activeStationId: null,
+      expFilter: "ALL",
+      musicPlaying: false,
+      synthActive: false,
+      audioCtx: null,
+      synthInterval: null,
+      htmlAudio: null,
+
+      // Anime Quiz State
+      quiz: {
+        questions: [],
+        currentIndex: 0,
+        score: 0,
+        streak: 0,
+        answered: false,
+        selectedOption: null,
+        finished: false
+      }
+    };
+
+    /**
+     * =========================================================================
+     * INITIALIZATION ON WINDOW LOAD
+     * =========================================================================
+     */
+    window.addEventListener("DOMContentLoaded", () => {
+      // Set social links from PORTFOLIO_CONFIG
+      document.getElementById("hub-linkedin-link").href = PORTFOLIO_CONFIG.socials.linkedin;
+      document.getElementById("hub-github-link").href = PORTFOLIO_CONFIG.socials.github;
+
+      // Initialize Quiz questions
+      initQuiz();
+
+      // Apply default language ('fr') and render Hub
+      setLanguage("fr");
+
+      // Draw mini avatar preview in Hero Card
+      drawMiniHeroAvatar();
+
+      // Initialize Interactive 3D Liquid Chrome Studio Engine
+      Studio3DEngine.init();
+    });
+
+    /**
+     * =========================================================================
+     * LANGUAGE SWITCHER (FR / EN / ES)
+     * =========================================================================
+     */
+    function setLanguage(lang) {
+      state.lang = lang;
+      const t = I18N[lang];
+
+      // Update active language pill styling
+      ["fr", "en", "es"].forEach((code) => {
+        const btn = document.getElementById(`lang-${code}`);
+        if (code === lang) {
+          btn.className = "px-2 py-1 rounded-lg font-semibold transition-all bg-chrome-200 text-obsidian-950";
+        } else {
+          btn.className = "px-2 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white";
+        }
+      });
+
+      // Translate static data-i18n attributes
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (t[key]) el.textContent = t[key];
+      });
+
+      // Update Hero texts
+      document.getElementById("hero-status").textContent = t.heroStatus;
+      document.getElementById("hero-title").textContent = t.heroTitle;
+      document.getElementById("hero-bio").textContent = t.heroBio;
+
+      // Re-render Hub Cards & Studio Quick Pills
+      renderHubCards();
+      renderStudioQuickPills();
+
+      // If modal is currently open, refresh its content in the new language
+      if (state.activeStationId) {
+        renderModalContent(state.activeStationId);
+      }
+    }
+
+    /**
+     * =========================================================================
+     * VIEW MODE SWITCHING (HOMEPAGE HUB <-> INTERACTIVE 2026 STUDIO)
+     * =========================================================================
+     */
+    function switchMode(newMode, targetStationId = null) {
+      state.mode = newMode;
+      const hubView = document.getElementById("hub-view");
+      const studioView = document.getElementById("studio-view");
+      const holoLayer = document.getElementById("holo-labels-layer");
+      const navHubBtn = document.getElementById("nav-hub-btn");
+      const navStudioBtn = document.getElementById("nav-studio-btn");
+
+      if (newMode === "hub") {
+        hubView.classList.remove("hidden");
+        studioView.classList.add("hidden");
+        holoLayer.classList.add("opacity-0");
+        holoLayer.classList.remove("opacity-100");
+        navHubBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all bg-chrome-200 text-obsidian-950 shadow-sm";
+        navStudioBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all text-chrome-300 hover:text-white flex items-center gap-1.5";
+        Studio3DEngine.setOrbitOverviewMode(true);
+      } else {
+        hubView.classList.add("hidden");
+        studioView.classList.remove("hidden");
+        holoLayer.classList.remove("opacity-0");
+        holoLayer.classList.add("opacity-100");
+        navStudioBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all bg-chrome-200 text-obsidian-950 shadow-sm flex items-center gap-1.5";
+        navHubBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all text-chrome-300 hover:text-white";
+
+        Studio3DEngine.setOrbitOverviewMode(false);
+
+        // If user clicked a specific Hub Card, walk 3D Beanie Girl directly to that station!
+        if (targetStationId) {
+          Studio3DEngine.navigateToStation(targetStationId, true);
+        }
+      }
+    }
+
+    /**
+     * =========================================================================
+     * RENDER HOMEPAGE BENTO HUB CARDS (5 STATIONS)
+     * =========================================================================
+     */
+    function renderHubCards() {
+      const t = I18N[state.lang];
+      const grid = document.getElementById("hub-cards-grid");
+
+      const icons = {
+        profile: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>`,
+        experience: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`,
+        skills: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>`,
+        quiz: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+        contact: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
+      };
+
+      grid.innerHTML = t.stations.map((st, idx) => {
+        // Make card 02 (Experience) span 2 columns on large screens for editorial Bento rhythm
+        const spanClass = idx === 1 ? "lg:col-span-2" : "";
+        return `
+          <article
+            onclick="switchMode('studio', '${st.id}')"
+            class="bento-card bento-card-interactive ${spanClass} rounded-3xl p-6 cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2.5 py-1 rounded-xl bg-chrome-200 text-obsidian-950 font-mono text-xs font-bold">
+                    ${st.num}
+                  </span>
+                  <div class="w-9 h-9 rounded-xl bg-obsidian-800 border border-chrome-300/15 flex items-center justify-center text-chrome-200 group-hover:border-chrome-300/40 transition-colors">
+                    ${icons[st.id]}
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onclick="event.stopPropagation(); openStationModal('${st.id}')"
+                  class="px-3 py-1.5 rounded-xl bg-obsidian-850 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-300 text-[11px] font-mono border border-chrome-300/15 transition-colors"
+                >
+                  ${t.openStationBtn}
+                </button>
+              </div>
+
+              <h3 class="font-display text-xl font-bold text-chrome-100 group-hover:text-white transition-colors">
+                ${st.title}
+              </h3>
+              <p class="text-xs font-mono text-chrome-400 mt-1">${st.subtitle}</p>
+
+              <p class="mt-3 text-sm text-chrome-300/90 leading-relaxed">
+                ${st.cardSummary}
+              </p>
+            </div>
+
+            <div class="mt-5 pt-4 border-t border-chrome-300/10 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap gap-1.5">
+                ${st.tags.map(tag => `<span class="px-2.5 py-1 rounded-lg bg-obsidian-850 border border-chrome-300/10 font-mono text-[11px] text-chrome-300">${tag}</span>`).join("")}
+              </div>
+              <span class="font-mono text-xs text-chrome-200 group-hover:translate-x-1 transition-transform">
+                ${t.walkToStationBtn}
+              </span>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderStudioQuickPills() {
+      const t = I18N[state.lang];
+      const container = document.getElementById("studio-quick-pills");
+      container.innerHTML = t.stations.map(st => `
+        <button
+          onclick="Studio3DEngine.navigateToStation('${st.id}', true)"
+          class="px-2.5 py-1.5 rounded-xl bg-obsidian-850/90 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 font-mono text-[11px] border border-chrome-300/15 transition-colors"
+        >
+          ${st.shortLabel}
+        </button>
+      `).join("");
+
+      // Sync 3D holographic station labels when language changes
+      if (typeof Studio3DEngine !== "undefined" && Studio3DEngine.updateHoloLabelTexts) {
+        Studio3DEngine.updateHoloLabelTexts();
+      }
+    }
+
+    function openStationModal(stationId) {
+      state.activeStationId = stationId;
+      renderModalContent(stationId);
+      const modal = document.getElementById("station-modal");
+      modal.classList.remove("hidden");
+    }
+
+    function closeStationModal() {
+      state.activeStationId = null;
+      const modal = document.getElementById("station-modal");
+      modal.classList.add("hidden");
+    }
+
+    function openNearestStation() {
+      if (typeof Studio3DEngine === "undefined") return;
+      const nearest = Studio3DEngine.getNearestStation();
+      if (nearest) {
+        openStationModal(nearest.id);
+      }
+    }
+
+    function navigateModalStation(delta) {
+      const stations = I18N[state.lang].stations;
+      const idx = stations.findIndex(s => s.id === state.activeStationId);
+      const nextIdx = (idx + delta + stations.length) % stations.length;
+      const nextStation = stations[nextIdx];
+      openStationModal(nextStation.id);
+      if (state.mode === "studio" && typeof Studio3DEngine !== "undefined") {
+        Studio3DEngine.navigateToStation(nextStation.id, false);
+      }
+    }
+
+    function setExpFilter(cat) {
+      state.expFilter = cat;
+      renderModalContent("experience");
+    }
+
+    function renderModalContent(stationId) {
+      const t = I18N[state.lang];
+      const stMeta = t.stations.find(s => s.id === stationId) || t.stations[0];
+
+      document.getElementById("modal-station-num").textContent = stMeta.num;
+      document.getElementById("modal-station-title").textContent = stMeta.title;
+      document.getElementById("modal-station-subtitle").textContent = stMeta.subtitle;
+
+      const body = document.getElementById("modal-body");
+
+      // 01: PROFIL & FORMATION
+      if (stationId === "profile") {
+        const p = t.profileData;
+        body.innerHTML = `
+          <div class="space-y-5">
+            <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-2.5">
+              <h4 class="font-display text-base sm:text-lg font-bold text-chrome-100">${p.headingProfile}</h4>
+              <p class="text-xs sm:text-sm text-chrome-300/95 leading-relaxed">${t.heroBio}</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              ${p.highlights.map(h => `
+                <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15">
+                  <div class="text-[11px] font-mono uppercase text-chrome-400">${h.label}</div>
+                  <div class="text-xs sm:text-sm font-semibold text-chrome-100 mt-1">${h.value}</div>
+                </div>
+              `).join("")}
+            </div>
+
+            <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <div class="text-[11px] font-mono uppercase text-chrome-400">${p.headingEdu}</div>
+                  <h4 class="font-display text-base sm:text-lg font-bold text-chrome-100 mt-0.5">${p.eduSchool}</h4>
+                  <div class="text-xs sm:text-sm text-chrome-300">${p.eduDegree}</div>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-chrome-200 text-obsidian-950 font-mono text-xs font-bold">
+                  ${p.eduPeriod}
+                </span>
+              </div>
+
+              <div class="pt-2 flex flex-wrap gap-1.5">
+                ${p.eduModules.map(mod => `
+                  <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-chrome-300/15 font-mono text-[11px] text-chrome-200">${mod}</span>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 02: EXPÉRIENCES & PROJETS
+      else if (stationId === "experience") {
+        const categories = ["ALL", ...new Set(t.experiencesData.map(e => e.category))];
+        const exps = state.expFilter === "ALL"
+          ? t.experiencesData
+          : t.experiencesData.filter(e => e.category === state.expFilter);
+        const projects = PORTFOLIO_CONFIG.projects || [];
+
+        body.innerHTML = `
+          <div class="space-y-5">
+            <!-- Category Filter Pills -->
+            <div class="flex flex-wrap items-center gap-2">
+              ${categories.map(cat => `
+                <button
+                  type="button"
+                  onclick="setExpFilter('${cat.replace(/'/g, "\\'")}')"
+                  class="px-3 py-1.5 rounded-xl font-mono text-xs border transition-colors ${
+                    state.expFilter === cat
+                      ? "bg-chrome-200 text-obsidian-950 border-white font-semibold"
+                      : "bg-obsidian-850 text-chrome-300 border-chrome-300/15 hover:border-chrome-300/40"
+                  }"
+                >
+                  ${cat}
+                </button>
+              `).join("")}
+            </div>
+
+            <!-- Featured Projects from PORTFOLIO_CONFIG -->
+            ${projects.length > 0 ? `
+              <div class="space-y-3">
+                <div class="font-mono text-xs uppercase tracking-wider text-chrome-400">Projects / Labs</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  ${projects.map(proj => `
+                    <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/20 flex flex-col justify-between space-y-3">
+                      <div>
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                          <span class="font-mono text-[11px] text-chrome-400">${proj.period}</span>
+                          ${proj.githubUrl ? `<a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" class="font-mono text-[11px] text-chrome-200 underline">GitHub ↗</a>` : ""}
+                        </div>
+                        <h5 class="font-display text-sm sm:text-base font-bold text-chrome-100">
+                          ${proj.title[state.lang] || proj.title.fr}
+                        </h5>
+                        <p class="mt-1.5 text-xs text-chrome-300/90 leading-relaxed">
+                          ${proj.description[state.lang] || proj.description.fr}
+                        </p>
+                      </div>
+                      <div class="flex flex-wrap gap-1.5">
+                        ${proj.tags.map(tag => `<span class="px-2 py-0.5 rounded-md bg-obsidian-900 border border-chrome-300/15 font-mono text-[10px] text-chrome-300">${tag}</span>`).join("")}
+                      </div>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            ` : ""}
+
+            <!-- Experiences List -->
+            <div class="space-y-4">
+              ${exps.map(exp => `
+                <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
+                  <div class="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <span class="inline-block px-2.5 py-0.5 rounded-md bg-chrome-200/10 border border-chrome-300/20 font-mono text-[11px] text-chrome-200 mb-1.5">
+                        ${exp.category}
+                      </span>
+                      <h4 class="font-display text-base sm:text-lg font-bold text-chrome-100">${exp.role}</h4>
+                      <div class="text-xs sm:text-sm font-medium text-chrome-300">${exp.company}</div>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-obsidian-900 border border-chrome-300/20 font-mono text-xs text-chrome-200">
+                      ${exp.period}
+                    </span>
+                  </div>
+
+                  <ul class="space-y-2 text-xs sm:text-sm text-chrome-300/95 leading-relaxed list-disc pl-5">
+                    ${exp.bullets.map(b => `<li>${b}</li>`).join("")}
+                  </ul>
+
+                  <div class="pt-2 flex flex-wrap gap-1.5">
+                    ${exp.badges.map(badge => `
+                      <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-chrome-300/15 font-mono text-[11px] text-chrome-300">${badge}</span>
+                    `).join("")}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+
+      // 03: COMPÉTENCES IT & RÉSEAUX
+      else if (stationId === "skills") {
+        const cats = t.skillsCategories;
+        body.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${cats.map(cat => `
+              <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
+                <h4 class="font-display text-base font-bold text-chrome-100">${cat.title}</h4>
+                <div class="flex flex-wrap gap-2">
+                  ${cat.items.map(skill => `
+                    <span class="px-3 py-1.5 rounded-xl bg-obsidian-900 border border-chrome-300/15 font-mono text-xs text-chrome-200">${skill}</span>
+                  `).join("")}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      // 04: ANIME & MANGA QUIZ
+      else if (stationId === "quiz") {
+        renderAnimeQuiz(body);
+      }
+
+      // 05: CONTACT & CV PDF
+      else if (stationId === "contact") {
+        const c = t.contactUI;
+        body.innerHTML = `
+          <div class="space-y-5">
+            <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-2">
+              <h4 class="font-display text-lg font-bold text-chrome-100">${c.heading}</h4>
+              <p class="text-sm text-chrome-300 leading-relaxed">${c.sub}</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="text-[11px] font-mono uppercase text-chrome-400">Email</div>
+                  <a href="mailto:${PORTFOLIO_CONFIG.email}" class="text-sm font-semibold text-chrome-100 hover:underline truncate block">${PORTFOLIO_CONFIG.email}</a>
+                </div>
+                <button onclick="copyText('${PORTFOLIO_CONFIG.email}', 'Email')" class="px-3 py-1.5 rounded-xl bg-obsidian-900 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 font-mono text-xs border border-chrome-300/15 shrink-0">${t.copyBtn}</button>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="text-[11px] font-mono uppercase text-chrome-400">${t.phoneLabel}</div>
+                  <a href="tel:${PORTFOLIO_CONFIG.phoneHref}" class="text-sm font-semibold text-chrome-100 hover:underline block">${PORTFOLIO_CONFIG.phoneDisplay}</a>
+                </div>
+                <button onclick="copyText('${PORTFOLIO_CONFIG.phoneDisplay}', '${t.phoneLabel}')" class="px-3 py-1.5 rounded-xl bg-obsidian-900 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 font-mono text-xs border border-chrome-300/15 shrink-0">${t.copyBtn}</button>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button onclick="downloadCV()" class="chrome-btn-primary px-5 py-3 rounded-2xl text-sm font-display">
+                ${c.downloadAction}
+              </button>
+              <a href="${PORTFOLIO_CONFIG.socials.linkedin}" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-obsidian-850 hover:bg-obsidian-800 border border-chrome-300/20 text-xs font-mono text-chrome-100">
+                LinkedIn ↗
+              </a>
+              <a href="${PORTFOLIO_CONFIG.socials.github}" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-obsidian-850 hover:bg-obsidian-800 border border-chrome-300/20 text-xs font-mono text-chrome-100">
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    /**
+     * =========================================================================
+     * ILLUSTRATED ANIME & MANGA QUIZ ENGINE (STATION 04)
+     * =========================================================================
+     */
+    function initQuiz() {
+      const shuffled = [...ANIME_CHARACTERS].sort(() => Math.random() - 0.5).map(q => ({
+        ...q,
+        shuffledOptions: [...q.options].sort(() => Math.random() - 0.5)
+      }));
+      state.quiz = {
+        questions: shuffled,
+        currentIndex: 0,
+        score: 0,
+        streak: 0,
+        answered: false,
+        selectedOption: null,
+        finished: false
+      };
+    }
+
+    function renderAnimeQuiz(container) {
+      const qState = state.quiz;
+      const ui = I18N[state.lang].quizUI;
+
+      if (qState.finished) {
+        container.innerHTML = `
+          <div class="p-6 sm:p-8 rounded-3xl bg-obsidian-850/90 border border-chrome-300/20 text-center space-y-5">
+            <div class="inline-flex px-4 py-1.5 rounded-full bg-chrome-200 text-obsidian-950 font-mono text-xs font-bold">
+              ${ui.scoreLabel}: ${qState.score} / ${qState.questions.length}
+            </div>
+            <h4 class="font-display text-2xl sm:text-3xl font-bold liquid-chrome-text">${ui.finishTitle}</h4>
+            <p class="text-sm text-chrome-300 max-w-md mx-auto">${ui.finishSub}</p>
+            <div>
+              <button onclick="initQuiz(); renderModalContent('quiz')" class="chrome-btn-primary px-6 py-3 rounded-2xl text-sm font-display">
+                ${ui.restartBtn}
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const current = qState.questions[qState.currentIndex];
+      const clueText = current.clue[state.lang] || current.clue.fr;
+
+      container.innerHTML = `
+        <div class="space-y-5">
+          <!-- Score & Progress Header -->
+          <div class="flex flex-wrap items-center justify-between gap-2 p-3.5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15">
+            <span class="text-xs text-chrome-300">${ui.intro}</span>
+            <div class="flex items-center gap-2 font-mono text-xs shrink-0">
+              <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-chrome-300/15 text-chrome-200">
+                ${qState.currentIndex + 1}/${qState.questions.length}
+              </span>
+              <span class="px-2.5 py-1 rounded-lg bg-chrome-200 text-obsidian-950 font-bold">
+                ${ui.scoreLabel}: ${qState.score}
+              </span>
+              <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-chrome-300/15 text-chrome-200">
+                ${ui.streakLabel}: ${qState.streak}🔥
+              </span>
+            </div>
+          </div>
+
+          <!-- Character Card + Options -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center p-5 rounded-3xl bg-obsidian-850/90 border border-chrome-300/15">
+            <!-- Custom SVG Portrait -->
+            <div class="sm:col-span-5 flex flex-col items-center">
+              <div class="w-40 h-40 sm:w-44 sm:h-44 rounded-3xl p-1.5 bg-gradient-to-br from-chrome-100 via-chrome-400 to-obsidian-700 shadow-xl">
+                <div class="w-full h-full rounded-[20px] overflow-hidden bg-obsidian-950">
+                  ${current.svg}
+                </div>
+              </div>
+              <div class="mt-3 text-center">
+                <div class="font-display font-bold text-base text-chrome-100">${current.name}</div>
+                <div class="text-[11px] font-mono text-chrome-400 mt-0.5">${clueText}</div>
+              </div>
+            </div>
+
+            <!-- Multiple Choice Options -->
+            <div class="sm:col-span-7 space-y-3">
+              <div class="font-display font-semibold text-sm sm:text-base text-chrome-100">
+                ${ui.questionPrefix}
+              </div>
+
+              <div class="grid grid-cols-1 gap-2.5">
+                ${current.shuffledOptions.map(opt => {
+                  let btnStyle = "bg-obsidian-900 hover:bg-obsidian-800 border-chrome-300/20 text-chrome-200";
+                  if (qState.answered) {
+                    if (opt === current.correctAnime) {
+                      btnStyle = "bg-emerald-500/20 border-emerald-400 text-emerald-200 font-semibold";
+                    } else if (opt === qState.selectedOption) {
+                      btnStyle = "bg-rose-500/20 border-rose-400 text-rose-200";
+                    } else {
+                      btnStyle = "bg-obsidian-900/50 border-chrome-300/10 text-chrome-500";
+                    }
+                  }
+                  return `
+                    <button
+                      type="button"
+                      ${qState.answered ? "disabled" : ""}
+                      onclick="submitQuizAnswer('${opt.replace(/'/g, "\\'")}')"
+                      class="w-full text-left px-4 py-3 rounded-2xl border text-xs sm:text-sm transition-all flex items-center justify-between ${btnStyle}"
+                    >
+                      <span>${opt}</span>
+                      ${qState.answered && opt === current.correctAnime ? '<span class="font-mono text-xs">✓</span>' : ''}
+                    </button>
+                  `;
+                }).join("")}
+              </div>
+
+              ${qState.answered ? `
+                <div class="pt-2 flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-mono ${qState.selectedOption === current.correctAnime ? 'text-emerald-300' : 'text-rose-300'}">
+                    ${qState.selectedOption === current.correctAnime ? ui.correctMsg : `${ui.wrongMsg} ${current.correctAnime}`}
+                  </span>
+                  <button onclick="nextQuizQuestion()" class="chrome-btn-primary px-4 py-2 rounded-xl text-xs font-display">
+                    ${ui.nextBtn}
+                  </button>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function submitQuizAnswer(option) {
+      if (state.quiz.answered) return;
+      const current = state.quiz.questions[state.quiz.currentIndex];
+      state.quiz.answered = true;
+      state.quiz.selectedOption = option;
+      if (option === current.correctAnime) {
+        state.quiz.score += 1;
+        state.quiz.streak += 1;
+      } else {
+        state.quiz.streak = 0;
+      }
+      renderModalContent("quiz");
+    }
+
+    function nextQuizQuestion() {
+      if (state.quiz.currentIndex + 1 >= state.quiz.questions.length) {
+        state.quiz.finished = true;
+      } else {
+        state.quiz.currentIndex += 1;
+        state.quiz.answered = false;
+        state.quiz.selectedOption = null;
+      }
+      renderModalContent("quiz");
+    }
+
+    /**
+     * =========================================================================
+     * DON TOLIVER — "NO IDEA" MUSIC DOCK CONTROLLER
+     * =========================================================================
+     */
+    function toggleSpotifyDrawer() {
+      const pop = document.getElementById("spotify-popover");
+      pop.classList.toggle("hidden");
+    }
+
+    function toggleMusicPlay() {
+      // If user configured a local MP3 URL in PORTFOLIO_CONFIG.music.mp3Url, play it directly
+      if (PORTFOLIO_CONFIG.music.mp3Url) {
+        if (!state.htmlAudio) {
+          state.htmlAudio = new Audio(PORTFOLIO_CONFIG.music.mp3Url);
+          state.htmlAudio.loop = true;
+        }
+        if (state.musicPlaying) {
+          state.htmlAudio.pause();
+          setMusicUIState(false);
+        } else {
+          state.htmlAudio.play().then(() => setMusicUIState(true)).catch(() => toggleSpotifyDrawer());
+        }
+        return;
+      }
+
+      // Otherwise toggle the Spotify embed drawer AND subtle ambient synth mode
+      const pop = document.getElementById("spotify-popover");
+      if (pop.classList.contains("hidden")) {
+        pop.classList.remove("hidden");
+      }
+      toggleSynthFallback();
+    }
+
+    function toggleSynthFallback() {
+      if (state.synthActive) {
+        clearInterval(state.synthInterval);
+        state.synthInterval = null;
+        state.synthActive = false;
+        setMusicUIState(false);
+        return;
+      }
+
+      try {
+        if (!state.audioCtx) {
+          state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (state.audioCtx.state === "suspended") {
+          state.audioCtx.resume();
+        }
+
+        // Subtle nocturnal 2026 ambient chord progression (Cm9 - Fm9 - Abmaj7 - Gm7)
+        const chords = [
+          [130.81, 155.56, 196.00, 233.08, 293.66],
+          [174.61, 207.65, 261.63, 311.13, 392.00],
+          [207.65, 261.63, 311.13, 392.00],
+          [196.00, 233.08, 293.66, 349.23]
+        ];
+        let step = 0;
+
+        const playChord = () => {
+          if (!state.audioCtx || !state.synthActive) return;
+          const now = state.audioCtx.currentTime;
+          const notes = chords[step % chords.length];
+          step++;
+
+          notes.forEach((freq) => {
+            const osc = state.audioCtx.createOscillator();
+            const gain = state.audioCtx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(freq, now);
+
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.exponentialRampToValueAtTime(0.018, now + 0.45);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.3);
+
+            osc.connect(gain);
+            gain.connect(state.audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 2.4);
+          });
+        };
+
+        state.synthActive = true;
+        setMusicUIState(true);
+        playChord();
+        state.synthInterval = setInterval(playChord, 2400);
+      } catch (err) {
+        toggleSpotifyDrawer();
+      }
+    }
+
+    function setMusicUIState(isPlaying) {
+      state.musicPlaying = isPlaying;
+      const playIcon = document.getElementById("icon-play");
+      const pauseIcon = document.getElementById("icon-pause");
+      const eq = document.getElementById("music-eq");
+
+      if (isPlaying) {
+        playIcon.classList.add("hidden");
+        pauseIcon.classList.remove("hidden");
+        eq.classList.add("eq-playing");
+      } else {
+        playIcon.classList.remove("hidden");
+        pauseIcon.classList.add("hidden");
+        eq.classList.remove("eq-playing");
+      }
+    }
+
+    /**
+     * =========================================================================
+     * CLIPBOARD & TOAST UTILITIES
+     * =========================================================================
+     */
+    function copyText(text, label) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast(`${label} ${I18N[state.lang].copiedToast}`);
+      } catch (e) {
+        showToast(text);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    let toastTimeout = null;
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toast-message");
+      toastMsg.textContent = msg;
+      toast.classList.remove("opacity-0", "translate-y-2");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add("opacity-0", "translate-y-2");
+      }, 2600);
+    }
+
+    /**
+     * =========================================================================
+     * INSTANT DOWNLOADABLE PDF CV GENERATOR (jsPDF)
+     * Populated directly from CV_Maria_Essindi_Bidjo_ATS.pdf
+     * =========================================================================
+     */
+    function downloadCV() {
+      // If Maria linked a direct PDF URL in PORTFOLIO_CONFIG.cvPdfUrl, download it
+      if (PORTFOLIO_CONFIG.cvPdfUrl) {
+        const a = document.createElement("a");
+        a.href = PORTFOLIO_CONFIG.cvPdfUrl;
+        a.download = "CV_Maria_Essindi_Bidjo.pdf";
+        a.click();
+        return;
+      }
+
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ unit: "mm", format: "a4" });
+        const margin = 15;
+        const pageWidth = 210;
+        const contentWidth = pageWidth - margin * 2;
+        let y = 16;
+
+        // Header
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.setTextColor(15, 23, 42);
+        doc.text("MARIA ESSINDI BIDJO", margin, y);
+        y += 6;
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10.5);
+        doc.setTextColor(51, 65, 85);
+        doc.text("Etudiante en Informatique - Administration Systemes & Reseaux / Support Informatique", margin, y);
+        y += 5;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        doc.setTextColor(71, 85, 105);
+        doc.text("Recherche de stage (Disponible a partir de Juin 2027) & Alternance Systemes / Reseaux", margin, y);
+        y += 5;
+        doc.text("Villenave-d'Ornon (33), France | essindibidjomaria@gmail.com | 07 66 04 37 84", margin, y);
+        y += 4;
+
+        doc.setDrawColor(148, 163, 184);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 6;
+
+        const addSectionTitle = (title) => {
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(11);
+          doc.setTextColor(15, 23, 42);
+          doc.text(title, margin, y);
+          y += 1.5;
+          doc.setDrawColor(203, 213, 225);
+          doc.line(margin, y, pageWidth - margin, y);
+          y += 4.5;
+        };
+
+        const addWrappedText = (text, fontSize = 9, isBold = false, indent = 0) => {
+          doc.setFont("helvetica", isBold ? "bold" : "normal");
+          doc.setFontSize(fontSize);
+          doc.setTextColor(30, 41, 59);
+          const lines = doc.splitTextToSize(text, contentWidth - indent);
+          lines.forEach((line) => {
+            if (y > 282) {
+              doc.addPage();
+              y = 16;
+            }
+            doc.text(line, margin + indent, y);
+            y += fontSize * 0.44;
+          });
+        };
+
+        // PROFIL
+        addSectionTitle("PROFIL");
+        addWrappedText(
+          "Etudiante en Bachelor en developpement IA a l'ECE Ecole d'Ingenieurs de Bordeaux (2e annee), je recherche une alternance ou un stage (des Juin 2027) en administration systemes et reseaux / support informatique. Mon stage chez SNT SUMA m'a permis de decouvrir le support informatique, la maintenance materielle et les reseaux, et de participer a des etudes techniques sur les telecoms et la mobilite electrique. Curieuse, rigoureuse et autonome."
+        );
+        y += 3;
+
+        // EXPERIENCES PROFESSIONNELLES
+        addSectionTitle("EXPERIENCES PROFESSIONNELLES & PROJETS");
+        addWrappedText("SNT SUMA (Societe Nouvelle Transport SUMA) - Stage Support IT & Reseaux (Juin 2026 - Juillet 2026)", 9.5, true);
+        const sntBullets = [
+          "- Support informatique : assistance utilisateurs Windows, diagnostic/resolution de pannes, installation de postes (HDMI, VGA, DisplayPort).",
+          "- Maintenance materielle : diagnostic RAM, BIOS, cartes meres, alimentations, demontage/remontage de composants.",
+          "- Reseaux : verification des connexions (ping, adressage IP), parametrage DHCP / IP statique, administration de routeurs.",
+          "- Cloud & Microsoft 365 : suivi Google Drive, controle des sauvegardes, assistance Teams, OneDrive et SharePoint.",
+          "- Data & Etudes techniques : tableaux de bord Excel, visioconference Lifesize Icon 600 sans Cloud (Teams), etude telephonie fixe (Snom IP, SFR vs Free Coms Pro) et bornes de recharge electrique (Virta / AMPECO / EV Map)."
+        ];
+        sntBullets.forEach(b => addWrappedText(b, 8.8, false, 2));
+        y += 2;
+
+        addWrappedText("Concours Robot Sumo - ECE Bordeaux (07 Mars 2026)", 9.5, true);
+        addWrappedText("- Conception en equipe d'un robot autonome : programmation des capteurs, logique de deplacement, tests et optimisation.", 8.8, false, 2);
+        y += 2;
+
+        addWrappedText("Delegation Regionale de l'Education de Base (Cameroun) - Stage (Aout 2024)", 9.5, true);
+        addWrappedText("- Maintenance informatique, gestion du site internet, assistance aux utilisateurs, resolution d'incidents et mise a jour du parc.", 8.8, false, 2);
+        y += 3;
+
+        // FORMATION
+        addSectionTitle("FORMATION");
+        addWrappedText("ECE Ecole d'Ingenieurs - Bordeaux (2025 - 2028) | Bachelor Developpeur en IA (2e annee)", 9.5, true);
+        addWrappedText("Enseignements : Python, C, C++, Reseaux, DevOps, Developpement Web, Bases de donnees, SQL.", 8.8, false, 2);
+        y += 3;
+
+        // COMPETENCES TECHNIQUES
+        addSectionTitle("COMPETENCES TECHNIQUES & LANGUES");
+        addWrappedText("Systemes : Windows 10/11, support utilisateurs, maintenance et diagnostic materiel, installation de postes.", 8.8);
+        addWrappedText("Reseaux : TCP/IP, DHCP, routage, ping, adressage IP, routeurs, Cisco Packet Tracer.", 8.8);
+        addWrappedText("Cloud & Outils : Microsoft 365 (Teams, SharePoint, OneDrive), Google Workspace, Excel, WordPress, VirtualBox, VS Code, Ninite, Git.", 8.8);
+        addWrappedText("Langues & Qualites : Bilingue Francais / Anglais (langues maternelles), Espagnol | Esprit d'analyse, sens du service, autonomie.", 8.8);
+
+        doc.save("CV_Maria_Essindi_Bidjo.pdf");
+        showToast(I18N[state.lang].pdfGeneratedToast);
+      } catch (err) {
+        window.print();
+      }
+    }
+
+    /**
+     * =========================================================================
+     * CUSTOM 2026 BEANIE GIRL VECTOR CANVAS RENDERER
+     * High-detail character with warm caramel skin, textured black hair under
+     * dark charcoal knit beanie, silver over-ear headphones around neck,
+     * oversized charcoal/silver streetwear hoodie, baggy cargo pants, and
+     * chunky silver-accented sneakers.
+     * =========================================================================
+     */
+    function drawBeanieGirl(ctx, x, y, scale, animTime, isMoving, facingDir) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
+
+      const walkCycle = isMoving ? Math.sin(animTime * 11) : 0;
+      const walkCos = isMoving ? Math.cos(animTime * 11) : 0;
+      const idleBounce = isMoving ? Math.abs(walkCos) * -3.5 : Math.sin(animTime * 3.2) * 1.8;
+
+      // Ground Contact Shadow
+      ctx.fillStyle = "rgba(0, 0, 0, 0.42)";
+      ctx.beginPath();
+      ctx.ellipse(0, 42, 22 - Math.abs(walkCycle) * 2, 6.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Apply vertical bounce to character body
+      ctx.translate(0, idleBounce);
+
+      // Flip horizontally if facing left
+      ctx.save();
+      if (facingDir < 0) {
+        ctx.scale(-1, 1);
+      }
+
+      // 1. BAGGY CARGO PANTS & CHUNKY SILVER-ACCENTED SNEAKERS
+      const leftLegY = isMoving ? Math.max(0, -walkCycle) * -5 : 0;
+      const rightLegY = isMoving ? Math.max(0, walkCycle) * -5 : 0;
+      const leftLegX = isMoving ? walkCycle * 6 : 0;
+      const rightLegX = isMoving ? -walkCycle * 6 : 0;
+
+      // Back Leg (Left)
+      drawLegAndSneaker(ctx, -7 + leftLegX, 14 + leftLegY, "#13161d", "#9aa4b6");
+      // Front Leg (Right)
+      drawLegAndSneaker(ctx, 7 + rightLegX, 14 + rightLegY, "#191d26", "#e4e8ef");
+
+      // 2. OVERSIZED CHARCOAL / SILVER STREETWEAR HOODIE
+      // Hoodie Torso
+      const hoodieGrad = ctx.createLinearGradient(-18, -18, 18, 18);
+      hoodieGrad.addColorStop(0, "#323744");
+      hoodieGrad.addColorStop(0.5, "#232731");
+      hoodieGrad.addColorStop(1, "#181b22");
+
+      ctx.fillStyle = hoodieGrad;
+      ctx.strokeStyle = "rgba(216, 221, 230, 0.25)";
+      ctx.lineWidth = 1.2;
+      roundRectPath(ctx, -17, -16, 34, 32, 10);
+      ctx.fill();
+      ctx.stroke();
+
+      // Brushed Silver Streetwear Chest Accent Panel
+      ctx.fillStyle = "rgba(216, 221, 230, 0.16)";
+      roundRectPath(ctx, -13, -6, 26, 5, 2.5);
+      ctx.fill();
+
+      // Kangaroo Pocket & Ribbed Hem
+      ctx.fillStyle = "#1b1e26";
+      roundRectPath(ctx, -11, 3, 22, 10, 4);
+      ctx.fill();
+      ctx.fillStyle = "#2b303c";
+      roundRectPath(ctx, -16, 13, 32, 4, 2);
+      ctx.fill();
+
+      // Hoodie Drawstrings (Silver tips)
+      ctx.strokeStyle = "#cbd5e1";
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.moveTo(-4, -12);
+      ctx.lineTo(-4.5, -2);
+      ctx.moveTo(4, -12);
+      ctx.lineTo(4.5, -2);
+      ctx.stroke();
+
+      // Sleeves & Caramel Hands
+      const armSwing = isMoving ? -walkCycle * 5 : Math.sin(animTime * 2.5) * 1;
+      // Left Sleeve
+      ctx.fillStyle = "#20242e";
+      roundRectPath(ctx, -22, -13 + armSwing * 0.4, 8, 22, 4);
+      ctx.fill();
+      ctx.fillStyle = "#b87b56"; // Warm caramel hand
+      ctx.beginPath();
+      ctx.arc(-18, 10 + armSwing * 0.4, 3.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Right Sleeve
+      ctx.fillStyle = "#2b303c";
+      roundRectPath(ctx, 14, -13 - armSwing * 0.4, 8, 22, 4);
+      ctx.fill();
+      ctx.fillStyle = "#c2845e"; // Warm caramel hand
+      ctx.beginPath();
+      ctx.arc(18, 10 - armSwing * 0.4, 3.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 3. SILVER OVER-EAR HEADPHONES AROUND NECK
+      ctx.strokeStyle = "#94a3b8";
+      ctx.lineWidth = 3.2;
+      ctx.beginPath();
+      ctx.arc(0, -15, 11, 0.15 * Math.PI, 0.85 * Math.PI);
+      ctx.stroke();
+
+      // Left & Right Silver Earcups
+      const cupGrad = ctx.createLinearGradient(-12, -16, 12, -8);
+      cupGrad.addColorStop(0, "#f1f5f9");
+      cupGrad.addColorStop(0.5, "#b0b8c6");
+      cupGrad.addColorStop(1, "#64748b");
+      ctx.fillStyle = cupGrad;
+      roundRectPath(ctx, -13.5, -16, 6.5, 9, 3);
+      ctx.fill();
+      roundRectPath(ctx, 7, -16, 6.5, 9, 3);
+      ctx.fill();
+
+      // 4. NECK, HEAD & WARM CARAMEL SKIN
+      ctx.fillStyle = "#a66c49";
+      roundRectPath(ctx, -4, -22, 8, 7, 3);
+      ctx.fill();
+
+      const skinGrad = ctx.createRadialGradient(-2, -33, 3, 0, -31, 16);
+      skinGrad.addColorStop(0, "#cc8e68");
+      skinGrad.addColorStop(0.7, "#b87b56");
+      skinGrad.addColorStop(1, "#9a613f");
+      ctx.fillStyle = skinGrad;
+      ctx.beginPath();
+      ctx.arc(0, -31, 13.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Expressive Eyes, Brows & Confident Subtle Smile
+      ctx.fillStyle = "#181518";
+      ctx.beginPath();
+      ctx.ellipse(-3.5, -31, 1.7, 2.2, 0, 0, Math.PI * 2);
+      ctx.ellipse(5.5, -31, 1.7, 2.2, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Eye specular catchlights
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.arc(-3, -31.8, 0.65, 0, Math.PI * 2);
+      ctx.arc(6, -31.8, 0.65, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Soft Eyebrows
+      ctx.strokeStyle = "#261c1a";
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.moveTo(-6, -34.5);
+      ctx.lineTo(-1.5, -34.8);
+      ctx.moveTo(3.5, -34.8);
+      ctx.lineTo(8, -34.5);
+      ctx.stroke();
+
+      // Warm Smile
+      ctx.strokeStyle = "#75442b";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(1.2, -26.5, 3.2, 0.12 * Math.PI, 0.85 * Math.PI);
+      ctx.stroke();
+
+      // 5. SHORT TEXTURED BLACK HAIR PEEKING OUT FROM BEANIE
+      ctx.fillStyle = "#141418";
+      const hairTufts = [
+        [-13.5, -33, 4.2], [-14.2, -28, 3.8], [-12.5, -24, 3.2],
+        [13.2, -33, 4.0], [13.8, -28.5, 3.5], [-8, -37, 3.5], [9, -37, 3.5]
+      ];
+      hairTufts.forEach(([hx, hy, hr]) => {
+        ctx.beginPath();
+        ctx.arc(hx, hy, hr, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 6. DARK CHARCOAL KNIT BEANIE WITH METALLIC CHROME PIN
+      const beanieGrad = ctx.createLinearGradient(-14, -52, 14, -34);
+      beanieGrad.addColorStop(0, "#2c303b");
+      beanieGrad.addColorStop(1, "#16181f");
+      ctx.fillStyle = beanieGrad;
+      ctx.beginPath();
+      ctx.arc(0, -37, 14.5, Math.PI, 0);
+      ctx.lineTo(15, -34);
+      ctx.lineTo(-15, -34);
+      ctx.closePath();
+      ctx.fill();
+
+      // Ribbed Beanie Folded Cuff
+      ctx.fillStyle = "#1f232c";
+      ctx.strokeStyle = "rgba(216, 221, 230, 0.18)";
+      ctx.lineWidth = 1;
+      roundRectPath(ctx, -15.5, -39, 31, 6.5, 3.2);
+      ctx.fill();
+      ctx.stroke();
+
+      // Knit rib vertical lines
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.lineWidth = 1;
+      for (let rx = -11; rx <= 11; rx += 4.4) {
+        ctx.beginPath();
+        ctx.moveTo(rx, -38.5);
+        ctx.lineTo(rx, -33);
+        ctx.stroke();
+      }
+
+      // Tiny Liquid Chrome Badge Pin on Beanie Cuff
+      ctx.fillStyle = "#e2e8f0";
+      roundRectPath(ctx, 6.5, -37.2, 5, 2.8, 1);
+      ctx.fill();
+
+      ctx.restore();
+      ctx.restore();
+    }
+
+    function drawLegAndSneaker(ctx, x, y, pantColor, sneakerAccent) {
+      // Baggy Cargo Pant Leg
+      ctx.fillStyle = pantColor;
+      roundRectPath(ctx, x - 6.5, y, 13, 19, 4.5);
+      ctx.fill();
+
+      // Side Cargo Pocket Detail
+      ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+      roundRectPath(ctx, x - 5, y + 4, 10, 7, 2);
+      ctx.fill();
+
+      // Chunky Silver-Accented Sneaker
+      ctx.fillStyle = "#1c2029";
+      roundRectPath(ctx, x - 7, y + 17, 16, 7.5, 3.5);
+      ctx.fill();
+
+      // Brushed Silver Metallic Side Panel
+      ctx.fillStyle = sneakerAccent;
+      roundRectPath(ctx, x - 4, y + 18.5, 11, 3.2, 1.5);
+      ctx.fill();
+
+      // Chunky Sole
+      ctx.fillStyle = "#d8dde6";
+      roundRectPath(ctx, x - 7.5, y + 23, 17, 3.2, 1.5);
+      ctx.fill();
+    }
+
+    function roundRectPath(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    function drawMiniHeroAvatar() {
+      const c = document.getElementById("mini-avatar-canvas");
+      if (!c) return;
+      const ctx = c.getContext("2d");
+      ctx.clearRect(0, 0, c.width, c.height);
+      drawBeanieGirl(ctx, 19, 25, 0.44, 0, false, 1);
+    }
+
+    /**
+     * =========================================================================
+     * REALISTIC 3D LIQUID CHROME STUDIO ENGINE (THREE.JS WEBGL PBR)
+     * - Custom high-contrast softbox environment map via PMREMGenerator for
+     *   mirror-like liquid chrome reflections (metalness: 1.0, roughness: 0.035)
+     * - Mirror-polished obsidian & brushed-titanium circular studio platform
+     * - Morphing liquid-chrome sculptures + 5 distinct 3D chrome stations
+     * - Articulated 3D 2026 Beanie Girl Avatar with procedural walking,
+     *   breathing, smooth turning, and arrival wave animations
+     * - Full directional controls: WASD/Arrows, press-and-hold D-Pad,
+     *   3D Raycaster floor/station click-to-move, and Follow/Free Orbit camera
+     * =========================================================================
+     */
+    const Studio3DEngine = {
+      scene: null,
+      camera: null,
+      renderer: null,
+      envMap: null,
+      clock: null,
+      totalTime: 0,
+
+      // Camera State
+      cameraMode: "follow", // 'follow' | 'orbit'
+      orbitOverview: true,  // True when on Hub Bento screen
+      camYaw: 0,
+      camPitch: 0.56,
+      camDist: 10.5,
+      isDraggingCam: false,
+      dragStartX: 0,
+      dragStartY: 0,
+      dragMoved: false,
+      camLookCurrent: null,
+      camPosCurrent: null,
+
+      // Avatar 3D Rig & Movement State
+      avatar: {
+        root: null,
+        hips: null,
+        torso: null,
+        headGroup: null,
+        leftArm: null,
+        rightArm: null,
+        leftLeg: null,
+        rightLeg: null,
+        x: 0,
+        z: 1.8,
+        rotY: 0,
+        isMoving: false,
+        waveTimer: 0,
+        targetX: null,
+        targetZ: null,
+        autoOpenStationId: null
+      },
+
+      // Input State
+      keys: { up: false, down: false, left: false, right: false },
+      dpad: { up: false, down: false, left: false, right: false },
+
+      // Interactive 3D Elements
+      floorMesh: null,
+      rippleMesh: null,
+      rippleAlpha: 0,
+      morphMeshes: [],
+      stations: [],
+      raycaster: null,
+      pointerNDC: null,
+
+      init() {
+        const container = document.getElementById("three-bg-container");
+        if (!container || typeof THREE === "undefined") return;
+
+        this.clock = new THREE.Clock();
+        this.raycaster = new THREE.Raycaster();
+        this.pointerNDC = new THREE.Vector2();
+
+        // 1. Scene & Atmospheric Obsidian Fog
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x090a0f);
+        this.scene.fog = new THREE.FogExp2(0x090a0f, 0.024);
+
+        // 2. Perspective Camera
+        const aspect = window.innerWidth / window.innerHeight;
+        this.camera = new THREE.PerspectiveCamera(44, aspect, 0.1, 120);
+        this.camPosCurrent = new THREE.Vector3(0, 7.5, 11.5);
+        this.camLookCurrent = new THREE.Vector3(0, 0.9, 0);
+        this.camera.position.copy(this.camPosCurrent);
+
+        // 3. WebGLRenderer with ACES Filmic Tone Mapping & Soft Shadows
+        this.renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        this.renderer.toneMappingExposure = 1.28;
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        container.appendChild(this.renderer.domElement);
+
+        // 4. Generate High-Contrast Studio Softbox Environment Map for Mirror Chrome
+        this.buildStudioEnvironment();
+
+        // 5. Studio Lighting Rig
+        this.buildLights();
+
+        // 6. Obsidian & Brushed-Titanium Platform + Morphing Liquid Chrome Sculptures
+        this.buildStudioPlatform();
+        this.buildMorphingLiquidChrome();
+
+        // 7. Build 5 Distinct 3D Chrome Station Pedestals & Holographic Labels
+        this.buildStations();
+
+        // 8. Build Articulated 3D 2026 Beanie Girl Avatar
+        this.buildBeanieGirl3D();
+
+        // 9. Destination Click Ripple Ring
+        const rippleGeo = new THREE.RingGeometry(0.18, 0.32, 48);
+        rippleGeo.rotateX(-Math.PI / 2);
+        const rippleMat = new THREE.MeshBasicMaterial({
+          color: 0xf5f7fa,
+          transparent: true,
+          opacity: 0,
+          side: THREE.DoubleSide
+        });
+        this.rippleMesh = new THREE.Mesh(rippleGeo, rippleMat);
+        this.rippleMesh.position.y = 0.03;
+        this.scene.add(this.rippleMesh);
+
+        // 10. Bind Controls & Resize
+        this.bindKeyboard();
+        this.bindDPad();
+        this.bindPointerAndOrbit();
+        window.addEventListener("resize", () => this.onResize());
+
+        // Start Render Loop
+        this.animate();
+      },
+
+      buildStudioEnvironment() {
+        const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+        pmremGenerator.compileEquirectangularShader();
+
+        const envScene = new THREE.Scene();
+        envScene.background = new THREE.Color(0x06070a);
+
+        // High-contrast studio softboxes for crisp liquid-chrome reflections
+        const addSoftbox = (w, h, colorHex, intensity, pos, rot) => {
+          const geo = new THREE.PlaneGeometry(w, h);
+          const mat = new THREE.MeshBasicMaterial({
+            color: new THREE.Color(colorHex).multiplyScalar(intensity),
+            side: THREE.DoubleSide
+          });
+          const mesh = new THREE.Mesh(geo, mat);
+          mesh.position.set(pos[0], pos[1], pos[2]);
+          mesh.rotation.set(rot[0], rot[1], rot[2]);
+          envScene.add(mesh);
+        };
+
+        // Overhead Main Softbox Strip
+        addSoftbox(18, 6, 0xffffff, 2.8, [0, 14, 0], [Math.PI / 2, 0, 0]);
+        // Front-Left Cool Silver Key Panel
+        addSoftbox(12, 8, 0xeef3fa, 2.2, [-14, 6, 10], [0, Math.PI / 3, 0]);
+        // Front-Right Brushed Chrome Panel
+        addSoftbox(12, 8, 0xd8dde6, 2.0, [14, 6, 10], [0, -Math.PI / 3, 0]);
+        // Rear Horizon Rim Strip
+        addSoftbox(24, 3.5, 0xffffff, 2.4, [0, 4, -16], [0, 0, 0]);
+        // Subtle Floor Bounce Ring
+        const floorBounce = new THREE.Mesh(
+          new THREE.RingGeometry(6, 16, 48),
+          new THREE.MeshBasicMaterial({ color: 0x262c3a, side: THREE.DoubleSide })
+        );
+        floorBounce.rotation.x = -Math.PI / 2;
+        floorBounce.position.y = -8;
+        envScene.add(floorBounce);
+
+        const renderTarget = pmremGenerator.fromScene(envScene, 0.025);
+        this.envMap = renderTarget.texture;
+        this.scene.environment = this.envMap;
+        pmremGenerator.dispose();
+      },
+
+      buildLights() {
+        const hemi = new THREE.HemisphereLight(0xeef2f7, 0x10131a, 0.65);
+        this.scene.add(hemi);
+
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.35);
+        keyLight.position.set(7, 13, 8);
+        keyLight.castShadow = true;
+        keyLight.shadow.mapSize.width = 1024;
+        keyLight.shadow.mapSize.height = 1024;
+        keyLight.shadow.camera.near = 1;
+        keyLight.shadow.camera.far = 35;
+        const d = 11;
+        keyLight.shadow.camera.left = -d;
+        keyLight.shadow.camera.right = d;
+        keyLight.shadow.camera.top = d;
+        keyLight.shadow.camera.bottom = -d;
+        keyLight.shadow.bias = -0.0005;
+        this.scene.add(keyLight);
+
+        const rimLight = new THREE.DirectionalLight(0xcbd5e1, 0.85);
+        rimLight.position.set(-9, 7, -9);
+        this.scene.add(rimLight);
+      },
+
+      createLiquidChromeMaterial(roughness = 0.035, colorHex = 0xf5f7fa) {
+        return new THREE.MeshPhysicalMaterial({
+          color: colorHex,
+          metalness: 1.0,
+          roughness: roughness,
+          envMap: this.envMap,
+          envMapIntensity: 1.45,
+          clearcoat: 1.0,
+          clearcoatRoughness: 0.03
+        });
+      },
+
+      buildStudioPlatform() {
+        const studioGroup = new THREE.Group();
+
+        // Main Mirror-Polished Obsidian Circular Deck
+        const deckGeo = new THREE.CylinderGeometry(8.8, 9.1, 0.36, 72);
+        const deckMat = new THREE.MeshPhysicalMaterial({
+          color: 0x0d0f15,
+          metalness: 0.72,
+          roughness: 0.16,
+          envMap: this.envMap,
+          envMapIntensity: 0.9,
+          clearcoat: 0.85,
+          clearcoatRoughness: 0.12
+        });
+        const deck = new THREE.Mesh(deckGeo, deckMat);
+        deck.position.y = -0.18;
+        deck.receiveShadow = true;
+        studioGroup.add(deck);
+        this.floorMesh = deck;
+
+        // Outer Liquid Chrome Rim Bezel
+        const outerBezel = new THREE.Mesh(
+          new THREE.TorusGeometry(8.85, 0.075, 24, 96),
+          this.createLiquidChromeMaterial(0.03, 0xffffff)
+        );
+        outerBezel.rotation.x = Math.PI / 2;
+        outerBezel.position.y = 0.01;
+        studioGroup.add(outerBezel);
+
+        // Concentric Brushed-Titanium & Chrome Floor Rings
+        [2.6, 5.4, 7.6].forEach((radius, idx) => {
+          const ring = new THREE.Mesh(
+            new THREE.RingGeometry(radius - 0.025, radius + 0.025, 72),
+            this.createLiquidChromeMaterial(idx === 0 ? 0.04 : 0.14, 0xd8dde6)
+          );
+          ring.rotation.x = -Math.PI / 2;
+          ring.position.y = 0.008;
+          studioGroup.add(ring);
+        });
+
+        // Subtle Radial Chrome Grid Spokes
+        const spokeMat = new THREE.MeshBasicMaterial({
+          color: 0xd8dde6,
+          transparent: true,
+          opacity: 0.14
+        });
+        for (let i = 0; i < 12; i++) {
+          const angle = (i / 12) * Math.PI * 2;
+          const spoke = new THREE.Mesh(new THREE.PlaneGeometry(0.02, 6.2), spokeMat);
+          spoke.rotation.x = -Math.PI / 2;
+          spoke.rotation.z = angle;
+          spoke.position.set(Math.sin(angle) * 5.7, 0.006, Math.cos(angle) * 5.7);
+          studioGroup.add(spoke);
+        }
+
+        // Outer Architectural Chrome Arch Frame (Background Depth)
+        const arch = new THREE.Mesh(
+          new THREE.TorusGeometry(10.6, 0.12, 24, 96, Math.PI),
+          this.createLiquidChromeMaterial(0.03, 0xffffff)
+        );
+        arch.position.set(0, 0, -6.5);
+        studioGroup.add(arch);
+
+        this.scene.add(studioGroup);
+      },
+
+      buildMorphingLiquidChrome() {
+        // Floating Morphing Liquid-Mercury Droplet Sculptures around the Studio
+        const configs = [
+          { pos: [-7.2, 3.4, -5.2], radius: 0.85, speed: 1.4, phase: 0 },
+          { pos: [7.4, 3.8, -4.8], radius: 0.95, speed: 1.2, phase: 2.1 },
+          { pos: [0, 4.9, -7.2], radius: 1.15, speed: 1.05, phase: 4.0 }
+        ];
+
+        configs.forEach((cfg) => {
+          const geo = new THREE.IcosahedronGeometry(cfg.radius, 4);
+          // Store original vertex positions for smooth organic liquid morphing
+          const posAttr = geo.attributes.position;
+          const origPositions = new Float32Array(posAttr.array.length);
+          origPositions.set(posAttr.array);
+
+          const mesh = new THREE.Mesh(geo, this.createLiquidChromeMaterial(0.025, 0xffffff));
+          mesh.position.set(cfg.pos[0], cfg.pos[1], cfg.pos[2]);
+          mesh.castShadow = true;
+          this.scene.add(mesh);
+
+          this.morphMeshes.push({
+            mesh,
+            origPositions,
+            baseY: cfg.pos[1],
+            speed: cfg.speed,
+            phase: cfg.phase
+          });
+        });
+      },
+
+      buildStations() {
+        const layout = [
+          { id: "profile",    num: "01", x: -4.4, z: -2.2 },
+          { id: "experience", num: "02", x:  0.0, z: -4.4 },
+          { id: "skills",     num: "03", x:  4.4, z: -2.2 },
+          { id: "quiz",       num: "04", x: -3.5, z:  3.3 },
+          { id: "contact",    num: "05", x:  3.5, z:  3.3 }
+        ];
+
+        const holoContainer = document.getElementById("holo-labels-layer");
+        holoContainer.innerHTML = "";
+
+        const baseMat = new THREE.MeshPhysicalMaterial({
+          color: 0x161922,
+          metalness: 0.85,
+          roughness: 0.18,
+          envMap: this.envMap
+        });
+        const mirrorChrome = this.createLiquidChromeMaterial(0.03, 0xffffff);
+        const brushedSilver = this.createLiquidChromeMaterial(0.14, 0xd8dde6);
+
+        layout.forEach((item, idx) => {
+          const group = new THREE.Group();
+          group.position.set(item.x, 0, item.z);
+
+          // Pedestal Base Cylinder
+          const ped = new THREE.Mesh(new THREE.CylinderGeometry(0.92, 1.06, 0.24, 40), baseMat);
+          ped.position.y = 0.12;
+          ped.receiveShadow = true;
+          ped.castShadow = true;
+          group.add(ped);
+
+          // Mirror Chrome Top Trim Ring
+          const trim = new THREE.Mesh(new THREE.TorusGeometry(0.93, 0.035, 16, 48), mirrorChrome);
+          trim.rotation.x = Math.PI / 2;
+          trim.position.y = 0.24;
+          group.add(trim);
+
+          // Proximity Halo Ring on Floor
+          const haloMat = new THREE.MeshBasicMaterial({
+            color: 0xe4e8ef,
+            transparent: true,
+            opacity: 0.22,
+            side: THREE.DoubleSide
+          });
+          const halo = new THREE.Mesh(new THREE.RingGeometry(1.12, 1.28, 48), haloMat);
+          halo.rotation.x = -Math.PI / 2;
+          halo.position.y = 0.015;
+          group.add(halo);
+
+          // Unique 3D Liquid Chrome Centerpiece Sculpture per Station
+          const sculpture = new THREE.Group();
+          sculpture.position.y = 1.05;
+
+          if (item.id === "profile") {
+            // 01: Chrome Academic Gyro-Sphere
+            const core = new THREE.Mesh(new THREE.SphereGeometry(0.32, 32, 32), mirrorChrome);
+            const orbit = new THREE.Mesh(new THREE.TorusGeometry(0.52, 0.04, 16, 48), brushedSilver);
+            orbit.rotation.x = Math.PI / 3;
+            sculpture.add(core, orbit);
+          } else if (item.id === "experience") {
+            // 02: Stacked Brushed-Titanium Server & Hardware Blades
+            for (let b = -1; b <= 1; b++) {
+              const blade = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.12, 0.52), b === 0 ? mirrorChrome : brushedSilver);
+              blade.position.y = b * 0.22;
+              sculpture.add(blade);
+            }
+          } else if (item.id === "skills") {
+            // 03: Interlocking Chrome Network Octahedron
+            const oct = new THREE.Mesh(new THREE.OctahedronGeometry(0.42, 0), mirrorChrome);
+            const ring = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.03, 12, 36), brushedSilver);
+            ring.rotation.y = Math.PI / 4;
+            sculpture.add(oct, ring);
+          } else if (item.id === "quiz") {
+            // 04: Tilted Liquid-Chrome Manga Cube & Star Ring
+            const cube = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.52, 0.52), mirrorChrome);
+            cube.rotation.set(0.5, 0.7, 0.3);
+            sculpture.add(cube);
+          } else {
+            // 05: Chrome Beacon Spire
+            const spire = new THREE.Mesh(new THREE.ConeGeometry(0.34, 0.82, 32), mirrorChrome);
+            const baseDisc = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.07, 32), brushedSilver);
+            baseDisc.position.y = -0.38;
+            sculpture.add(spire, baseDisc);
+          }
+
+          sculpture.traverse((child) => {
+            if (child.isMesh) child.castShadow = true;
+          });
+          group.add(sculpture);
+          this.scene.add(group);
+
+          // Create Floating Holographic Label Pill
+          const labelEl = document.createElement("button");
+          labelEl.type = "button";
+          labelEl.className = "station-holo-label px-3 py-1.5 rounded-full bg-obsidian-900/85 backdrop-blur-md border border-chrome-300/30 text-chrome-100 font-display text-xs font-semibold shadow-xl flex items-center gap-1.5";
+          labelEl.onclick = (e) => {
+            e.stopPropagation();
+            this.navigateToStation(item.id, true);
+          };
+          holoContainer.appendChild(labelEl);
+
+          this.stations.push({
+            id: item.id,
+            num: item.num,
+            x: item.x,
+            z: item.z,
+            group,
+            sculpture,
+            halo,
+            labelEl,
+            phase: idx * 1.2
+          });
+        });
+
+        this.updateHoloLabelTexts();
+      },
+
+      updateHoloLabelTexts() {
+        const tStations = I18N[state.lang].stations;
+        this.stations.forEach((st) => {
+          const meta = tStations.find(s => s.id === st.id);
+          if (meta && st.labelEl) {
+            st.labelEl.innerHTML = `<span class="px-1.5 py-0.5 rounded-full bg-chrome-200 text-obsidian-950 font-mono text-[10px] font-bold">${meta.num}</span><span>${meta.title}</span>`;
+          }
+        });
+      },
+
+      buildBeanieGirl3D() {
+        const root = new THREE.Group();
+        root.position.set(this.avatar.x, 0, this.avatar.z);
+
+        // Materials
+        const caramelSkin = new THREE.MeshStandardMaterial({
+          color: 0xb87b56,
+          roughness: 0.52,
+          metalness: 0.04
+        });
+        const blackHair = new THREE.MeshStandardMaterial({
+          color: 0x121318,
+          roughness: 0.65,
+          metalness: 0.08
+        });
+        const charcoalBeanie = new THREE.MeshStandardMaterial({
+          color: 0x222631,
+          roughness: 0.82,
+          metalness: 0.05
+        });
+        const pufferObsidian = new THREE.MeshPhysicalMaterial({
+          color: 0x252a36,
+          roughness: 0.36,
+          metalness: 0.25,
+          clearcoat: 0.35
+        });
+        const pufferSilver = new THREE.MeshPhysicalMaterial({
+          color: 0xd8dde6,
+          roughness: 0.22,
+          metalness: 0.82,
+          envMap: this.envMap
+        });
+        const whiteTee = new THREE.MeshStandardMaterial({
+          color: 0xf8fafc,
+          roughness: 0.7
+        });
+        const cargoPants = new THREE.MeshStandardMaterial({
+          color: 0x151821,
+          roughness: 0.75
+        });
+        const sneakerWhite = new THREE.MeshStandardMaterial({
+          color: 0xf1f5f9,
+          roughness: 0.4
+        });
+        const mirrorChrome = this.createLiquidChromeMaterial(0.03, 0xffffff);
+
+        // Hips & Torso Hierarchy
+        const hips = new THREE.Group();
+        hips.position.y = 0.86;
+        root.add(hips);
+
+        const torso = new THREE.Group();
+        hips.add(torso);
+
+        // White Tee Underlayer
+        const teeMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.26, 0.58, 24), whiteTee);
+        teeMesh.position.y = 0.28;
+        teeMesh.castShadow = true;
+        torso.add(teeMesh);
+
+        // Oversized 2026 Silver-Obsidian Puffer Jacket (Segmented Baffles)
+        for (let i = 0; i < 3; i++) {
+          const isSilverPanel = i === 2;
+          const baffle = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.30 - i * 0.01, 0.32 - i * 0.01, 0.17, 24),
+            isSilverPanel ? pufferSilver : pufferObsidian
+          );
+          baffle.scale.set(1.08, 1, 0.86);
+          baffle.position.y = 0.13 + i * 0.165;
+          baffle.castShadow = true;
+          torso.add(baffle);
+        }
+
+        // High Puffer Collar
+        const collar = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.065, 14, 28), pufferSilver);
+        collar.rotation.x = Math.PI / 2;
+        collar.position.y = 0.56;
+        torso.add(collar);
+
+        // Over-Ear Chrome Headphones Resting Around Neck
+        const hpBand = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.022, 12, 24, Math.PI * 1.25), mirrorChrome);
+        hpBand.rotation.set(Math.PI * 0.42, 0, -Math.PI * 0.12);
+        hpBand.position.set(0, 0.57, 0.03);
+        torso.add(hpBand);
+
+        [-0.16, 0.16].forEach((sideX) => {
+          const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.065, 0.045, 20), mirrorChrome);
+          cup.rotation.z = Math.PI / 2;
+          cup.position.set(sideX, 0.53, 0.13);
+          torso.add(cup);
+        });
+
+        // Head Group (Neck, Caramel Face, Bob Hair, Ribbed Beanie + Chrome Pin)
+        const headGroup = new THREE.Group();
+        headGroup.position.y = 0.62;
+        torso.add(headGroup);
+
+        const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.095, 0.14, 16), caramelSkin);
+        neck.position.y = 0.04;
+        headGroup.add(neck);
+
+        // Head Sphere
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.24, 32, 32), caramelSkin);
+        head.position.y = 0.24;
+        head.scale.set(0.96, 1.03, 0.96);
+        head.castShadow = true;
+        headGroup.add(head);
+
+        // Eyes & Subtle Highlights
+        const eyeMat = new THREE.MeshBasicMaterial({ color: 0x111216 });
+        const catchlightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        [-0.078, 0.078].forEach((ex) => {
+          const eye = new THREE.Mesh(new THREE.SphereGeometry(0.025, 14, 14), eyeMat);
+          eye.position.set(ex, 0.245, 0.215);
+          headGroup.add(eye);
+
+          const glint = new THREE.Mesh(new THREE.SphereGeometry(0.008, 8, 8), catchlightMat);
+          glint.position.set(ex + 0.007, 0.253, 0.236);
+          headGroup.add(glint);
+        });
+
+        // Short Black Bob Hair (Back & Side Locks)
+        const backHair = new THREE.Mesh(
+          new THREE.SphereGeometry(0.255, 28, 28, 0, Math.PI * 2, 0, Math.PI * 0.68),
+          blackHair
+        );
+        backHair.position.set(0, 0.24, -0.03);
+        backHair.rotation.x = -0.22;
+        headGroup.add(backHair);
+
+        [-0.21, 0.21].forEach((bobX) => {
+          const sideBob = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.065, 0.075, 0.22, 16),
+            blackHair
+          );
+          sideBob.position.set(bobX, 0.17, 0.02);
+          sideBob.rotation.z = bobX < 0 ? 0.14 : -0.14;
+          headGroup.add(sideBob);
+        });
+
+        // Charcoal Knit Beanie Dome + Folded Cuff + Mirror Chrome Badge
+        const beanieDome = new THREE.Mesh(
+          new THREE.SphereGeometry(0.262, 32, 24, 0, Math.PI * 2, 0, Math.PI * 0.56),
+          charcoalBeanie
+        );
+        beanieDome.position.set(0, 0.28, -0.015);
+        beanieDome.rotation.x = -0.14;
+        beanieDome.castShadow = true;
+        headGroup.add(beanieDome);
+
+        const beanieCuff = new THREE.Mesh(new THREE.TorusGeometry(0.248, 0.046, 16, 36), charcoalBeanie);
+        beanieCuff.rotation.x = Math.PI / 2 - 0.14;
+        beanieCuff.position.set(0, 0.305, -0.01);
+        headGroup.add(beanieCuff);
+
+        const chromePin = new THREE.Mesh(new THREE.BoxGeometry(0.075, 0.038, 0.02), mirrorChrome);
+        chromePin.position.set(0.14, 0.315, 0.235);
+        chromePin.rotation.set(-0.14, 0.52, 0);
+        headGroup.add(chromePin);
+
+        // Articulated Arms (Oversized Puffer Sleeves + Caramel Hands)
+        const buildArm = (side) => {
+          const shoulder = new THREE.Group();
+          shoulder.position.set(side * 0.38, 0.49, 0);
+
+          const upper = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.12, 0.24, 18), pufferSilver);
+          upper.position.y = -0.11;
+          upper.castShadow = true;
+          shoulder.add(upper);
+
+          const forearm = new THREE.Mesh(new THREE.CylinderGeometry(0.115, 0.095, 0.24, 18), pufferObsidian);
+          forearm.position.y = -0.32;
+          forearm.castShadow = true;
+          shoulder.add(forearm);
+
+          const hand = new THREE.Mesh(new THREE.SphereGeometry(0.068, 16, 16), caramelSkin);
+          hand.position.y = -0.46;
+          shoulder.add(hand);
+
+          torso.add(shoulder);
+          return shoulder;
+        };
+
+        const leftArm = buildArm(-1);
+        const rightArm = buildArm(1);
+
+        // Articulated Legs (Wide-Leg Streetwear Cargo Pants + Chunky Silver-White Sneakers)
+        const buildLeg = (side) => {
+          const hipJoint = new THREE.Group();
+          hipJoint.position.set(side * 0.155, 0, 0);
+
+          const pantLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.125, 0.145, 0.68, 20), cargoPants);
+          pantLeg.position.y = -0.34;
+          pantLeg.castShadow = true;
+          hipJoint.add(pantLeg);
+
+          // Cargo Side Pocket
+          const pocket = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.18, 0.14), cargoPants);
+          pocket.position.set(side * 0.135, -0.34, 0);
+          hipJoint.add(pocket);
+
+          // Chunky Sneaker Sole & Chrome Cage
+          const sole = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.08, 0.36), sneakerWhite);
+          sole.position.set(0, -0.82, 0.05);
+          sole.castShadow = true;
+          hipJoint.add(sole);
+
+          const upperShoe = new THREE.Mesh(new THREE.BoxGeometry(0.20, 0.11, 0.32), pufferSilver);
+          upperShoe.position.set(0, -0.74, 0.04);
+          upperShoe.castShadow = true;
+          hipJoint.add(upperShoe);
+
+          hips.add(hipJoint);
+          return hipJoint;
+        };
+
+        const leftLeg = buildLeg(-1);
+        const rightLeg = buildLeg(1);
+
+        this.scene.add(root);
+
+        this.avatar.root = root;
+        this.avatar.hips = hips;
+        this.avatar.torso = torso;
+        this.avatar.headGroup = headGroup;
+        this.avatar.leftArm = leftArm;
+        this.avatar.rightArm = rightArm;
+        this.avatar.leftLeg = leftLeg;
+        this.avatar.rightLeg = rightLeg;
+      },
+
+      toggleCameraMode() {
+        this.cameraMode = this.cameraMode === "follow" ? "orbit" : "follow";
+        const label = document.getElementById("camera-mode-label");
+        if (label) {
+          label.textContent = this.cameraMode === "follow" ? "Cam: Follow" : "Cam: 360° Orbit";
+        }
+      },
+
+      setOrbitOverviewMode(isOverview) {
+        this.orbitOverview = isOverview;
+        if (!isOverview) {
+          this.cameraMode = "follow";
+          const label = document.getElementById("camera-mode-label");
+          if (label) label.textContent = "Cam: Follow";
+        }
+      },
+
+      bindKeyboard() {
+        window.addEventListener("keydown", (e) => {
+          if (state.mode !== "studio" || state.activeStationId) return;
+          const k = e.key.toLowerCase();
+          let handled = true;
+
+          if (k === "arrowup" || k === "w" || k === "z") this.keys.up = true;
+          else if (k === "arrowdown" || k === "s") this.keys.down = true;
+          else if (k === "arrowleft" || k === "a" || k === "q") this.keys.left = true;
+          else if (k === "arrowright" || k === "d") this.keys.right = true;
+          else if (k === "enter" || k === " ") openNearestStation();
+          else handled = false;
+
+          if (handled) {
+            e.preventDefault();
+            this.avatar.targetX = null;
+            this.avatar.targetZ = null;
+            this.avatar.autoOpenStationId = null;
+          }
+        });
+
+        window.addEventListener("keyup", (e) => {
+          const k = e.key.toLowerCase();
+          if (k === "arrowup" || k === "w" || k === "z") this.keys.up = false;
+          if (k === "arrowdown" || k === "s") this.keys.down = false;
+          if (k === "arrowleft" || k === "a" || k === "q") this.keys.left = false;
+          if (k === "arrowright" || k === "d") this.keys.right = false;
+        });
+
+        window.addEventListener("blur", () => {
+          this.keys = { up: false, down: false, left: false, right: false };
+          this.dpad = { up: false, down: false, left: false, right: false };
+        });
+      },
+
+      bindDPad() {
+        ["up", "down", "left", "right"].forEach((dir) => {
+          const btn = document.getElementById(`dpad-${dir}`);
+          if (!btn) return;
+
+          const startPress = (e) => {
+            e.preventDefault();
+            this.dpad[dir] = true;
+            btn.classList.add("is-pressed");
+            this.avatar.targetX = null;
+            this.avatar.targetZ = null;
+            this.avatar.autoOpenStationId = null;
+          };
+
+          const endPress = (e) => {
+            if (e) e.preventDefault();
+            this.dpad[dir] = false;
+            btn.classList.remove("is-pressed");
+          };
+
+          btn.addEventListener("pointerdown", startPress);
+          btn.addEventListener("pointerup", endPress);
+          btn.addEventListener("pointerleave", endPress);
+          btn.addEventListener("pointercancel", endPress);
+        });
+      },
+
+      bindPointerAndOrbit() {
+        const dom = this.renderer.domElement;
+
+        dom.addEventListener("pointerdown", (e) => {
+          if (state.mode !== "studio" || state.activeStationId) return;
+          this.isDraggingCam = true;
+          this.dragMoved = false;
+          this.dragStartX = e.clientX;
+          this.dragStartY = e.clientY;
+        });
+
+        window.addEventListener("pointermove", (e) => {
+          if (!this.isDraggingCam || state.mode !== "studio") return;
+          const dx = e.clientX - this.dragStartX;
+          const dy = e.clientY - this.dragStartY;
+          if (Math.hypot(dx, dy) > 6) {
+            this.dragMoved = true;
+            if (this.cameraMode === "orbit") {
+              this.camYaw -= dx * 0.0065;
+              this.camPitch = Math.max(0.22, Math.min(1.18, this.camPitch + dy * 0.005));
+              this.dragStartX = e.clientX;
+              this.dragStartY = e.clientY;
+            }
+          }
+        });
+
+        window.addEventListener("pointerup", (e) => {
+          if (!this.isDraggingCam) return;
+          const wasClick = !this.dragMoved;
+          this.isDraggingCam = false;
+
+          if (wasClick && state.mode === "studio" && !state.activeStationId) {
+            this.handleFloorOrStationTap(e.clientX, e.clientY);
+          }
+        });
+
+        dom.addEventListener("wheel", (e) => {
+          if (state.mode !== "studio" || state.activeStationId) return;
+          this.camDist = Math.max(6.0, Math.min(16.5, this.camDist + e.deltaY * 0.005));
+        }, { passive: true });
+      },
+
+      handleFloorOrStationTap(clientX, clientY) {
+        const rect = this.renderer.domElement.getBoundingClientRect();
+        this.pointerNDC.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        this.pointerNDC.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+
+        this.raycaster.setFromCamera(this.pointerNDC, this.camera);
+
+        // 1. Check if user tapped any of the 5 3D Station Pedestals
+        const stationTargets = this.stations.map(s => s.group);
+        const stHits = this.raycaster.intersectObjects(stationTargets, true);
+        if (stHits.length > 0) {
+          let hitObj = stHits[0].object;
+          while (hitObj && !this.stations.some(s => s.group === hitObj)) {
+            hitObj = hitObj.parent;
+          }
+          const matchedStation = this.stations.find(s => s.group === hitObj);
+          if (matchedStation) {
+            this.navigateToStation(matchedStation.id, true);
+            return;
+          }
+        }
+
+        // 2. Otherwise raycast onto the circular studio floor
+        if (this.floorMesh) {
+          const floorHits = this.raycaster.intersectObject(this.floorMesh);
+          if (floorHits.length > 0) {
+            const pt = floorHits[0].point;
+            const r = Math.hypot(pt.x, pt.z);
+            const maxR = 7.8;
+            const clampedX = r > maxR ? (pt.x / r) * maxR : pt.x;
+            const clampedZ = r > maxR ? (pt.z / r) * maxR : pt.z;
+
+            this.avatar.targetX = clampedX;
+            this.avatar.targetZ = clampedZ;
+            this.avatar.autoOpenStationId = null;
+
+            this.rippleMesh.position.set(clampedX, 0.03, clampedZ);
+            this.rippleAlpha = 1.0;
+          }
+        }
+      },
+
+      navigateToStation(stationId, openOnArrival = true) {
+        const st = this.stations.find(s => s.id === stationId);
+        if (!st) return;
+
+        // Stand right in front of the station toward studio center
+        const len = Math.hypot(st.x, st.z) || 1;
+        const standX = st.x - (st.x / len) * 1.15;
+        const standZ = st.z - (st.z / len) * 1.15;
+
+        this.avatar.targetX = standX;
+        this.avatar.targetZ = standZ;
+        this.avatar.autoOpenStationId = openOnArrival ? stationId : null;
+
+        if (this.rippleMesh) {
+          this.rippleMesh.position.set(standX, 0.03, standZ);
+          this.rippleAlpha = 1.0;
+        }
+      },
+
+      getNearestStation() {
+        let nearest = null;
+        let bestDist = Infinity;
+        for (const st of this.stations) {
+          const d = Math.hypot(this.avatar.x - st.x, this.avatar.z - st.z);
+          if (d < bestDist) {
+            bestDist = d;
+            nearest = st;
+          }
+        }
+        return bestDist < 2.25 ? nearest : null;
+      },
+
+      update(dt) {
+        this.totalTime += dt;
+
+        // 1. Animate Morphing Liquid Chrome Sculptures
+        this.morphMeshes.forEach((m) => {
+          const posAttr = m.mesh.geometry.attributes.position;
+          const arr = posAttr.array;
+          const orig = m.origPositions;
+          const t = this.totalTime * m.speed + m.phase;
+
+          for (let i = 0; i < arr.length; i += 3) {
+            const ox = orig[i];
+            const oy = orig[i + 1];
+            const oz = orig[i + 2];
+            const wave = 1 + 0.14 * Math.sin(ox * 3.2 + t) * Math.cos(oy * 3.0 - t * 0.9) * Math.sin(oz * 2.8 + t * 1.1);
+            arr[i] = ox * wave;
+            arr[i + 1] = oy * wave;
+            arr[i + 2] = oz * wave;
+          }
+          posAttr.needsUpdate = true;
+          m.mesh.geometry.computeVertexNormals();
+          m.mesh.position.y = m.baseY + Math.sin(t * 0.9) * 0.25;
+          m.mesh.rotation.y += dt * 0.28;
+        });
+
+        // 2. Animate Station Sculptures & Proximity Halos
+        const nearest = this.getNearestStation();
+        this.stations.forEach((st) => {
+          const isNear = nearest && nearest.id === st.id;
+          st.sculpture.rotation.y += dt * (isNear ? 1.5 : 0.55);
+          st.sculpture.position.y = 1.05 + Math.sin(this.totalTime * 2.2 + st.phase) * 0.09;
+          st.halo.material.opacity = isNear ? 0.65 : 0.20;
+          const s = isNear ? 1.12 : 1.0;
+          st.halo.scale.set(s, s, 1);
+        });
+
+        // 3. Avatar Directional Movement (Camera-relative WASD/Arrows/D-Pad or Auto-Waypoint)
+        const moveSpeed = 4.2;
+        let inX = 0;
+        let inZ = 0;
+        if (this.keys.left || this.dpad.left) inX -= 1;
+        if (this.keys.right || this.dpad.right) inX += 1;
+        if (this.keys.up || this.dpad.up) inZ -= 1;
+        if (this.keys.down || this.dpad.down) inZ += 1;
+
+        if (inX !== 0 || inZ !== 0) {
+          const len = Math.hypot(inX, inZ);
+          inX /= len;
+          inZ /= len;
+
+          // Align movement with camera horizontal viewing direction
+          const yaw = this.cameraMode === "orbit" ? this.camYaw : 0;
+          const forwardX = -Math.sin(yaw);
+          const forwardZ = -Math.cos(yaw);
+          const rightX = Math.cos(yaw);
+          const rightZ = -Math.sin(yaw);
+
+          const worldVx = rightX * inX + forwardX * (-inZ);
+          const worldVz = rightZ * inX + forwardZ * (-inZ);
+
+          const nextX = this.avatar.x + worldVx * moveSpeed * dt;
+          const nextZ = this.avatar.z + worldVz * moveSpeed * dt;
+          const r = Math.hypot(nextX, nextZ);
+          const maxR = 7.8;
+
+          this.avatar.x = r > maxR ? (nextX / r) * maxR : nextX;
+          this.avatar.z = r > maxR ? (nextZ / r) * maxR : nextZ;
+          this.avatar.isMoving = true;
+          this.avatar.waveTimer = 0;
+
+          const targetAngle = Math.atan2(worldVx, worldVz);
+          this.avatar.rotY = this.lerpAngle(this.avatar.rotY, targetAngle, dt * 12);
+        } else if (this.avatar.targetX !== null && this.avatar.targetZ !== null) {
+          const dx = this.avatar.targetX - this.avatar.x;
+          const dz = this.avatar.targetZ - this.avatar.z;
+          const dist = Math.hypot(dx, dz);
+
+          if (dist < 0.08) {
+            this.avatar.x = this.avatar.targetX;
+            this.avatar.z = this.avatar.targetZ;
+            this.avatar.targetX = null;
+            this.avatar.targetZ = null;
+            this.avatar.isMoving = false;
+            this.avatar.waveTimer = 1.4; // Trigger friendly arrival wave
+
+            if (this.avatar.autoOpenStationId) {
+              const stId = this.avatar.autoOpenStationId;
+              this.avatar.autoOpenStationId = null;
+              openStationModal(stId);
+            }
+          } else {
+            const step = Math.min(dist, moveSpeed * 1.15 * dt);
+            const vx = dx / dist;
+            const vz = dz / dist;
+            this.avatar.x += vx * step;
+            this.avatar.z += vz * step;
+            this.avatar.isMoving = true;
+
+            const targetAngle = Math.atan2(vx, vz);
+            this.avatar.rotY = this.lerpAngle(this.avatar.rotY, targetAngle, dt * 12);
+          }
+        } else {
+          this.avatar.isMoving = false;
+        }
+
+        // 4. Procedural 3D Articulated Avatar Animations (Walk Cycle / Idle Breathing / Arrival Wave)
+        if (this.avatar.root) {
+          this.avatar.root.position.set(this.avatar.x, 0, this.avatar.z);
+          this.avatar.root.rotation.y = this.avatar.rotY;
+
+          if (this.avatar.isMoving) {
+            const cycle = this.totalTime * 10.5;
+            const swing = Math.sin(cycle) * 0.62;
+            this.avatar.leftLeg.rotation.x = swing;
+            this.avatar.rightLeg.rotation.x = -swing;
+            this.avatar.leftArm.rotation.x = -swing * 0.72;
+            this.avatar.rightArm.rotation.x = swing * 0.72;
+            this.avatar.rightArm.rotation.z = 0.08;
+            this.avatar.hips.position.y = 0.86 + Math.abs(Math.cos(cycle)) * 0.045;
+            this.avatar.headGroup.rotation.y = Math.sin(cycle * 0.5) * 0.06;
+          } else {
+            const idle = this.totalTime * 2.6;
+            this.avatar.leftLeg.rotation.x *= 0.82;
+            this.avatar.rightLeg.rotation.x *= 0.82;
+            this.avatar.leftArm.rotation.x = Math.sin(idle) * 0.04;
+            this.avatar.hips.position.y = 0.86 + Math.sin(idle) * 0.015;
+            this.avatar.headGroup.rotation.y = Math.sin(idle * 0.7) * 0.1;
+
+            if (this.avatar.waveTimer > 0) {
+              this.avatar.waveTimer -= dt;
+              this.avatar.rightArm.rotation.z = 2.45 + Math.sin(this.totalTime * 14) * 0.28;
+              this.avatar.rightArm.rotation.x = -0.2;
+            } else {
+              this.avatar.rightArm.rotation.z *= 0.84;
+              this.avatar.rightArm.rotation.x = -Math.sin(idle) * 0.04;
+            }
+          }
+        }
+
+        // 5. Update Destination Ripple Ring
+        if (this.rippleAlpha > 0 && this.rippleMesh) {
+          this.rippleAlpha -= dt * 1.4;
+          const scale = 1 + (1 - Math.max(0, this.rippleAlpha)) * 2.4;
+          this.rippleMesh.scale.set(scale, scale, 1);
+          this.rippleMesh.material.opacity = Math.max(0, this.rippleAlpha * 0.75);
+        }
+
+        // 6. Camera Positioning (Hub Slow Orbit vs Studio Follow / Free 360 Orbit)
+        const targetPos = new THREE.Vector3();
+        const targetLook = new THREE.Vector3();
+
+        if (this.orbitOverview) {
+          const autoAngle = this.totalTime * 0.14;
+          targetPos.set(Math.sin(autoAngle) * 11.2, 6.2, Math.cos(autoAngle) * 11.2);
+          targetLook.set(0, 1.1, -0.8);
+        } else if (this.cameraMode === "follow") {
+          targetPos.set(this.avatar.x * 0.72, 6.4, this.avatar.z * 0.72 + 8.6);
+          targetLook.set(this.avatar.x * 0.85, 1.0, this.avatar.z * 0.85 - 0.5);
+        } else {
+          const horizR = Math.cos(this.camPitch) * this.camDist;
+          targetPos.set(
+            this.avatar.x + Math.sin(this.camYaw) * horizR,
+            Math.max(1.8, Math.sin(this.camPitch) * this.camDist),
+            this.avatar.z + Math.cos(this.camYaw) * horizR
+          );
+          targetLook.set(this.avatar.x, 1.15, this.avatar.z);
+        }
+
+        this.camPosCurrent.lerp(targetPos, Math.min(1, dt * 5.2));
+        this.camLookCurrent.lerp(targetLook, Math.min(1, dt * 6.5));
+        this.camera.position.copy(this.camPosCurrent);
+        this.camera.lookAt(this.camLookCurrent);
+
+        // 7. Project 3D Station Holographic Labels onto Screen Coordinates
+        if (state.mode === "studio") {
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          const projVec = new THREE.Vector3();
+
+          this.stations.forEach((st) => {
+            projVec.set(st.x, 2.05, st.z);
+            projVec.project(this.camera);
+
+            if (projVec.z > 1) {
+              st.labelEl.style.display = "none";
+            } else {
+              st.labelEl.style.display = "flex";
+              const sx = (projVec.x * 0.5 + 0.5) * w;
+              const sy = (-projVec.y * 0.5 + 0.5) * h;
+              st.labelEl.style.left = `${sx}px`;
+              st.labelEl.style.top = `${sy}px`;
+
+              const isNear = nearest && nearest.id === st.id;
+              st.labelEl.style.borderColor = isNear ? "rgba(255,255,255,0.9)" : "rgba(216,221,230,0.3)";
+              st.labelEl.style.backgroundColor = isNear ? "rgba(228,232,239,0.95)" : "rgba(15,17,23,0.85)";
+              st.labelEl.style.color = isNear ? "#0b0c10" : "#e4e8ef";
+            }
+          });
+        }
+
+        // 8. Proximity Prompt HUD
+        const promptEl = document.getElementById("proximity-prompt");
+        if (state.mode === "studio" && nearest && !state.activeStationId) {
+          const stMeta = I18N[state.lang].stations.find(s => s.id === nearest.id);
+          document.getElementById("proximity-station-title").textContent = `${stMeta.num}. ${stMeta.title}`;
+          promptEl.classList.remove("hidden");
+        } else {
+          promptEl.classList.add("hidden");
+        }
+      },
+
+      lerpAngle(a, b, t) {
+        let diff = b - a;
+        while (diff < -Math.PI) diff += Math.PI * 2;
+        while (diff > Math.PI) diff -= Math.PI * 2;
+        return a + diff * Math.min(1, t);
+      },
+
+      onResize() {
+        if (!this.camera || !this.renderer) return;
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+      },
+
+      animate() {
+        requestAnimationFrame(() => this.animate());
+        const dt = Math.min(0.05, this.clock.getDelta());
+        this.update(dt);
+        this.renderer.render(this.scene, this.camera);
+      }
+    };
+  </script>
+</body>
+</html>
