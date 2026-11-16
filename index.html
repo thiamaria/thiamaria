@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Maria Essindi Bidjo — 2026 Chrome Portfolio</title>
-  
+  <title>Maria Essindi Bidjo — Portfolio IT, Systèmes & Réseaux</title>
+  <meta name="description" content="Portfolio interactif 3D de Maria Essindi Bidjo — Étudiante en Informatique à l'ECE Bordeaux, Administration Systèmes & Réseaux / Support IT." />
+  <meta name="author" content="Maria Essindi Bidjo" />
+  <meta property="og:title" content="Maria Essindi Bidjo — Portfolio IT, Systèmes & Réseaux" />
+  <meta property="og:description" content="Découvrez le portfolio 3D interactif de Maria Essindi Bidjo (Systèmes & Réseaux, Support IT, Projets & CV)." />
+  <meta property="og:type" content="website" />
+
   <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -249,71 +254,59 @@
           </div>
           <div class="hidden md:block">
             <div class="font-display font-bold text-sm tracking-tight text-chrome-100 leading-none">MARIA ESSINDI BIDJO</div>
-            <div class="font-mono text-[10px] text-chrome-400 tracking-widest uppercase mt-0.5">2026 CHROME EDITION</div>
+            <div class="font-mono text-[10px] text-chrome-400 tracking-widest uppercase mt-0.5">PORTFOLIO</div>
           </div>
         </button>
 
         <!-- Mode Toggle Pills (Hub Bento vs Interactive Studio) -->
         <nav class="flex items-center p-1 rounded-xl bg-obsidian-850/90 border border-chrome-300/15">
           <button id="nav-hub-btn" onclick="switchMode('hub')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all bg-chrome-200 text-obsidian-950 shadow-sm">
-            <span data-i18n="navHub">Hub Bento</span>
+            <span data-i18n="navHub">Hub</span>
           </button>
           <button id="nav-studio-btn" onclick="switchMode('studio')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all text-chrome-300 hover:text-white flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span data-i18n="navStudio">Studio 2026</span>
+            <span data-i18n="navStudio">Studio</span>
           </button>
         </nav>
       </div>
 
-      <!-- Right: Don Toliver "No Idea" Music Dock + Trilingual Switcher -->
+      <!-- Right: Don Toliver "No Idea" Music Dock + Bilingual Switcher -->
       <div class="flex items-center gap-2 sm:gap-3">
 
         <!-- Don Toliver - "No Idea" Music Dock -->
         <div class="relative">
-          <div id="music-dock-pill" class="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-obsidian-850/95 border border-chrome-300/20 hover:border-chrome-300/40 transition-colors">
-            <button id="music-play-btn" onclick="toggleMusicPlay()" title="Play / Pause" class="w-7 h-7 rounded-lg bg-chrome-200/15 hover:bg-chrome-200/25 text-chrome-100 flex items-center justify-center transition-colors">
-              <svg id="icon-play" class="w-3.5 h-3.5 translate-x-[0.5px]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              <svg id="icon-pause" class="w-3.5 h-3.5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            </button>
-
-            <div class="hidden sm:flex flex-col leading-tight max-w-[130px]">
+          <button type="button" onclick="toggleSpotifyDrawer()" id="music-dock-pill" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-obsidian-850/95 border border-chrome-300/20 hover:border-chrome-300/45 transition-colors">
+            <div class="flex flex-col text-left leading-tight max-w-[135px]">
               <span class="text-[11px] font-semibold text-chrome-100 truncate">No Idea</span>
               <span class="text-[10px] font-mono text-chrome-400 truncate">Don Toliver</span>
             </div>
 
-            <div id="music-eq" class="flex items-end gap-[2px] h-3.5 px-0.5">
+            <div id="music-eq" class="flex items-end gap-[2px] h-3.5 px-0.5 eq-playing">
               <span class="eq-bar"></span>
               <span class="eq-bar"></span>
               <span class="eq-bar"></span>
               <span class="eq-bar"></span>
             </div>
 
-            <button onclick="toggleSpotifyDrawer()" title="Spotify Player" class="px-2 py-1 rounded-lg bg-chrome-200/10 hover:bg-chrome-200 hover:text-obsidian-950 text-[10px] font-mono font-semibold text-chrome-200 transition-colors">
+            <span class="px-2 py-1 rounded-lg bg-chrome-200/10 text-[10px] font-mono font-semibold text-chrome-200">
               SPOTIFY
-            </button>
-          </div>
+            </span>
+          </button>
 
-          <!-- Expandable Spotify Embed / Audio Source Popover -->
+          <!-- Expandable Spotify Embed Popover -->
           <div id="spotify-popover" class="hidden absolute right-0 mt-2 w-[300px] sm:w-[320px] rounded-2xl bento-card p-3 z-50 shadow-2xl">
             <div class="flex items-center justify-between mb-2">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-chrome-300">2026 Studio Audio Dock</span>
-              <button onclick="toggleSpotifyDrawer()" class="text-chrome-400 hover:text-white text-xs px-1.5 py-0.5 rounded">✕</button>
+              <span class="font-mono text-[10px] uppercase tracking-wider text-chrome-300">Spotify Player</span>
+              <button type="button" onclick="toggleSpotifyDrawer()" class="text-chrome-400 hover:text-white text-xs px-1.5 py-0.5 rounded">✕</button>
             </div>
-        
-             <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/7AzlLxHn24DxjgQX73F9fU?utm_source=generator&si=4810174dcd044e62" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      
-            <div class="mt-2 flex items-center justify-between text-[10px] font-mono text-chrome-400">
-              <span id="audio-mode-label">Spotify / Synth Ambient</span>
-              <button onclick="toggleSynthFallback()" class="underline hover:text-chrome-100">Synth Loop</button>
-            </div>
+           <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3PEwQ1uaMwg0ehoTeVm7Yq?utm_source=generator&si=77d9aa07432c4ca1" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
           </div>
         </div>
 
-        <!-- Trilingual Switcher (FR | EN | ES) -->
+        <!-- Bilingual Switcher (FR | EN) -->
         <div class="flex items-center p-1 rounded-xl bg-obsidian-850/90 border border-chrome-300/15 font-mono text-xs">
-          <button onclick="setLanguage('fr')" id="lang-fr" class="px-2 py-1 rounded-lg font-semibold transition-all bg-chrome-200 text-obsidian-950">FR</button>
-          <button onclick="setLanguage('en')" id="lang-en" class="px-2 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white">EN</button>
-          <button onclick="setLanguage('es')" id="lang-es" class="px-2 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white">ES</button>
+          <button onclick="setLanguage('fr')" id="lang-fr" class="px-2.5 py-1 rounded-lg font-semibold transition-all bg-chrome-200 text-obsidian-950">FR</button>
+          <button onclick="setLanguage('en')" id="lang-en" class="px-2.5 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white">EN</button>
         </div>
 
       </div>
@@ -321,15 +314,15 @@
   </header>
 
   <!-- ===================================================================== -->
-  <!-- MODE 1: HOMEPAGE HUB (DEFAULT 2026 BENTO GRID OVER LIVE 3D CHROME)    -->
+  <!-- MODE 1: HOMEPAGE HUB (CLEAN PRESENTATION, CONTACT & CV ONLY)          -->
   <!-- ===================================================================== -->
-  <main id="hub-view" class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6">
+  <main id="hub-view" class="relative z-20 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-14 flex flex-col justify-center min-h-[calc(100vh-4rem)]">
 
     <!-- Top Bento Row: Hero Introduction + Quick Contact & Socials -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
       <!-- Hero Card (8 cols) -->
-      <section class="lg:col-span-8 bento-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+      <section class="lg:col-span-8 bento-card rounded-3xl p-6 sm:p-9 flex flex-col justify-between relative overflow-hidden">
         <!-- Subtle Metallic Corner Accent -->
         <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-gradient-to-br from-chrome-200/10 to-transparent blur-2xl pointer-events-none"></div>
 
@@ -349,63 +342,57 @@
             </span>
           </div>
 
-          <!-- Name & Role -->
+          <!-- Name & Education Role -->
           <div class="pt-1">
             <h1 class="font-display text-3xl sm:text-5xl font-bold tracking-tight liquid-chrome-text">
               MARIA ESSINDI BIDJO
             </h1>
             <p id="hero-title" class="mt-2 font-display text-base sm:text-xl font-medium text-chrome-200">
-              Étudiante en Informatique • Administration Systèmes & Réseaux / Support Informatique
+              Étudiante en Bachelor Développeur en IA • ECE École d'Ingénieurs de Bordeaux
             </p>
           </div>
 
           <!-- Bio Summary -->
           <p id="hero-bio" class="text-sm sm:text-[15px] leading-relaxed text-chrome-300/90 max-w-3xl">
-            Étudiante en 2e année de Bachelor Développeur en IA à l'ECE École d'Ingénieurs de Bordeaux, je recherche une alternance ou un stage (dès Juin 2027) en administration systèmes & réseaux / support informatique. Mon stage chez SNT SUMA m'a permis d'acquérir une solide expérience terrain en support utilisateurs, diagnostic matériel, réseaux et études techniques télécoms.
+            Étudiante en 2e année de Bachelor Développeur en IA à l'ECE École d'Ingénieurs de Bordeaux, je recherche une alternance ou un stage (dès Juin 2027) en administration systèmes et réseaux / support informatique. Mon stage chez SNT SUMA m'a permis d'acquérir une solide expérience en support utilisateurs, diagnostic matériel, réseaux et études techniques télécoms.
           </p>
         </div>
 
         <!-- Primary Action Row -->
-        <div class="mt-7 pt-5 border-t border-chrome-300/10 flex flex-wrap items-center justify-between gap-4 relative z-10">
+        <div class="mt-8 pt-5 border-t border-chrome-300/10 flex flex-wrap items-center justify-between gap-4 relative z-10">
           <div class="flex flex-wrap items-center gap-3">
-            <button onclick="switchMode('studio')" class="chrome-btn-primary px-5 py-3 rounded-2xl text-sm font-display flex items-center gap-2.5">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              <span data-i18n="ctaExploreStudio">Explorer le Studio 2026</span>
-            </button>
-
-            <button onclick="downloadCV()" class="px-4 py-3 rounded-2xl text-sm font-medium bg-obsidian-800/90 hover:bg-obsidian-700 text-chrome-100 border border-chrome-300/20 hover:border-chrome-300/40 transition-all flex items-center gap-2">
-              <svg class="w-4 h-4 text-chrome-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <button onclick="downloadCV()" class="chrome-btn-primary px-5 py-3 rounded-2xl text-sm font-display flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
               </svg>
               <span data-i18n="ctaDownloadCv">Télécharger CV PDF</span>
             </button>
-          </div>
 
-          <!-- Mini Avatar Preview Badge -->
-          <button onclick="switchMode('studio')" class="flex items-center gap-3 px-3.5 py-2 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 hover:border-chrome-300/35 transition-all group">
-            <canvas id="mini-avatar-canvas" width="38" height="44" class="rounded-lg"></canvas>
-            <div class="text-left">
-              <div class="text-xs font-semibold text-chrome-100 group-hover:text-white" data-i18n="avatarBadgeTitle">2026 Beanie Girl</div>
-              <div class="text-[11px] font-mono text-chrome-400" data-i18n="avatarBadgeSub">Cliquer pour piloter →</div>
-            </div>
-          </button>
+            <button onclick="switchMode('studio')" class="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-obsidian-850/90 hover:bg-obsidian-800 border border-chrome-300/20 hover:border-chrome-300/40 transition-all group">
+              <canvas id="mini-avatar-canvas" width="38" height="44" class="shrink-0"></canvas>
+              <div class="text-left leading-tight pr-1">
+                <div class="font-display text-xs font-semibold text-chrome-100 group-hover:text-white flex items-center gap-1.5">
+                  <span data-i18n="beanieBtnLabel">Beanie Girl</span>
+                  <span class="text-chrome-400 group-hover:translate-x-0.5 transition-transform">→</span>
+                </div>
+                <div class="font-mono text-[10px] text-chrome-400" data-i18n="beanieBtnSub">Contrôler l'avatar 3D</div>
+              </div>
+            </button>
+          </div>
         </div>
       </section>
 
       <!-- Quick Contact & Socials Card (4 cols) -->
-      <aside class="lg:col-span-4 bento-card rounded-3xl p-6 flex flex-col justify-between">
+      <aside class="lg:col-span-4 bento-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
         <div>
           <div class="flex items-center justify-between mb-4">
             <span class="font-mono text-xs uppercase tracking-widest text-chrome-400" data-i18n="quickContactLabel">Contact & Liens Rapides</span>
-            <span class="px-2 py-0.5 rounded-md bg-chrome-200/10 font-mono text-[10px] text-chrome-200">FR / EN / ES</span>
+            <span class="px-2 py-0.5 rounded-md bg-chrome-200/10 font-mono text-[10px] text-chrome-200">FR / EN</span>
           </div>
 
-          <div class="space-y-2.5">
+          <div class="space-y-3">
             <!-- Email Pill -->
-            <div class="p-3 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
+            <div class="p-3.5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
               <a href="mailto:essindibidjomaria@gmail.com" class="flex items-center gap-2.5 min-w-0 group">
                 <div class="w-8 h-8 rounded-xl bg-chrome-200/10 flex items-center justify-center text-chrome-200 shrink-0">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -423,7 +410,7 @@
             </div>
 
             <!-- Phone Pill -->
-            <div class="p-3 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
+            <div class="p-3.5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
               <a href="tel:+33766043784" class="flex items-center gap-2.5 min-w-0 group">
                 <div class="w-8 h-8 rounded-xl bg-chrome-200/10 flex items-center justify-center text-chrome-200 shrink-0">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -442,8 +429,8 @@
           </div>
         </div>
 
-        <!-- Socials & Direct CV Row -->
-        <div class="mt-4 pt-4 border-t border-chrome-300/10 grid grid-cols-2 gap-2.5">
+        <!-- Socials Row -->
+        <div class="mt-5 pt-4 border-t border-chrome-300/10 grid grid-cols-2 gap-2.5">
           <a id="hub-linkedin-link" href="#" target="_blank" rel="noopener noreferrer" class="p-3 rounded-2xl bg-obsidian-850/90 hover:bg-obsidian-800 border border-chrome-300/15 hover:border-chrome-300/35 flex items-center justify-center gap-2 text-xs font-medium text-chrome-100 transition-all">
             <svg class="w-4 h-4 text-chrome-200" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             <span>LinkedIn</span>
@@ -457,44 +444,22 @@
       </aside>
     </div>
 
-    <!-- Section Header for the 5 Interactive Hub Cards -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2">
-      <div>
-        <h2 class="font-display text-lg sm:text-xl font-bold text-chrome-100" data-i18n="hubGridHeading">
-          Stations Interactives du Portfolio
-        </h2>
-        <p class="text-xs sm:text-sm text-chrome-400" data-i18n="hubGridSub">
-          Sélectionnez une carte pour guider automatiquement l'avatar vers la station correspondante dans le Studio 2026.
-        </p>
-      </div>
-      <span class="font-mono text-xs text-chrome-400">05 MODULES • STUDIO READY</span>
-    </div>
-
-    <!-- 5 Interactive Bento Hub Cards -->
-    <div id="hub-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- Populated dynamically by renderHubCards() -->
-    </div>
-
   </main>
 
   <!-- ===================================================================== -->
-  <!-- MODE 2: INTERACTIVE 3D CHROME STUDIO HUD                              -->
+  <!-- MODE 2: INTERACTIVE 3D CHROME STUDIO HUD (CLEAN & UNCLUTTERED)        -->
   <!-- ===================================================================== -->
   <section id="studio-view" class="hidden fixed inset-x-0 top-16 bottom-0 z-20 pointer-events-none select-none">
 
-    <!-- Studio Top Overlay HUD -->
+    <!-- Studio Top Overlay HUD (Only Back to Hub + Camera/Controls) -->
     <div class="absolute top-3 left-3 right-3 sm:top-5 sm:left-6 sm:right-6 flex flex-wrap items-center justify-between gap-2 pointer-events-none z-20">
 
-      <!-- Left: Studio Status & Quick Station Pills -->
-      <div class="pointer-events-auto flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-obsidian-900/85 backdrop-blur-xl border border-chrome-300/20 shadow-xl">
-        <button onclick="switchMode('hub')" class="px-3 py-1.5 rounded-xl bg-obsidian-800 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 text-xs font-mono transition-colors flex items-center gap-1.5">
+      <!-- Left: Back to Hub Button -->
+      <div class="pointer-events-auto flex items-center p-1.5 rounded-2xl bg-obsidian-900/85 backdrop-blur-xl border border-chrome-300/20 shadow-xl">
+        <button onclick="switchMode('hub')" class="px-3.5 py-1.5 rounded-xl bg-obsidian-800 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 text-xs font-mono transition-colors flex items-center gap-1.5">
           <span>←</span>
           <span data-i18n="backToHub">Hub</span>
         </button>
-
-        <div id="studio-quick-pills" class="flex flex-wrap items-center gap-1">
-          <!-- Populated dynamically with 01..05 pills -->
-        </div>
       </div>
 
       <!-- Right: Camera Mode Toggle + Controls Hint Pill -->
@@ -513,7 +478,7 @@
       </div>
     </div>
 
-    <!-- Proximity Action Prompt (Appears when 3D Beanie Girl is near a station) -->
+    <!-- Proximity Action Prompt (Appears when Beanie Girl is near a station) -->
     <div id="proximity-prompt" class="hidden pointer-events-auto absolute bottom-36 sm:bottom-8 left-1/2 -translate-x-1/2 z-20">
       <button onclick="openNearestStation()" class="chrome-btn-primary px-5 py-2.5 rounded-full text-xs sm:text-sm font-display flex items-center gap-2 shadow-2xl">
         <span id="proximity-station-title">Ouvrir la station</span>
@@ -624,8 +589,8 @@
       socials: {
         // Paste your exact LinkedIn profile URL below:
         linkedin: "https://www.linkedin.com/search/results/all/?keywords=Maria%20Essindi%20Bidjo",
-        // Paste your exact GitHub profile URL below:
-        github: "https://github.com/search?q=Maria+Essindi+Bidjo&type=users"
+        // Your GitHub profile URL:
+        github: "https://github.com/thiamaria"
       },
 
       // Optional: Set "./CV_Maria_Essindi_Bidjo_ATS.pdf" if you place your PDF in the same folder.
@@ -642,129 +607,83 @@
       },
 
       // Add or edit your featured projects here — they appear automatically in Station 02!
-      projects: [
-        {
-          title: {
-            fr: "Concours Robot Sumo Autonome — ECE Bordeaux",
-            en: "Autonomous Sumo Robot Competition — ECE Bordeaux",
-            es: "Concurso Robot Sumo Autónomo — ECE Burdeos"
-          },
-          period: "07 Mars 2026",
-          description: {
-            fr: "Conception en équipe d'un robot autonome : programmation des capteurs de détection, logique d'esquive et d'attaque, tests sur arène et optimisation des performances.",
-            en: "Team design of an autonomous sumo robot: sensor programming, edge/opponent detection logic, arena testing, and performance optimization.",
-            es: "Diseño en equipo de un robot autónomo de sumo: programación de sensores, lógica de movimiento, pruebas y optimización."
-          },
-          tags: ["C / C++", "Capteurs", "Systèmes Embarqués", "ECE Bordeaux"],
-          githubUrl: ""
-        },
-        {
-          title: {
-            fr: "Architecture Réseau & Virtualisation Multi-VM",
-            en: "Enterprise Network Topology & Virtualization Lab",
-            es: "Arquitectura de Red y Virtualización Multi-VM"
-          },
-          period: "2025 – 2026",
-          description: {
-            fr: "Simulation d'infrastructures sous Cisco Packet Tracer (plan d'adressage IPv4, serveur DHCP, routage inter-réseaux) et déploiement de postes virtuels sous Oracle VirtualBox.",
-            en: "Network infrastructure simulation in Cisco Packet Tracer (IPv4 addressing, DHCP server, routing) and virtual workstation deployment on Oracle VirtualBox.",
-            es: "Simulación de redes en Cisco Packet Tracer (direccionamiento IPv4, DHCP, enrutamiento) y máquinas virtuales en Oracle VirtualBox."
-          },
-          tags: ["Cisco Packet Tracer", "DHCP / TCP-IP", "Oracle VirtualBox"],
-          githubUrl: ""
-        }
-      ]
+      projects: []
     };
 
     /**
      * =========================================================================
-     * TRILINGUAL RESUME DATA & UI STRINGS (FR / EN / ES)
+     * BILINGUAL RESUME DATA & UI STRINGS (FR / EN)
      * Populated directly from CV_Maria_Essindi_Bidjo_ATS.pdf
      * =========================================================================
      */
     const I18N = {
       fr: {
-        navHub: "Hub Bento",
-        navStudio: "Studio 2026",
+        navHub: "Hub",
+        navStudio: "Studio",
         backToHub: "Hub",
-        studioHintMove: "ou Cliquer au sol",
+        studioHintMove: "ou Cliquer au sol 3D",
         heroStatus: "Recherche de stage • Disponible à partir de Juin 2027 | Alternance Systèmes & Réseaux / Support IT",
-        heroTitle: "Étudiante en Informatique • Administration Systèmes & Réseaux / Support Informatique",
+        heroTitle: "Étudiante en Bachelor Développeur en IA • ECE École d'Ingénieurs de Bordeaux",
         heroBio: "Étudiante en Bachelor Développeur en IA à l'ECE École d'Ingénieurs de Bordeaux (2e année), je recherche une opportunité en administration systèmes et réseaux / support informatique (alternance ou stage dès Juin 2027). Mon stage chez SNT SUMA m'a permis d'acquérir une solide expérience en support utilisateurs, diagnostic matériel, réseaux et études techniques télécoms. Curieuse, rigoureuse et autonome, j'aime comprendre les problématiques techniques et proposer des solutions adaptées.",
-        ctaExploreStudio: "Explorer le Studio 2026",
         ctaDownloadCv: "Télécharger CV PDF",
-        avatarBadgeTitle: "2026 Beanie Girl",
-        avatarBadgeSub: "Cliquer pour piloter →",
+        beanieBtnLabel: "Beanie Girl",
+        beanieBtnSub: "Contrôler l'avatar 3D",
         quickContactLabel: "Contact & Liens Rapides",
         phoneLabel: "Téléphone",
         copyBtn: "Copier",
         copiedToast: "copié dans le presse-papiers !",
         pdfGeneratedToast: "CV_Maria_Essindi_Bidjo.pdf téléchargé !",
-        hubGridHeading: "Stations Interactives du Portfolio",
-        hubGridSub: "Sélectionnez une carte pour guider automatiquement l'avatar vers la station correspondante dans le Studio 2026.",
-        openStationBtn: "Ouvrir la station",
-        walkToStationBtn: "Aller à la station →",
 
         stations: [
           {
             id: "profile",
             num: "01",
-            shortLabel: "01 Profil",
-            title: "Profil & Formation",
-            subtitle: "ECE École d'Ingénieurs Bordeaux • Bachelor Développeur en IA",
-            cardSummary: "Parcours académique à l'ECE Bordeaux (2025–2028), objectif stage Juin 2027 / alternance Systèmes & Réseaux, langues et centres d'intérêt.",
-            tags: ["ECE Bordeaux", "Bachelor IA 2A", "Stage Juin 2027"]
+            shortLabel: "01 Formation",
+            title: "Formation & Qualités",
+            subtitle: "ECE École d'Ingénieurs Bordeaux • Bachelor Développeur en IA"
           },
           {
             id: "experience",
             num: "02",
             shortLabel: "02 Expériences",
             title: "Expériences & Projets",
-            subtitle: "SNT SUMA • Robot Sumo ECE • Délégation Éducation Cameroun",
-            cardSummary: "Stage support IT & réseaux chez SNT SUMA, concours Robot Sumo autonome à l'ECE Bordeaux, maintenance informatique et labs Packet Tracer.",
-            tags: ["SNT SUMA", "Support IT", "Robot Sumo", "Télécoms"]
+            subtitle: "SNT SUMA • Robot Sumo ECE • Délégation Éducation Cameroun"
           },
           {
             id: "skills",
             num: "03",
             shortLabel: "03 Compétences",
             title: "Compétences IT & Réseaux",
-            subtitle: "Windows 10/11 • TCP/IP & DHCP • Packet Tracer • Python / C++ / SQL",
-            cardSummary: "Administration Windows, diagnostic matériel (RAM/BIOS), routage & DHCP, Microsoft 365, VirtualBox et développement Python, C, C++, SQL.",
-            tags: ["Windows 10/11", "TCP/IP", "M365", "Python / C++"]
+            subtitle: "Windows 10/11 • TCP/IP & DHCP • Packet Tracer • Python / C / SQL"
           },
           {
             id: "quiz",
             num: "04",
             shortLabel: "04 Anime Quiz",
             title: "Anime & Manga Quiz",
-            subtitle: "Mini-jeu interactif • Devinez l'anime à partir du portrait illustré",
-            cardSummary: "Un clin d'œil interactif à ma passion pour les mangas et animes : identifiez 8 personnages iconiques dessinés sur mesure.",
-            tags: ["Mini-Jeu", "8 Personnages", "Mangas & Animes"]
+            subtitle: "Mini-jeu interactif • Devinez l'anime parmi 20 personnages"
           },
           {
             id: "contact",
             num: "05",
             shortLabel: "05 Contact & CV",
             title: "Contact & CV PDF",
-            subtitle: "Villenave-d'Ornon (33) • Disponible dès Juin 2027",
-            cardSummary: "Coordonnées directes (email, téléphone), profils LinkedIn & GitHub, et téléchargement instantané de mon CV au format PDF.",
-            tags: ["Email", "07 66 04 37 84", "CV PDF", "Bordeaux"]
+            subtitle: "Villenave-d'Ornon (33) • Disponible dès Juin 2027"
           }
         ],
 
         // Detailed Station Content
         profileData: {
-          headingProfile: "Profil Professionnel",
           headingEdu: "Formation Académique",
           eduSchool: "ECE École d'Ingénieurs — Bordeaux",
           eduPeriod: "2025 – 2028",
           eduDegree: "Bachelor Développeur en IA (2e année)",
           eduModules: ["Python", "C", "Réseaux", "DevOps", "Développement Web", "Bases de données", "SQL"],
+          headingQualities: "Qualités & Atouts",
+          qualities: ["Esprit d'analyse", "Sens du service", "Capacité d'apprentissage rapide", "Travail en équipe", "Communication professionnelle"],
           highlights: [
             { label: "Disponibilité", value: "Stage dès Juin 2027 & Alternance" },
-            { label: "Localisation", value: "Villenave-d'Ornon (33) / Bordeaux" },
-            { label: "Langues", value: "Bilingue Français / Anglais (maternel)" },
+            { label: "Langues", value: "Bilingue Français / Anglais" },
             { label: "Centres d'intérêt", value: "Mangas, Animes, Volley-ball, Voyages" }
           ]
         },
@@ -797,21 +716,19 @@
               "Programmation des capteurs de détection d'adversaire et de bordure de piste.",
               "Développement de la logique de déplacement autonome, tests terrain et optimisation des performances."
             ],
-            badges: ["C / C++", "Capteurs", "Logique Embarquée", "Travail d'équipe"]
+            badges: ["C", "Capteurs", "Logique Embarquée", "Travail d'équipe"]
           },
           {
-            role: "Stage — Maintenance Informatique & Web",
+            role: "Stage — Maintenance Informatique",
             company: "Délégation Régionale de l'Éducation de Base (Cameroun)",
             period: "Août 2024",
             category: "IT & Réseaux",
             bullets: [
               "Maintenance informatique préventive et corrective sur le parc de postes.",
-              "Gestion et mise à jour du site internet institutionnel.",
               "Assistance aux utilisateurs, résolution d'incidents quotidiens et mise à jour du parc informatique."
             ],
-            badges: ["Maintenance PC", "Support Utilisateurs", "WordPress / Web", "Gestion de Parc"]
-          },
-         
+            badges: ["Maintenance PC", "Support Utilisateurs", "Gestion de Parc"]
+          }
         ],
 
         skillsCategories: [
@@ -829,16 +746,12 @@
           },
           {
             title: "Développement & Outils",
-            items: ["Python", "C / C++", "SQL & Bases de données", "Développement Web (HTML/CSS/JS)", "Oracle VirtualBox", "VS Code / VS Codium", "Ninite", "Git (notions)"]
-          },
-          {
-            title: "Qualités & Langues",
-            items: ["Bilingue Français / Anglais (maternel)", "Esprit d'analyse", "Sens du service", "Autonomie & Rigueur", "Communication professionnelle"]
+            items: ["Python", "C", "SQL & Bases de données", "Développement Web (HTML/CSS/JS)", "Oracle VirtualBox", "VS Code / VS Codium", "Ninite", "Git (notions)"]
           }
         ],
 
         quizUI: {
-          intro: "Testez votre culture anime & manga ! Identifiez l'œuvre d'origine de chacun des 8 personnages illustrés.",
+          intro: "Testez votre culture anime & manga ! Une sélection aléatoire de 8 personnages parmi 20 œuvres cultes.",
           scoreLabel: "Score",
           streakLabel: "Série",
           questionPrefix: "De quel anime / manga vient ce personnage ?",
@@ -846,8 +759,8 @@
           wrongMsg: "Pas tout à fait — C'était :",
           nextBtn: "Personnage suivant →",
           finishTitle: "Quiz Terminé !",
-          finishSub: "Merci d'avoir exploré l'univers manga & anime de Maria.",
-          restartBtn: "Rejouer le Quiz"
+          finishSub: "Rejouez pour découvrir de nouveaux personnages parmi les 20 disponibles !",
+          restartBtn: "Nouvelle série de personnages"
         },
 
         contactUI: {
@@ -860,86 +773,71 @@
       },
 
       en: {
-        navHub: "Bento Hub",
-        navStudio: "2026 Studio",
+        navHub: "Hub",
+        navStudio: "Studio",
         backToHub: "Hub",
-        studioHintMove: "or Click Floor",
+        studioHintMove: "or Click 3D Floor",
         heroStatus: "Seeking Internship • Available from June 2027 | Systems & Network Admin / IT Support",
-        heroTitle: "Computer Science Student • Systems & Network Administration / IT Support",
+        heroTitle: "Bachelor in AI Development Student • ECE School of Engineering Bordeaux",
         heroBio: "2nd-year Bachelor in AI Development student at ECE School of Engineering in Bordeaux, seeking an internship (from June 2027) or apprenticeship in systems & network administration / IT support. My internship at SNT SUMA gave me hands-on experience in user support, hardware diagnostics, networking, and telecom technical studies. Curious, rigorous, and autonomous.",
-        ctaExploreStudio: "Explore 2026 Studio",
         ctaDownloadCv: "Download PDF CV",
-        avatarBadgeTitle: "2026 Beanie Girl",
-        avatarBadgeSub: "Click to explore →",
+        beanieBtnLabel: "Beanie Girl",
+        beanieBtnSub: "Control 3D Avatar",
         quickContactLabel: "Quick Contact & Links",
         phoneLabel: "Phone",
         copyBtn: "Copy",
         copiedToast: "copied to clipboard!",
         pdfGeneratedToast: "CV_Maria_Essindi_Bidjo.pdf downloaded!",
-        hubGridHeading: "Interactive Portfolio Stations",
-        hubGridSub: "Select any card to automatically guide the avatar to its matching station inside the 2026 Studio.",
-        openStationBtn: "Open station",
-        walkToStationBtn: "Go to station →",
 
         stations: [
           {
             id: "profile",
             num: "01",
-            shortLabel: "01 Profile",
-            title: "Profile & Education",
-            subtitle: "ECE School of Engineering Bordeaux • Bachelor in AI Development",
-            cardSummary: "Academic path at ECE Bordeaux (2025–2028), June 2027 internship / Systems & Networks apprenticeship goal, languages, and interests.",
-            tags: ["ECE Bordeaux", "2nd Yr AI Bachelor", "June 2027"]
+            shortLabel: "01 Education",
+            title: "Education & Strengths",
+            subtitle: "ECE School of Engineering Bordeaux • Bachelor in AI Development"
           },
           {
             id: "experience",
             num: "02",
             shortLabel: "02 Experience",
             title: "Experience & Projects",
-            subtitle: "SNT SUMA • ECE Robot Sumo • Regional Education Delegation",
-            cardSummary: "IT support & network internship at SNT SUMA, autonomous Robot Sumo competition at ECE Bordeaux, IT maintenance, and Packet Tracer labs.",
-            tags: ["SNT SUMA", "IT Support", "Robot Sumo", "Telecom"]
+            subtitle: "SNT SUMA • ECE Robot Sumo • Regional Education Delegation"
           },
           {
             id: "skills",
             num: "03",
             shortLabel: "03 Skills",
             title: "IT & Network Skills",
-            subtitle: "Windows 10/11 • TCP/IP & DHCP • Packet Tracer • Python / C++ / SQL",
-            cardSummary: "Windows administration, hardware diagnostics (RAM/BIOS), routing & DHCP, Microsoft 365, VirtualBox, and Python, C, C++, SQL development.",
-            tags: ["Windows 10/11", "TCP/IP", "M365", "Python / C++"]
+            subtitle: "Windows 10/11 • TCP/IP & DHCP • Packet Tracer • Python / C / SQL"
           },
           {
             id: "quiz",
             num: "04",
             shortLabel: "04 Anime Quiz",
             title: "Anime & Manga Quiz",
-            subtitle: "Interactive mini-game • Guess the anime from custom portraits",
-            cardSummary: "An interactive tribute to my passion for manga and anime: identify 8 iconic custom-illustrated characters.",
-            tags: ["Mini-Game", "8 Characters", "Manga & Anime"]
+            subtitle: "Interactive mini-game • Guess the anime from a 20-character pool"
           },
           {
             id: "contact",
             num: "05",
             shortLabel: "05 Contact & CV",
             title: "Contact & PDF CV",
-            subtitle: "Villenave-d'Ornon (33), France • Available June 2027",
-            cardSummary: "Direct contact details (email, phone), LinkedIn & GitHub profiles, and instant ATS-ready PDF CV download.",
-            tags: ["Email", "07 66 04 37 84", "PDF CV", "Bordeaux"]
+            subtitle: "Villenave-d'Ornon (33), France • Available June 2027"
           }
         ],
 
         profileData: {
-          headingProfile: "Professional Summary",
           headingEdu: "Education",
           eduSchool: "ECE School of Engineering — Bordeaux",
           eduPeriod: "2025 – 2028",
           eduDegree: "Bachelor in AI Development (2nd Year)",
           eduModules: ["Python", "C", "Networking", "DevOps", "Web Development", "Databases", "SQL"],
+          headingQualities: "Soft Skills & Strengths",
+          qualities: ["Analytical Mindset", "Service-Oriented", "Fast Learner", "Teamwork", "Professional Communication"],
           highlights: [
             { label: "Availability", value: "Internship from June 2027 & Apprenticeship" },
-            { label: "Location", value: "Villenave-d'Ornon (33) / Bordeaux, France" },
-            { label: "Languages", value: "Bilingual French / English (Native) },
+            { label: "Languages", value: "Bilingual French / English" },
             { label: "Interests", value: "Manga, Anime, Volleyball, Travel" }
           ]
         },
@@ -972,21 +870,19 @@
               "Programming opponent-detection and arena-edge sensors.",
               "Implementing autonomous movement decision logic, field testing, and performance optimization."
             ],
-            badges: ["C / C++", "Sensors", "Embedded Logic", "Teamwork"]
+            badges: ["C", "Sensors", "Embedded Logic", "Teamwork"]
           },
           {
-            role: "IT Maintenance & Web Intern",
+            role: "IT Maintenance Intern",
             company: "Regional Delegation of Basic Education (Cameroon)",
             period: "August 2024",
             category: "IT & Networks",
             bullets: [
               "Preventive and corrective IT hardware maintenance across office workstations.",
-              "Management and updates of the organization's website.",
               "User technical assistance, daily incident resolution, and IT fleet updates."
             ],
-            badges: ["PC Maintenance", "User Support", "WordPress / Web", "Fleet Updates"]
-          },
-        
+            badges: ["PC Maintenance", "User Support", "Fleet Updates"]
+          }
         ],
 
         skillsCategories: [
@@ -1004,16 +900,12 @@
           },
           {
             title: "Development & Tools",
-            items: ["Python", "C / C++", "SQL & Databases", "Web Development (HTML/CSS/JS)", "Oracle VirtualBox", "VS Code / VS Codium", "Ninite", "Git (basics)"]
-          },
-          {
-            title: "Soft Skills & Languages",
-            items: ["Bilingual French / English (Native)", "Spanish", "Analytical Mindset", "Service-Oriented", "Autonomy & Rigor", "Professional Communication"]
+            items: ["Python", "C", "SQL & Databases", "Web Development (HTML/CSS/JS)", "Oracle VirtualBox", "VS Code / VS Codium", "Ninite", "Git (basics)"]
           }
         ],
 
         quizUI: {
-          intro: "Test your anime & manga knowledge! Identify the series for each of the 8 custom-illustrated characters.",
+          intro: "Test your anime & manga knowledge! A randomized round of 8 characters drawn from a 20-character pool.",
           scoreLabel: "Score",
           streakLabel: "Streak",
           questionPrefix: "Which anime / manga is this character from?",
@@ -1021,8 +913,8 @@
           wrongMsg: "Not quite — It was:",
           nextBtn: "Next Character →",
           finishTitle: "Quiz Complete!",
-          finishSub: "Thanks for exploring Maria's manga & anime universe.",
-          restartBtn: "Play Again"
+          finishSub: "Play again to get a fresh mix of characters from the 20-character pool!",
+          restartBtn: "New Character Mix"
         },
 
         contactUI: {
@@ -1032,187 +924,13 @@
           callAction: "Call Directly",
           downloadAction: "Download Full CV (PDF)"
         }
-      },
-
-      es: {
-        navHub: "Hub Bento",
-        navStudio: "Estudio 2026",
-        backToHub: "Hub",
-        studioHintMove: "o Clic en el suelo",
-        heroStatus: "Buscando prácticas • Disponible desde Junio 2027 | Administración de Sistemas y Redes / Soporte IT",
-        heroTitle: "Estudiante de Informática • Administración de Sistemas y Redes / Soporte Informático",
-        heroBio: "Estudiante de 2º año del Bachelor en Desarrollo de IA en ECE Escuela de Ingenieros de Burdeos, busco prácticas (desde Junio 2027) o alternancia en administración de sistemas y redes / soporte informático. Mi experiencia en SNT SUMA me permitió desarrollar sólidas competencias en soporte a usuarios, diagnóstico de hardware, redes y estudios técnicos de telecomunicaciones.",
-        ctaExploreStudio: "Explorar Estudio 2026",
-        ctaDownloadCv: "Descargar CV PDF",
-        avatarBadgeTitle: "2026 Beanie Girl",
-        avatarBadgeSub: "Clic para explorar →",
-        quickContactLabel: "Contacto y Enlaces Rápidos",
-        phoneLabel: "Teléfono",
-        copyBtn: "Copiar",
-        copiedToast: "¡copiado al portapapeles!",
-        pdfGeneratedToast: "¡CV_Maria_Essindi_Bidjo.pdf descargado!",
-        hubGridHeading: "Estaciones Interactivas del Portafolio",
-        hubGridSub: "Selecciona una tarjeta para guiar automáticamente al avatar hacia su estación en el Estudio 2026.",
-        openStationBtn: "Abrir estación",
-        walkToStationBtn: "Ir a la estación →",
-
-        stations: [
-          {
-            id: "profile",
-            num: "01",
-            shortLabel: "01 Perfil",
-            title: "Perfil y Formación",
-            subtitle: "ECE Escuela de Ingenieros Burdeos • Bachelor Desarrollador en IA",
-            cardSummary: "Formación académica en ECE Burdeos (2025–2028), objetivo prácticas Junio 2027 / alternancia Sistemas y Redes, idiomas e intereses.",
-            tags: ["ECE Burdeos", "Bachelor IA 2º", "Junio 2027"]
-          },
-          {
-            id: "experience",
-            num: "02",
-            shortLabel: "02 Experiencia",
-            title: "Experiencia y Proyectos",
-            subtitle: "SNT SUMA • Robot Sumo ECE • Delegación Regional de Educación",
-            cardSummary: "Prácticas de soporte IT y redes en SNT SUMA, concurso Robot Sumo autónomo en ECE Burdeos, mantenimiento informático y laboratorios Packet Tracer.",
-            tags: ["SNT SUMA", "Soporte IT", "Robot Sumo", "Telecom"]
-          },
-          {
-            id: "skills",
-            num: "03",
-            shortLabel: "03 Habilidades",
-            title: "Competencias IT y Redes",
-            subtitle: "Windows 10/11 • TCP/IP y DHCP • Packet Tracer • Python / C++ / SQL",
-            cardSummary: "Administración Windows, diagnóstico de hardware (RAM/BIOS), enrutamiento y DHCP, Microsoft 365, VirtualBox y desarrollo en Python, C, C++, SQL.",
-            tags: ["Windows 10/11", "TCP/IP", "M365", "Python / C++"]
-          },
-          {
-            id: "quiz",
-            num: "04",
-            shortLabel: "04 Anime Quiz",
-            title: "Quiz de Anime y Manga",
-            subtitle: "Minijuego interactivo • Adivina el anime por su retrato ilustrado",
-            cardSummary: "Un homenaje interactivo a mi pasión por el manga y el anime: identifica 8 personajes icónicos ilustrados a medida.",
-            tags: ["Minijuego", "8 Personajes", "Manga y Anime"]
-          },
-          {
-            id: "contact",
-            num: "05",
-            shortLabel: "05 Contacto y CV",
-            title: "Contacto y CV PDF",
-            subtitle: "Villenave-d'Ornon (33), Francia • Disponible Junio 2027",
-            cardSummary: "Datos de contacto directos (correo, teléfono), perfiles de LinkedIn y GitHub, y descarga instantánea de mi CV en formato PDF.",
-            tags: ["Correo", "07 66 04 37 84", "CV PDF", "Burdeos"]
-          }
-        ],
-
-        profileData: {
-          headingProfile: "Perfil Profesional",
-          headingEdu: "Formación Académica",
-          eduSchool: "ECE Escuela de Ingenieros — Burdeos",
-          eduPeriod: "2025 – 2028",
-          eduDegree: "Bachelor Desarrollador en IA (2º año)",
-          eduModules: ["Python", "C", "C++", "Redes", "DevOps", "Desarrollo Web", "Bases de datos", "SQL"],
-          highlights: [
-            { label: "Disponibilidad", value: "Prácticas desde Junio 2027 y Alternancia" },
-            { label: "Ubicación", value: "Villenave-d'Ornon (33) / Burdeos, Francia" },
-            { label: "Idiomas", value: "Bilingüe Francés / Inglés (nativo), Español" },
-            { label: "Intereses", value: "Manga, Anime, Voleibol, Viajes" }
-          ]
-        },
-
-        experiencesData: [
-          {
-            role: "Prácticas — Soporte Informático y Redes",
-            company: "SNT SUMA (Société Nouvelle Transport SUMA)",
-            period: "Junio 2026 – Julio 2026",
-            category: "IT y Redes",
-            bullets: [
-              "Soporte informático: asistencia a usuarios en equipos Windows, diagnóstico y resolución de fallos de hardware/software, instalación de puestos (monitores, HDMI, VGA, DisplayPort).",
-              "Mantenimiento de hardware: diagnóstico de componentes (RAM, BIOS, placas base, fuentes de alimentación), desmontaje/montaje y propuestas de reemplazo.",
-              "Redes: verificación de conectividad (ping, direccionamiento IP), configuración DHCP / IP estática y administración de routers.",
-              "Cloud y Microsoft 365: seguimiento de sincronización Google Drive, control de copias de seguridad y soporte en Teams, OneDrive y SharePoint.",
-              "Gestión documental y datos: conversión de PDF a Google Sheets, creación de paneles en Excel (seguimiento de flota de vehículos y antigüedad del personal).",
-              "Estudio de videoconferencia Lifesize Icon 600: verificación del equipo existente y búsqueda de uso sin suscripción Cloud con conexión a Teams.",
-              "Estudio comparativo de telefonía fija: análisis de propuesta de proveedor (licencias, números DDI, conservación de teléfonos IP Snom) y comparativa SFR vs Free Coms Pro.",
-              "Proyecto de puntos de recarga eléctrica: comparativa Virta / AMPECO / EV Map, contacto con proveedores, solicitud de presupuestos e informes técnicos."
-            ],
-            badges: ["Windows 10/11", "Diagnóstico RAM/BIOS", "DHCP / IP", "Microsoft 365", "Lifesize Icon 600", "Telefonía IP Snom"]
-          },
-          {
-            role: "Concurso Robot Sumo — Proyecto en Equipo",
-            company: "ECE Escuela de Ingenieros Burdeos",
-            period: "07 de Marzo de 2026",
-            category: "Robótica y Dev",
-            bullets: [
-              "Diseño en equipo de un robot autónomo de combate sumo.",
-              "Programación de sensores de detección de oponente y borde de pista.",
-              "Lógica de desplazamiento autónomo, pruebas y optimización de rendimiento."
-            ],
-            badges: ["C , "Sensores", "Lógica Embebida", "Trabajo en equipo"]
-          },
-          {
-            role: "Prácticas — Mantenimiento Informático y Web",
-            company: "Delegación Regional de Educación Básica (Camerún)",
-            period: "Agosto 2024",
-            category: "IT y Redes",
-            bullets: [
-              "Mantenimiento preventivo y correctivo del parque informático.",
-              "Gestión y actualización del sitio web institucional.",
-              "Asistencia a usuarios, resolución de incidencias y actualización de equipos."
-            ],
-            badges: ["Mantenimiento PC", "Soporte Usuarios", "WordPress / Web", "Inventario IT"]
-          },
-          
-        ],
-
-        skillsCategories: [
-          {
-            title: "Sistemas y Hardware",
-            items: ["Windows 10 / 11", "Soporte a usuarios N1/N2", "Diagnóstico Hardware (RAM, BIOS, Placa base)", "Instalación de puestos", "HDMI / VGA / DisplayPort"]
-          },
-          {
-            title: "Redes e Infraestructura",
-            items: ["TCP/IP y Direccionamiento IP", "DHCP e IP Estática", "Enrutamiento y Ping", "Administración de routers", "Cisco Packet Tracer"]
-          },
-          {
-            title: "Cloud y Productividad",
-            items: ["Microsoft 365 (Teams, SharePoint, OneDrive)", "Google Workspace y Drive", "Excel (Paneles y Datos)", "Google Sheets", "WordPress"]
-          },
-          {
-            title: "Desarrollo y Herramientas",
-            items: ["Python", "C / C++", "SQL y Bases de datos", "Desarrollo Web (HTML/CSS/JS)", "Oracle VirtualBox", "VS Code / VS Codium", "Ninite", "Git (nociones)"]
-          },
-          {
-            title: "Cualidades e Idiomas",
-            items: ["Bilingüe Francés / Inglés (nativo)", "Español", "Capacidad analítica", "Vocación de servicio", "Autonomía y Rigor", "Comunicación profesional"]
-          }
-        ],
-
-        quizUI: {
-          intro: "¡Pon a prueba tus conocimientos de anime y manga! Identifica la serie de cada uno de los 8 personajes ilustrados.",
-          scoreLabel: "Puntuación",
-          streakLabel: "Racha",
-          questionPrefix: "¿De qué anime / manga es este personaje?",
-          correctMsg: "¡Exacto! ¡Muy bien!",
-          wrongMsg: "Casi — Era:",
-          nextBtn: "Siguiente personaje →",
-          finishTitle: "¡Quiz Completado!",
-          finishSub: "Gracias por explorar el universo manga y anime de Maria.",
-          restartBtn: "Jugar de nuevo"
-        },
-
-        contactUI: {
-          heading: "Conectemos",
-          sub: "Disponible para prácticas a partir de Junio 2027 o alternancia en administración de sistemas y redes / soporte informático en Burdeos.",
-          emailAction: "Enviar correo",
-          callAction: "Llamar directamente",
-          downloadAction: "Descargar CV completo (PDF)"
-        }
       }
     };
 
     /**
      * =========================================================================
-     * ILLUSTRATED ANIME & MANGA CHARACTER QUIZ DATA (8 CUSTOM SVG PORTRAITS)
+     * ILLUSTRATED ANIME & MANGA CHARACTER QUIZ DATA (20 CHARACTER POOL)
+     * Each round picks 8 random characters so every playthrough varies!
      * =========================================================================
      */
     const ANIME_CHARACTERS = [
@@ -1221,7 +939,7 @@
         name: "Satoru Gojo",
         correctAnime: "Jujutsu Kaisen",
         options: ["Jujutsu Kaisen", "Bleach", "Chainsaw Man", "Tokyo Ghoul"],
-        clue: { fr: "Sorciers & Fléaux • Bandeau noir", en: "Sorcerers & Curses • Black blindfold", es: "Hechiceros y Maldiciones • Venda negra" },
+        clue: { fr: "Sorciers & Fléaux • Bandeau noir", en: "Sorcerers & Curses • Black blindfold" },
         svg: `
           <svg viewBox="0 0 160 160" class="w-full h-full">
             <defs>
@@ -1232,17 +950,12 @@
             </defs>
             <rect width="160" height="160" rx="24" fill="#11141d"/>
             <circle cx="80" cy="80" r="68" fill="url(#gojoAura)"/>
-            <!-- High Collar Uniform -->
             <path d="M42 155 L48 116 Q80 124 112 116 L118 155 Z" fill="#181b24" stroke="#334155" stroke-width="1.5"/>
             <path d="M72 118 L80 132 L88 118" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
-            <!-- Neck & Face -->
             <rect x="70" y="96" width="20" height="22" rx="6" fill="#f3d2c1"/>
             <path d="M54 64 Q54 104 80 108 Q106 104 106 64 Z" fill="#fae1d3"/>
-            <!-- Black Blindfold -->
             <rect x="52" y="62" width="56" height="17" rx="4" fill="#090a0f" stroke="#475569" stroke-width="1"/>
-            <!-- Mouth subtle smirk -->
             <path d="M73 94 Q80 98 88 93" fill="none" stroke="#8c5a4a" stroke-width="2" stroke-linecap="round"/>
-            <!-- Spiky White/Silver Hair -->
             <path d="M48 66 L36 44 L54 50 L48 26 L67 40 L76 16 L86 39 L102 20 L101 44 L122 34 L111 58 L124 62 L108 68 Q80 56 52 68 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2"/>
           </svg>`
       },
@@ -1251,23 +964,19 @@
         name: "Naruto Uzumaki",
         correctAnime: "Naruto Shippuden",
         options: ["Naruto Shippuden", "Dragon Ball Z", "Black Clover", "My Hero Academia"],
-        clue: { fr: "Bandeau de Konoha • Marques sur les joues", en: "Hidden Leaf Headband • Cheek whiskers", es: "Banda de Konoha • Marcas en las mejillas" },
+        clue: { fr: "Bandeau de Konoha • Marques sur les joues", en: "Hidden Leaf Headband • Cheek whiskers" },
         svg: `
           <svg viewBox="0 0 160 160" class="w-full h-full">
             <rect width="160" height="160" rx="24" fill="#151412"/>
             <circle cx="80" cy="80" r="65" fill="#f97316" fill-opacity="0.16"/>
-            <!-- Orange & Black Jacket -->
             <path d="M38 155 L46 116 L114 116 L122 155 Z" fill="#ea580c"/>
             <path d="M46 116 L66 116 L66 155 L40 155 Z" fill="#18181b"/>
             <path d="M94 116 L114 116 L120 155 L94 155 Z" fill="#18181b"/>
-            <!-- Neck & Face -->
             <rect x="70" y="96" width="20" height="22" rx="6" fill="#eab696"/>
             <path d="M54 62 Q54 103 80 107 Q106 103 106 62 Z" fill="#f5c6a5"/>
-            <!-- Headband -->
             <rect x="52" y="54" width="56" height="13" rx="3" fill="#1e293b"/>
             <rect x="64" y="55" width="32" height="11" rx="2" fill="#cbd5e1" stroke="#64748b" stroke-width="1"/>
             <path d="M77 60.5 Q80 57 83 60.5 Q80 64 77 60.5" fill="none" stroke="#334155" stroke-width="1.3"/>
-            <!-- Eyes & Whiskers -->
             <circle cx="68" cy="76" r="3.5" fill="#2563eb"/>
             <circle cx="92" cy="76" r="3.5" fill="#2563eb"/>
             <line x1="57" y1="82" x2="65" y2="83" stroke="#9a6b52" stroke-width="1.5"/>
@@ -1275,7 +984,6 @@
             <line x1="95" y1="83" x2="103" y2="82" stroke="#9a6b52" stroke-width="1.5"/>
             <line x1="95" y1="86" x2="103" y2="86" stroke="#9a6b52" stroke-width="1.5"/>
             <path d="M71 93 Q80 100 89 93" fill="none" stroke="#7c4d38" stroke-width="2" stroke-linecap="round"/>
-            <!-- Spiky Blonde Hair -->
             <path d="M48 56 L38 38 L55 43 L52 24 L69 36 L80 18 L91 36 L108 24 L105 43 L122 38 L112 56 Z" fill="#facc15" stroke="#eab308" stroke-width="1.2"/>
           </svg>`
       },
@@ -1284,24 +992,19 @@
         name: "Monkey D. Luffy",
         correctAnime: "One Piece",
         options: ["One Piece", "Fairy Tail", "Hunter x Hunter", "Gintama"],
-        clue: { fr: "Chapeau de paille • Cicatrice sous l'œil gauche", en: "Straw Hat • Scar under left eye", es: "Sombrero de paja • Cicatriz bajo el ojo" },
+        clue: { fr: "Chapeau de paille • Cicatrice sous l'œil gauche", en: "Straw Hat • Scar under left eye" },
         svg: `
           <svg viewBox="0 0 160 160" class="w-full h-full">
             <rect width="160" height="160" rx="24" fill="#171313"/>
             <circle cx="80" cy="82" r="64" fill="#ef4444" fill-opacity="0.16"/>
-            <!-- Red Vest -->
             <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#dc2626"/>
             <path d="M72 116 L80 155 L88 116 Z" fill="#f3c19d"/>
-            <!-- Neck & Face -->
             <rect x="70" y="96" width="20" height="22" rx="6" fill="#eab696"/>
             <path d="M55 62 Q55 103 80 107 Q105 103 105 62 Z" fill="#f5c6a5"/>
-            <!-- Black Hair Tufts -->
             <path d="M52 62 L46 74 L56 70 L58 78 L68 68 L80 75 L92 68 L102 78 L104 70 L114 74 L108 62 Z" fill="#111827"/>
-            <!-- Straw Hat -->
             <ellipse cx="80" cy="54" rx="52" ry="11" fill="#eab308" stroke="#ca8a04" stroke-width="1.5"/>
             <path d="M53 54 Q55 26 80 26 Q105 26 107 54 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/>
             <path d="M54 48 Q80 52 106 48 L107 54 Q80 58 53 54 Z" fill="#dc2626"/>
-            <!-- Eyes, Scar & Big Grin -->
             <circle cx="69" cy="78" r="3" fill="#0f172a"/>
             <circle cx="91" cy="78" r="3" fill="#0f172a"/>
             <path d="M88 84 L95 85" stroke="#991b1b" stroke-width="1.6" stroke-linecap="round"/>
@@ -1313,28 +1016,21 @@
         name: "Nezuko Kamado",
         correctAnime: "Demon Slayer (Kimetsu no Yaiba)",
         options: ["Demon Slayer (Kimetsu no Yaiba)", "Spirited Away", "Inuyasha", "Fruits Basket"],
-        clue: { fr: "Bambou vert • Kimono rose à motifs", en: "Green bamboo • Pink patterned kimono", es: "Bambú verde • Kimono rosa" },
+        clue: { fr: "Bambou vert • Kimono rose à motifs", en: "Green bamboo • Pink patterned kimono" },
         svg: `
           <svg viewBox="0 0 160 160" class="w-full h-full">
             <rect width="160" height="160" rx="24" fill="#181216"/>
             <circle cx="80" cy="80" r="65" fill="#f472b6" fill-opacity="0.16"/>
-            <!-- Long Dark Hair Back -->
             <path d="M44 60 Q40 120 46 150 L114 150 Q120 120 116 60 Z" fill="#18181b"/>
             <path d="M44 132 L46 150 L62 150 L58 132 Z" fill="#fb923c" fill-opacity="0.8"/>
             <path d="M102 132 L98 150 L114 150 L116 132 Z" fill="#fb923c" fill-opacity="0.8"/>
-            <!-- Pink Kimono & Dark Haori -->
             <path d="M42 155 L50 116 L110 116 L118 155 Z" fill="#1f242d"/>
             <path d="M66 116 L80 142 L94 116 Z" fill="#f472b6"/>
-            <!-- Face -->
             <path d="M56 60 Q56 102 80 106 Q104 102 104 60 Z" fill="#fde6da"/>
-            <!-- Pink Hair Ribbon -->
             <path d="M96 42 L108 36 L105 49 Z" fill="#f472b6"/>
-            <!-- Bangs -->
             <path d="M55 64 Q64 42 80 42 Q96 42 105 64 L96 68 L88 56 L80 68 L72 56 L64 68 Z" fill="#18181b"/>
-            <!-- Pink Eyes -->
             <circle cx="69" cy="76" r="4" fill="#ec4899"/>
             <circle cx="91" cy="76" r="4" fill="#ec4899"/>
-            <!-- Green Bamboo Muzzle -->
             <rect x="65" y="86" width="30" height="9" rx="3" fill="#22c55e" stroke="#15803d" stroke-width="1.2"/>
             <line x1="75" y1="86" x2="75" y2="95" stroke="#15803d" stroke-width="1.2"/>
             <line x1="85" y1="86" x2="85" y2="95" stroke="#15803d" stroke-width="1.2"/>
@@ -1345,21 +1041,16 @@
         name: "Levi Ackerman",
         correctAnime: "Attack on Titan",
         options: ["Attack on Titan", "Vinland Saga", "Fullmetal Alchemist", "Death Note"],
-        clue: { fr: "Bataillon d'Exploration • Cravate blanche", en: "Survey Corps • White cravat", es: "Legión de Reconocimiento • Pañuelo blanco" },
+        clue: { fr: "Bataillon d'Exploration • Cravate blanche", en: "Survey Corps • White cravat" },
         svg: `
           <svg viewBox="0 0 160 160" class="w-full h-full">
             <rect width="160" height="160" rx="24" fill="#111514"/>
             <circle cx="80" cy="80" r="64" fill="#10b981" fill-opacity="0.14"/>
-            <!-- Survey Corps Cloak & Jacket -->
             <path d="M38 155 L46 115 L114 115 L122 155 Z" fill="#15803d"/>
             <path d="M56 115 L104 115 L108 155 L52 155 Z" fill="#78350f"/>
-            <!-- White Cravat -->
             <path d="M72 114 L88 114 L85 134 L80 138 L75 134 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
-            <!-- Face -->
             <path d="M56 60 Q56 102 80 106 Q104 102 104 60 Z" fill="#f5dcd0"/>
-            <!-- Sharp Undercut Hair -->
             <path d="M53 68 Q53 36 80 36 Q107 36 107 68 L98 62 L88 68 L80 58 L72 68 L62 62 Z" fill="#0f172a"/>
-            <!-- Sharp Steely Eyes -->
             <line x1="63" y1="73" x2="74" y2="75" stroke="#0f172a" stroke-width="2"/>
             <line x1="86" y1="75" x2="97" y2="73" stroke="#0f172a" stroke-width="2"/>
             <circle cx="69" cy="77" r="2.8" fill="#475569"/>
@@ -1372,21 +1063,16 @@
         name: "Denji",
         correctAnime: "Chainsaw Man",
         options: ["Chainsaw Man", "Dandadan", "Mob Psycho 100", "Blue Lock"],
-        clue: { fr: "Chemise blanche & cravate • Cordon sur le torse", en: "White shirt & tie • Chest starter cord", es: "Camisa blanca y corbata • Cordón en el pecho" },
+        clue: { fr: "Chemise blanche & cravate • Cordon sur le torse", en: "White shirt & tie • Chest starter cord" },
         svg: `
           <svg viewBox="0 0 160 160" class="w-full h-full">
             <rect width="160" height="160" rx="24" fill="#171212"/>
             <circle cx="80" cy="80" r="64" fill="#ef4444" fill-opacity="0.16"/>
-            <!-- White Shirt & Black Tie -->
             <path d="M40 155 L48 115 L112 115 L120 155 Z" fill="#f1f5f9"/>
             <path d="M76 116 L84 116 L86 150 L80 155 L74 150 Z" fill="#18181b"/>
-            <!-- Starter Cord Ring -->
             <circle cx="80" cy="134" r="6" fill="none" stroke="#dc2626" stroke-width="2.2"/>
-            <!-- Face -->
             <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f6d5c3"/>
-            <!-- Tousled Blonde Hair -->
             <path d="M50 68 L44 46 L58 50 L62 32 L76 44 L86 30 L96 46 L112 42 L108 66 L96 60 L84 68 L74 58 L62 66 Z" fill="#fde047" stroke="#eab308" stroke-width="1.2"/>
-            <!-- Eyes & Sharp Grin -->
             <circle cx="69" cy="76" r="3.2" fill="#92400e"/>
             <circle cx="91" cy="76" r="3.2" fill="#92400e"/>
             <path d="M68 91 Q80 101 92 91 Z" fill="#ffffff" stroke="#7c4d38" stroke-width="1.5"/>
@@ -1398,19 +1084,15 @@
         name: "Killua Zoldyck",
         correctAnime: "Hunter x Hunter",
         options: ["Hunter x Hunter", "Yu Yu Hakusho", "Haikyuu!!", "Assassination Classroom"],
-        clue: { fr: "Cheveux argentés • Col roulé bleu & éclairs", en: "Silver hair • Blue turtleneck & lightning", es: "Cabello plateado • Cuello alto azul y rayos" },
+        clue: { fr: "Cheveux argentés • Col roulé bleu", en: "Silver hair • Blue turtleneck" },
         svg: `
           <svg viewBox="0 0 160 160" class="w-full h-full">
             <rect width="160" height="160" rx="24" fill="#11141c"/>
             <circle cx="80" cy="80" r="65" fill="#38bdf8" fill-opacity="0.18"/>
-            <!-- White Tee & Blue Turtleneck -->
             <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#f8fafc"/>
             <path d="M62 112 L98 112 L94 134 L66 134 Z" fill="#1d4ed8"/>
-            <!-- Face -->
             <path d="M55 60 Q55 102 80 106 Q105 102 105 60 Z" fill="#fbe4d8"/>
-            <!-- Fluffy Silver Hair -->
             <path d="M46 68 L38 52 L50 48 L46 32 L64 38 L76 24 L88 38 L106 30 L104 48 L118 52 L110 68 L98 62 L86 70 L78 60 L68 70 L58 62 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/>
-            <!-- Sapphire Eyes -->
             <ellipse cx="69" cy="77" rx="4" ry="4.5" fill="#0284c7"/>
             <ellipse cx="91" cy="77" rx="4" ry="4.5" fill="#0284c7"/>
             <path d="M73 93 Q80 97 87 92" fill="none" stroke="#8c5a4a" stroke-width="1.8" stroke-linecap="round"/>
@@ -1421,22 +1103,258 @@
         name: "Spike Spiegel",
         correctAnime: "Cowboy Bebop",
         options: ["Cowboy Bebop", "Samurai Champloo", "Trigun", "Lupin III"],
-        clue: { fr: "Costume bleu & chemise jaune • Chasseur de primes spatial", en: "Blue suit & yellow shirt • Space bounty hunter", es: "Traje azul y camisa amarilla • Cazarrecompensas espacial" },
+        clue: { fr: "Costume bleu & chemise jaune • Chasseur de primes", en: "Blue suit & yellow shirt • Space bounty hunter" },
         svg: `
           <svg viewBox="0 0 160 160" class="w-full h-full">
             <rect width="160" height="160" rx="24" fill="#12141a"/>
             <circle cx="80" cy="80" r="64" fill="#3b82f6" fill-opacity="0.16"/>
-            <!-- Blue Suit & Yellow Shirt -->
             <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#1e3a8a"/>
             <path d="M68 116 L80 144 L92 116 Z" fill="#facc15"/>
-            <!-- Face -->
             <path d="M56 60 Q56 104 80 108 Q104 104 104 60 Z" fill="#f2cbb5"/>
-            <!-- Fluffy Dark Green-Black Hair -->
             <path d="M46 66 Q40 36 66 30 Q80 22 96 30 Q120 38 114 66 L102 60 L90 66 L80 58 L70 66 L58 60 Z" fill="#142420" stroke="#2c4a42" stroke-width="1.2"/>
-            <!-- Relaxed Eyes & Smirk -->
             <circle cx="69" cy="77" r="3" fill="#422006"/>
             <circle cx="91" cy="77" r="3" fill="#422006"/>
             <path d="M72 93 Q81 97 88 92" fill="none" stroke="#7c4d38" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "ichigo",
+        name: "Ichigo Kurosaki",
+        correctAnime: "Bleach",
+        options: ["Bleach", "Jujutsu Kaisen", "Blue Exorcist", "Soul Eater"],
+        clue: { fr: "Cheveux orange hérissés • Shihakusho noir", en: "Spiky orange hair • Black Soul Reaper robe" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#171210"/>
+            <circle cx="80" cy="80" r="65" fill="#fb923c" fill-opacity="0.18"/>
+            <path d="M38 155 L46 115 L114 115 L122 155 Z" fill="#111318"/>
+            <path d="M64 115 L80 138 L96 115" fill="none" stroke="#f8fafc" stroke-width="4"/>
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f7d5c0"/>
+            <path d="M46 66 L36 48 L52 46 L48 26 L68 38 L80 18 L92 38 L112 26 L108 46 L124 48 L114 66 L98 58 L86 68 L78 56 L66 68 L56 58 Z" fill="#f97316" stroke="#ea580c" stroke-width="1.2"/>
+            <circle cx="69" cy="77" r="3" fill="#7c2d12"/>
+            <circle cx="91" cy="77" r="3" fill="#7c2d12"/>
+            <line x1="73" y1="94" x2="87" y2="94" stroke="#7c4d38" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "goku",
+        name: "Son Goku",
+        correctAnime: "Dragon Ball Z",
+        options: ["Dragon Ball Z", "Naruto Shippuden", "One Punch Man", "Saint Seiya"],
+        clue: { fr: "Dogi orange & bleu • Coupe Saiyan iconique", en: "Orange & blue gi • Iconic Saiyan hair" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#17130f"/>
+            <circle cx="80" cy="80" r="65" fill="#f59e0b" fill-opacity="0.18"/>
+            <path d="M38 155 L46 116 L114 116 L122 155 Z" fill="#ea580c"/>
+            <path d="M62 116 L80 136 L98 116 Z" fill="#1d4ed8"/>
+            <path d="M55 62 Q55 103 80 107 Q105 103 105 62 Z" fill="#f2c4a2"/>
+            <path d="M46 66 L26 56 L48 48 L32 32 L58 36 L68 16 L82 34 L100 18 L104 38 L128 34 L112 50 L132 58 L112 66 Z" fill="#0f172a"/>
+            <circle cx="69" cy="78" r="3.2" fill="#0f172a"/>
+            <circle cx="91" cy="78" r="3.2" fill="#0f172a"/>
+            <path d="M69 92 Q80 101 91 92 Z" fill="#ffffff" stroke="#7c4d38" stroke-width="1.5"/>
+          </svg>`
+      },
+      {
+        id: "tanjiro",
+        name: "Tanjiro Kamado",
+        correctAnime: "Demon Slayer (Kimetsu no Yaiba)",
+        options: ["Demon Slayer (Kimetsu no Yaiba)", "Rurouni Kenshin", "Dororo", "Noragami"],
+        clue: { fr: "Haori à damier vert & noir • Cicatrice sur le front", en: "Green & black checkered haori • Forehead scar" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#101714"/>
+            <circle cx="80" cy="80" r="65" fill="#10b981" fill-opacity="0.16"/>
+            <path d="M38 155 L48 116 L112 116 L122 155 Z" fill="#16a34a"/>
+            <rect x="52" y="122" width="14" height="14" fill="#111827"/>
+            <rect x="80" y="122" width="14" height="14" fill="#111827"/>
+            <rect x="66" y="136" width="14" height="14" fill="#111827"/>
+            <rect x="94" y="136" width="14" height="14" fill="#111827"/>
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f6d5c0"/>
+            <path d="M50 64 Q54 32 80 32 Q106 32 110 64 L98 58 L88 64 L80 54 L72 64 L62 58 Z" fill="#3b1219"/>
+            <path d="M60 58 L66 64 L61 68" fill="none" stroke="#991b1b" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="69" cy="78" r="3.5" fill="#7f1d1d"/>
+            <circle cx="91" cy="78" r="3.5" fill="#7f1d1d"/>
+            <path d="M72 93 Q80 98 88 93" fill="none" stroke="#7c4d38" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "deku",
+        name: "Izuku Midoriya",
+        correctAnime: "My Hero Academia",
+        options: ["My Hero Academia", "Black Clover", "Fire Force", "Dr. Stone"],
+        clue: { fr: "Cheveux bouclés vert foncé • Taches de rousseur", en: "Curly dark-green hair • Cheek freckles" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#101715"/>
+            <circle cx="80" cy="80" r="65" fill="#22c55e" fill-opacity="0.16"/>
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#15803d"/>
+            <path d="M66 116 L94 116 L90 128 L70 128 Z" fill="#dc2626"/>
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f7d7c4"/>
+            <path d="M46 66 Q42 34 80 30 Q118 34 114 66 L102 60 L90 66 L80 56 L70 66 L58 60 Z" fill="#14532d"/>
+            <circle cx="69" cy="77" r="3.6" fill="#16a34a"/>
+            <circle cx="91" cy="77" r="3.6" fill="#16a34a"/>
+            <circle cx="61" cy="84" r="1.2" fill="#8c5a4a"/>
+            <circle cx="65" cy="86" r="1.2" fill="#8c5a4a"/>
+            <circle cx="95" cy="86" r="1.2" fill="#8c5a4a"/>
+            <circle cx="99" cy="84" r="1.2" fill="#8c5a4a"/>
+            <path d="M71 93 Q80 99 89 93" fill="none" stroke="#7c4d38" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "edward",
+        name: "Edward Elric",
+        correctAnime: "Fullmetal Alchemist: Brotherhood",
+        options: ["Fullmetal Alchemist: Brotherhood", "Attack on Titan", "D.Gray-man", "Code Geass"],
+        clue: { fr: "Manteau rouge • Antenne dorée sur la tête", en: "Crimson coat • Golden hair ahoge" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#181112"/>
+            <circle cx="80" cy="80" r="65" fill="#dc2626" fill-opacity="0.16"/>
+            <path d="M38 155 L46 115 L114 115 L122 155 Z" fill="#b91c1c"/>
+            <path d="M64 115 L96 115 L92 155 L68 155 Z" fill="#18181b"/>
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f7d7c4"/>
+            <path d="M50 66 Q52 38 80 38 Q108 38 110 66 L96 60 L80 68 L64 60 Z" fill="#facc15"/>
+            <path d="M80 38 Q76 18 92 22" fill="none" stroke="#facc15" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="69" cy="77" r="3.2" fill="#ca8a04"/>
+            <circle cx="91" cy="77" r="3.2" fill="#ca8a04"/>
+            <path d="M72 93 Q80 97 88 92" fill="none" stroke="#7c4d38" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "light",
+        name: "Light Yagami",
+        correctAnime: "Death Note",
+        options: ["Death Note", "Code Geass", "Monster", "Psycho-Pass"],
+        clue: { fr: "Uniforme scolaire & cravate rouge • Regard stratégique", en: "School uniform & red tie • Calculating gaze" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#141316"/>
+            <circle cx="80" cy="80" r="65" fill="#dc2626" fill-opacity="0.14"/>
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#d6d3d1"/>
+            <path d="M76 116 L84 116 L86 150 L80 155 L74 150 Z" fill="#991b1b"/>
+            <path d="M56 60 Q56 103 80 107 Q104 103 104 60 Z" fill="#f8dfd0"/>
+            <path d="M50 68 Q52 34 80 34 Q108 34 110 68 L98 62 L88 70 L80 60 L72 70 L62 62 Z" fill="#78350f"/>
+            <circle cx="69" cy="77" r="3" fill="#92400e"/>
+            <circle cx="91" cy="77" r="3" fill="#92400e"/>
+            <path d="M73 94 Q80 97 88 92" fill="none" stroke="#8c5a4a" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "saitama",
+        name: "Saitama",
+        correctAnime: "One Punch Man",
+        options: ["One Punch Man", "Mob Psycho 100", "Dragon Ball Z", "Gintama"],
+        clue: { fr: "Combinaison jaune & cape blanche • Crâne lisse", en: "Yellow suit & white cape • Bald head" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#171611"/>
+            <circle cx="80" cy="80" r="65" fill="#facc15" fill-opacity="0.16"/>
+            <path d="M36 155 L46 114 L114 114 L124 155 Z" fill="#f8fafc"/>
+            <path d="M52 116 L108 116 L114 155 L46 155 Z" fill="#eab308"/>
+            <path d="M56 60 Q56 104 80 108 Q104 104 104 60 Q104 34 80 34 Q56 34 56 60 Z" fill="#f7d7c4"/>
+            <ellipse cx="69" cy="74" rx="4.5" ry="3.2" fill="#ffffff" stroke="#1e293b" stroke-width="1.3"/>
+            <ellipse cx="91" cy="74" rx="4.5" ry="3.2" fill="#ffffff" stroke="#1e293b" stroke-width="1.3"/>
+            <circle cx="69" cy="74" r="1.4" fill="#0f172a"/>
+            <circle cx="91" cy="74" r="1.4" fill="#0f172a"/>
+            <line x1="75" y1="93" x2="85" y2="93" stroke="#7c4d38" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "anya",
+        name: "Anya Forger",
+        correctAnime: "Spy x Family",
+        options: ["Spy x Family", "Kaguya-sama: Love Is War", "Fruits Basket", "Oshi no Ko"],
+        clue: { fr: "Cheveux rose pastel • Deux petits cônes noirs", en: "Pastel pink hair • Two black hair cones" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#181316"/>
+            <circle cx="80" cy="80" r="65" fill="#f472b6" fill-opacity="0.18"/>
+            <path d="M42 155 L50 118 L110 118 L118 155 Z" fill="#18181b"/>
+            <path d="M68 118 L80 132 L92 118 Z" fill="#facc15"/>
+            <path d="M56 64 Q56 102 80 106 Q104 102 104 64 Z" fill="#fde6da"/>
+            <polygon points="54,48 64,34 68,52" fill="#18181b"/>
+            <polygon points="106,48 96,34 92,52" fill="#18181b"/>
+            <path d="M50 74 Q50 40 80 40 Q110 40 110 74 L98 66 L88 72 L80 62 L72 72 L62 66 Z" fill="#f9a8d4"/>
+            <circle cx="69" cy="80" r="4.5" fill="#10b981"/>
+            <circle cx="91" cy="80" r="4.5" fill="#10b981"/>
+            <path d="M74 94 Q80 99 86 94" fill="none" stroke="#8c5a4a" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "hinata",
+        name: "Shoyo Hinata",
+        correctAnime: "Haikyuu!!",
+        options: ["Haikyuu!!", "Blue Lock", "Kuroko's Basketball", "Slam Dunk"],
+        clue: { fr: "Maillot noir & orange Karasuno #10 • Volley-ball", en: "Black & orange Karasuno #10 jersey • Volleyball" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#171310"/>
+            <circle cx="80" cy="80" r="65" fill="#f97316" fill-opacity="0.18"/>
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#18181b"/>
+            <path d="M64 116 L80 128 L96 116" fill="none" stroke="#f97316" stroke-width="4"/>
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f7d7c4"/>
+            <path d="M48 66 Q46 34 80 32 Q114 34 112 66 L98 58 L88 66 L80 56 L72 66 L62 58 Z" fill="#fb923c"/>
+            <circle cx="69" cy="77" r="3.4" fill="#9a3412"/>
+            <circle cx="91" cy="77" r="3.4" fill="#9a3412"/>
+            <path d="M70 92 Q80 101 90 92 Z" fill="#ffffff" stroke="#7c4d38" stroke-width="1.5"/>
+          </svg>`
+      },
+      {
+        id: "eren",
+        name: "Eren Yeager",
+        correctAnime: "Attack on Titan",
+        options: ["Attack on Titan", "Vinland Saga", "Tokyo Ghoul", "Berserk"],
+        clue: { fr: "Cheveux bruns mi-longs • Yeux émeraude déterminés", en: "Shoulder-length brown hair • Emerald eyes" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#121413"/>
+            <circle cx="80" cy="80" r="65" fill="#10b981" fill-opacity="0.14"/>
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#18181b"/>
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f5d5c3"/>
+            <path d="M48 92 Q46 36 80 36 Q114 36 112 92 L104 68 L90 62 L80 72 L70 62 L56 68 Z" fill="#291d18"/>
+            <circle cx="69" cy="77" r="3.4" fill="#10b981"/>
+            <circle cx="91" cy="77" r="3.4" fill="#10b981"/>
+            <line x1="73" y1="94" x2="87" y2="94" stroke="#7c4d38" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "isagi",
+        name: "Yoichi Isagi",
+        correctAnime: "Blue Lock",
+        options: ["Blue Lock", "Haikyuu!!", "Captain Tsubasa", "Inazuma Eleven"],
+        clue: { fr: "Combinaison bleue & noire • Deux mèches sur le sommet", en: "Blue & black bodysuit • Two top hair sprouts" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#0f141c"/>
+            <circle cx="80" cy="80" r="65" fill="#2563eb" fill-opacity="0.18"/>
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#1e3a8a"/>
+            <path d="M68 116 L92 116 L88 155 L72 155 Z" fill="#0f172a"/>
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f7d7c4"/>
+            <path d="M50 66 Q52 38 80 38 Q108 38 110 66 L96 60 L86 68 L80 58 L74 68 L64 60 Z" fill="#1e293b"/>
+            <path d="M76 38 L72 24 L80 36 L88 24 L84 38" fill="#1e293b"/>
+            <circle cx="69" cy="77" r="3.4" fill="#3b82f6"/>
+            <circle cx="91" cy="77" r="3.4" fill="#3b82f6"/>
+            <path d="M72 93 Q80 98 88 93" fill="none" stroke="#7c4d38" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>`
+      },
+      {
+        id: "kaneki",
+        name: "Ken Kaneki",
+        correctAnime: "Tokyo Ghoul",
+        options: ["Tokyo Ghoul", "Jujutsu Kaisen", "Parasyte", "Chainsaw Man"],
+        clue: { fr: "Cheveux blancs & cache-œil • Masque sombre", en: "White hair & eyepatch • Dark mask" },
+        svg: `
+          <svg viewBox="0 0 160 160" class="w-full h-full">
+            <rect width="160" height="160" rx="24" fill="#141215"/>
+            <circle cx="80" cy="80" r="65" fill="#ef4444" fill-opacity="0.16"/>
+            <path d="M40 155 L48 116 L112 116 L120 155 Z" fill="#18181b"/>
+            <path d="M55 60 Q55 103 80 107 Q105 103 105 60 Z" fill="#f5e1d8"/>
+            <path d="M55 82 L105 82 Q103 105 80 107 Q57 105 55 82 Z" fill="#111318"/>
+            <line x1="68" y1="94" x2="92" y2="94" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="3 2"/>
+            <rect x="61" y="71" width="15" height="12" rx="2" fill="#f8fafc" stroke="#334155" stroke-width="1"/>
+            <circle cx="91" cy="77" r="3.5" fill="#dc2626"/>
+            <path d="M48 68 Q50 34 80 34 Q110 34 112 68 L98 60 L88 68 L80 58 L72 68 L62 60 Z" fill="#f8fafc"/>
           </svg>`
       }
     ];
@@ -1451,11 +1369,6 @@
       mode: "hub", // 'hub' | 'studio'
       activeStationId: null,
       expFilter: "ALL",
-      musicPlaying: false,
-      synthActive: false,
-      audioCtx: null,
-      synthInterval: null,
-      htmlAudio: null,
 
       // Anime Quiz State
       quiz: {
@@ -1471,694 +1384,12 @@
 
     /**
      * =========================================================================
-     * INITIALIZATION ON WINDOW LOAD
-     * =========================================================================
-     */
-    window.addEventListener("DOMContentLoaded", () => {
-      // Set social links from PORTFOLIO_CONFIG
-      document.getElementById("hub-linkedin-link").href = PORTFOLIO_CONFIG.socials.linkedin;
-      document.getElementById("hub-github-link").href = PORTFOLIO_CONFIG.socials.github;
-
-      // Initialize Quiz questions
-      initQuiz();
-
-      // Apply default language ('fr') and render Hub
-      setLanguage("fr");
-
-      // Draw mini avatar preview in Hero Card
-      drawMiniHeroAvatar();
-
-      // Initialize Interactive 3D Liquid Chrome Studio Engine
-      Studio3DEngine.init();
-    });
-
-    /**
-     * =========================================================================
-     * LANGUAGE SWITCHER (FR / EN / ES)
-     * =========================================================================
-     */
-    function setLanguage(lang) {
-      state.lang = lang;
-      const t = I18N[lang];
-
-      // Update active language pill styling
-      ["fr", "en", "es"].forEach((code) => {
-        const btn = document.getElementById(`lang-${code}`);
-        if (code === lang) {
-          btn.className = "px-2 py-1 rounded-lg font-semibold transition-all bg-chrome-200 text-obsidian-950";
-        } else {
-          btn.className = "px-2 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white";
-        }
-      });
-
-      // Translate static data-i18n attributes
-      document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.getAttribute("data-i18n");
-        if (t[key]) el.textContent = t[key];
-      });
-
-      // Update Hero texts
-      document.getElementById("hero-status").textContent = t.heroStatus;
-      document.getElementById("hero-title").textContent = t.heroTitle;
-      document.getElementById("hero-bio").textContent = t.heroBio;
-
-      // Re-render Hub Cards & Studio Quick Pills
-      renderHubCards();
-      renderStudioQuickPills();
-
-      // If modal is currently open, refresh its content in the new language
-      if (state.activeStationId) {
-        renderModalContent(state.activeStationId);
-      }
-    }
-
-    /**
-     * =========================================================================
-     * VIEW MODE SWITCHING (HOMEPAGE HUB <-> INTERACTIVE 2026 STUDIO)
-     * =========================================================================
-     */
-    function switchMode(newMode, targetStationId = null) {
-      state.mode = newMode;
-      const hubView = document.getElementById("hub-view");
-      const studioView = document.getElementById("studio-view");
-      const holoLayer = document.getElementById("holo-labels-layer");
-      const navHubBtn = document.getElementById("nav-hub-btn");
-      const navStudioBtn = document.getElementById("nav-studio-btn");
-
-      if (newMode === "hub") {
-        hubView.classList.remove("hidden");
-        studioView.classList.add("hidden");
-        holoLayer.classList.add("opacity-0");
-        holoLayer.classList.remove("opacity-100");
-        navHubBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all bg-chrome-200 text-obsidian-950 shadow-sm";
-        navStudioBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all text-chrome-300 hover:text-white flex items-center gap-1.5";
-        Studio3DEngine.setOrbitOverviewMode(true);
-      } else {
-        hubView.classList.add("hidden");
-        studioView.classList.remove("hidden");
-        holoLayer.classList.remove("opacity-0");
-        holoLayer.classList.add("opacity-100");
-        navStudioBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all bg-chrome-200 text-obsidian-950 shadow-sm flex items-center gap-1.5";
-        navHubBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all text-chrome-300 hover:text-white";
-
-        Studio3DEngine.setOrbitOverviewMode(false);
-
-        // If user clicked a specific Hub Card, walk 3D Beanie Girl directly to that station!
-        if (targetStationId) {
-          Studio3DEngine.navigateToStation(targetStationId, true);
-        }
-      }
-    }
-
-    /**
-     * =========================================================================
-     * RENDER HOMEPAGE BENTO HUB CARDS (5 STATIONS)
-     * =========================================================================
-     */
-    function renderHubCards() {
-      const t = I18N[state.lang];
-      const grid = document.getElementById("hub-cards-grid");
-
-      const icons = {
-        profile: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>`,
-        experience: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`,
-        skills: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>`,
-        quiz: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
-        contact: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
-      };
-
-      grid.innerHTML = t.stations.map((st, idx) => {
-        // Make card 02 (Experience) span 2 columns on large screens for editorial Bento rhythm
-        const spanClass = idx === 1 ? "lg:col-span-2" : "";
-        return `
-          <article
-            onclick="switchMode('studio', '${st.id}')"
-            class="bento-card bento-card-interactive ${spanClass} rounded-3xl p-6 cursor-pointer flex flex-col justify-between group"
-          >
-            <div>
-              <div class="flex items-center justify-between gap-2 mb-4">
-                <div class="flex items-center gap-2.5">
-                  <span class="px-2.5 py-1 rounded-xl bg-chrome-200 text-obsidian-950 font-mono text-xs font-bold">
-                    ${st.num}
-                  </span>
-                  <div class="w-9 h-9 rounded-xl bg-obsidian-800 border border-chrome-300/15 flex items-center justify-center text-chrome-200 group-hover:border-chrome-300/40 transition-colors">
-                    ${icons[st.id]}
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onclick="event.stopPropagation(); openStationModal('${st.id}')"
-                  class="px-3 py-1.5 rounded-xl bg-obsidian-850 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-300 text-[11px] font-mono border border-chrome-300/15 transition-colors"
-                >
-                  ${t.openStationBtn}
-                </button>
-              </div>
-
-              <h3 class="font-display text-xl font-bold text-chrome-100 group-hover:text-white transition-colors">
-                ${st.title}
-              </h3>
-              <p class="text-xs font-mono text-chrome-400 mt-1">${st.subtitle}</p>
-
-              <p class="mt-3 text-sm text-chrome-300/90 leading-relaxed">
-                ${st.cardSummary}
-              </p>
-            </div>
-
-            <div class="mt-5 pt-4 border-t border-chrome-300/10 flex flex-wrap items-center justify-between gap-2">
-              <div class="flex flex-wrap gap-1.5">
-                ${st.tags.map(tag => `<span class="px-2.5 py-1 rounded-lg bg-obsidian-850 border border-chrome-300/10 font-mono text-[11px] text-chrome-300">${tag}</span>`).join("")}
-              </div>
-              <span class="font-mono text-xs text-chrome-200 group-hover:translate-x-1 transition-transform">
-                ${t.walkToStationBtn}
-              </span>
-            </div>
-          </article>
-        `;
-      }).join("");
-    }
-
-    function renderStudioQuickPills() {
-      const t = I18N[state.lang];
-      const container = document.getElementById("studio-quick-pills");
-      container.innerHTML = t.stations.map(st => `
-        <button
-          onclick="Studio3DEngine.navigateToStation('${st.id}', true)"
-          class="px-2.5 py-1.5 rounded-xl bg-obsidian-850/90 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 font-mono text-[11px] border border-chrome-300/15 transition-colors"
-        >
-          ${st.shortLabel}
-        </button>
-      `).join("");
-
-      // Sync 3D holographic station labels when language changes
-      if (typeof Studio3DEngine !== "undefined" && Studio3DEngine.updateHoloLabelTexts) {
-        Studio3DEngine.updateHoloLabelTexts();
-      }
-    }
-
-    function openStationModal(stationId) {
-      state.activeStationId = stationId;
-      renderModalContent(stationId);
-      const modal = document.getElementById("station-modal");
-      modal.classList.remove("hidden");
-    }
-
-    function closeStationModal() {
-      state.activeStationId = null;
-      const modal = document.getElementById("station-modal");
-      modal.classList.add("hidden");
-    }
-
-    function openNearestStation() {
-      if (typeof Studio3DEngine === "undefined") return;
-      const nearest = Studio3DEngine.getNearestStation();
-      if (nearest) {
-        openStationModal(nearest.id);
-      }
-    }
-
-    function navigateModalStation(delta) {
-      const stations = I18N[state.lang].stations;
-      const idx = stations.findIndex(s => s.id === state.activeStationId);
-      const nextIdx = (idx + delta + stations.length) % stations.length;
-      const nextStation = stations[nextIdx];
-      openStationModal(nextStation.id);
-      if (state.mode === "studio" && typeof Studio3DEngine !== "undefined") {
-        Studio3DEngine.navigateToStation(nextStation.id, false);
-      }
-    }
-
-    function setExpFilter(cat) {
-      state.expFilter = cat;
-      renderModalContent("experience");
-    }
-
-    function renderModalContent(stationId) {
-      const t = I18N[state.lang];
-      const stMeta = t.stations.find(s => s.id === stationId) || t.stations[0];
-
-      document.getElementById("modal-station-num").textContent = stMeta.num;
-      document.getElementById("modal-station-title").textContent = stMeta.title;
-      document.getElementById("modal-station-subtitle").textContent = stMeta.subtitle;
-
-      const body = document.getElementById("modal-body");
-
-      // 01: PROFIL & FORMATION
-      if (stationId === "profile") {
-        const p = t.profileData;
-        body.innerHTML = `
-          <div class="space-y-5">
-            <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-2.5">
-              <h4 class="font-display text-base sm:text-lg font-bold text-chrome-100">${p.headingProfile}</h4>
-              <p class="text-xs sm:text-sm text-chrome-300/95 leading-relaxed">${t.heroBio}</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              ${p.highlights.map(h => `
-                <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15">
-                  <div class="text-[11px] font-mono uppercase text-chrome-400">${h.label}</div>
-                  <div class="text-xs sm:text-sm font-semibold text-chrome-100 mt-1">${h.value}</div>
-                </div>
-              `).join("")}
-            </div>
-
-            <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
-              <div class="flex flex-wrap items-center justify-between gap-2">
-                <div>
-                  <div class="text-[11px] font-mono uppercase text-chrome-400">${p.headingEdu}</div>
-                  <h4 class="font-display text-base sm:text-lg font-bold text-chrome-100 mt-0.5">${p.eduSchool}</h4>
-                  <div class="text-xs sm:text-sm text-chrome-300">${p.eduDegree}</div>
-                </div>
-                <span class="px-3 py-1 rounded-full bg-chrome-200 text-obsidian-950 font-mono text-xs font-bold">
-                  ${p.eduPeriod}
-                </span>
-              </div>
-
-              <div class="pt-2 flex flex-wrap gap-1.5">
-                ${p.eduModules.map(mod => `
-                  <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-chrome-300/15 font-mono text-[11px] text-chrome-200">${mod}</span>
-                `).join("")}
-              </div>
-            </div>
-          </div>
-        `;
-      }
-
-      // 02: EXPÉRIENCES & PROJETS
-      else if (stationId === "experience") {
-        const categories = ["ALL", ...new Set(t.experiencesData.map(e => e.category))];
-        const exps = state.expFilter === "ALL"
-          ? t.experiencesData
-          : t.experiencesData.filter(e => e.category === state.expFilter);
-        const projects = PORTFOLIO_CONFIG.projects || [];
-
-        body.innerHTML = `
-          <div class="space-y-5">
-            <!-- Category Filter Pills -->
-            <div class="flex flex-wrap items-center gap-2">
-              ${categories.map(cat => `
-                <button
-                  type="button"
-                  onclick="setExpFilter('${cat.replace(/'/g, "\\'")}')"
-                  class="px-3 py-1.5 rounded-xl font-mono text-xs border transition-colors ${
-                    state.expFilter === cat
-                      ? "bg-chrome-200 text-obsidian-950 border-white font-semibold"
-                      : "bg-obsidian-850 text-chrome-300 border-chrome-300/15 hover:border-chrome-300/40"
-                  }"
-                >
-                  ${cat}
-                </button>
-              `).join("")}
-            </div>
-
-            <!-- Featured Projects from PORTFOLIO_CONFIG -->
-            ${projects.length > 0 ? `
-              <div class="space-y-3">
-                <div class="font-mono text-xs uppercase tracking-wider text-chrome-400">Projects / Labs</div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                  ${projects.map(proj => `
-                    <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/20 flex flex-col justify-between space-y-3">
-                      <div>
-                        <div class="flex items-center justify-between gap-2 mb-1">
-                          <span class="font-mono text-[11px] text-chrome-400">${proj.period}</span>
-                          ${proj.githubUrl ? `<a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" class="font-mono text-[11px] text-chrome-200 underline">GitHub ↗</a>` : ""}
-                        </div>
-                        <h5 class="font-display text-sm sm:text-base font-bold text-chrome-100">
-                          ${proj.title[state.lang] || proj.title.fr}
-                        </h5>
-                        <p class="mt-1.5 text-xs text-chrome-300/90 leading-relaxed">
-                          ${proj.description[state.lang] || proj.description.fr}
-                        </p>
-                      </div>
-                      <div class="flex flex-wrap gap-1.5">
-                        ${proj.tags.map(tag => `<span class="px-2 py-0.5 rounded-md bg-obsidian-900 border border-chrome-300/15 font-mono text-[10px] text-chrome-300">${tag}</span>`).join("")}
-                      </div>
-                    </div>
-                  `).join("")}
-                </div>
-              </div>
-            ` : ""}
-
-            <!-- Experiences List -->
-            <div class="space-y-4">
-              ${exps.map(exp => `
-                <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
-                  <div class="flex flex-wrap items-start justify-between gap-2">
-                    <div>
-                      <span class="inline-block px-2.5 py-0.5 rounded-md bg-chrome-200/10 border border-chrome-300/20 font-mono text-[11px] text-chrome-200 mb-1.5">
-                        ${exp.category}
-                      </span>
-                      <h4 class="font-display text-base sm:text-lg font-bold text-chrome-100">${exp.role}</h4>
-                      <div class="text-xs sm:text-sm font-medium text-chrome-300">${exp.company}</div>
-                    </div>
-                    <span class="px-3 py-1 rounded-full bg-obsidian-900 border border-chrome-300/20 font-mono text-xs text-chrome-200">
-                      ${exp.period}
-                    </span>
-                  </div>
-
-                  <ul class="space-y-2 text-xs sm:text-sm text-chrome-300/95 leading-relaxed list-disc pl-5">
-                    ${exp.bullets.map(b => `<li>${b}</li>`).join("")}
-                  </ul>
-
-                  <div class="pt-2 flex flex-wrap gap-1.5">
-                    ${exp.badges.map(badge => `
-                      <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-chrome-300/15 font-mono text-[11px] text-chrome-300">${badge}</span>
-                    `).join("")}
-                  </div>
-                </div>
-              `).join("")}
-            </div>
-          </div>
-        `;
-      }
-
-      // 03: COMPÉTENCES IT & RÉSEAUX
-      else if (stationId === "skills") {
-        const cats = t.skillsCategories;
-        body.innerHTML = `
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            ${cats.map(cat => `
-              <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
-                <h4 class="font-display text-base font-bold text-chrome-100">${cat.title}</h4>
-                <div class="flex flex-wrap gap-2">
-                  ${cat.items.map(skill => `
-                    <span class="px-3 py-1.5 rounded-xl bg-obsidian-900 border border-chrome-300/15 font-mono text-xs text-chrome-200">${skill}</span>
-                  `).join("")}
-                </div>
-              </div>
-            `).join("")}
-          </div>
-        `;
-      }
-
-      // 04: ANIME & MANGA QUIZ
-      else if (stationId === "quiz") {
-        renderAnimeQuiz(body);
-      }
-
-      // 05: CONTACT & CV PDF
-      else if (stationId === "contact") {
-        const c = t.contactUI;
-        body.innerHTML = `
-          <div class="space-y-5">
-            <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-2">
-              <h4 class="font-display text-lg font-bold text-chrome-100">${c.heading}</h4>
-              <p class="text-sm text-chrome-300 leading-relaxed">${c.sub}</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
-                <div class="min-w-0">
-                  <div class="text-[11px] font-mono uppercase text-chrome-400">Email</div>
-                  <a href="mailto:${PORTFOLIO_CONFIG.email}" class="text-sm font-semibold text-chrome-100 hover:underline truncate block">${PORTFOLIO_CONFIG.email}</a>
-                </div>
-                <button onclick="copyText('${PORTFOLIO_CONFIG.email}', 'Email')" class="px-3 py-1.5 rounded-xl bg-obsidian-900 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 font-mono text-xs border border-chrome-300/15 shrink-0">${t.copyBtn}</button>
-              </div>
-
-              <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 flex items-center justify-between gap-2">
-                <div class="min-w-0">
-                  <div class="text-[11px] font-mono uppercase text-chrome-400">${t.phoneLabel}</div>
-                  <a href="tel:${PORTFOLIO_CONFIG.phoneHref}" class="text-sm font-semibold text-chrome-100 hover:underline block">${PORTFOLIO_CONFIG.phoneDisplay}</a>
-                </div>
-                <button onclick="copyText('${PORTFOLIO_CONFIG.phoneDisplay}', '${t.phoneLabel}')" class="px-3 py-1.5 rounded-xl bg-obsidian-900 hover:bg-chrome-200 hover:text-obsidian-950 text-chrome-200 font-mono text-xs border border-chrome-300/15 shrink-0">${t.copyBtn}</button>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-3 pt-2">
-              <button onclick="downloadCV()" class="chrome-btn-primary px-5 py-3 rounded-2xl text-sm font-display">
-                ${c.downloadAction}
-              </button>
-              <a href="${PORTFOLIO_CONFIG.socials.linkedin}" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-obsidian-850 hover:bg-obsidian-800 border border-chrome-300/20 text-xs font-mono text-chrome-100">
-                LinkedIn ↗
-              </a>
-              <a href="${PORTFOLIO_CONFIG.socials.github}" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-obsidian-850 hover:bg-obsidian-800 border border-chrome-300/20 text-xs font-mono text-chrome-100">
-                GitHub ↗
-              </a>
-            </div>
-          </div>
-        `;
-      }
-    }
-
-    /**
-     * =========================================================================
-     * ILLUSTRATED ANIME & MANGA QUIZ ENGINE (STATION 04)
-     * =========================================================================
-     */
-    function initQuiz() {
-      const shuffled = [...ANIME_CHARACTERS].sort(() => Math.random() - 0.5).map(q => ({
-        ...q,
-        shuffledOptions: [...q.options].sort(() => Math.random() - 0.5)
-      }));
-      state.quiz = {
-        questions: shuffled,
-        currentIndex: 0,
-        score: 0,
-        streak: 0,
-        answered: false,
-        selectedOption: null,
-        finished: false
-      };
-    }
-
-    function renderAnimeQuiz(container) {
-      const qState = state.quiz;
-      const ui = I18N[state.lang].quizUI;
-
-      if (qState.finished) {
-        container.innerHTML = `
-          <div class="p-6 sm:p-8 rounded-3xl bg-obsidian-850/90 border border-chrome-300/20 text-center space-y-5">
-            <div class="inline-flex px-4 py-1.5 rounded-full bg-chrome-200 text-obsidian-950 font-mono text-xs font-bold">
-              ${ui.scoreLabel}: ${qState.score} / ${qState.questions.length}
-            </div>
-            <h4 class="font-display text-2xl sm:text-3xl font-bold liquid-chrome-text">${ui.finishTitle}</h4>
-            <p class="text-sm text-chrome-300 max-w-md mx-auto">${ui.finishSub}</p>
-            <div>
-              <button onclick="initQuiz(); renderModalContent('quiz')" class="chrome-btn-primary px-6 py-3 rounded-2xl text-sm font-display">
-                ${ui.restartBtn}
-              </button>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      const current = qState.questions[qState.currentIndex];
-      const clueText = current.clue[state.lang] || current.clue.fr;
-
-      container.innerHTML = `
-        <div class="space-y-5">
-          <!-- Score & Progress Header -->
-          <div class="flex flex-wrap items-center justify-between gap-2 p-3.5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15">
-            <span class="text-xs text-chrome-300">${ui.intro}</span>
-            <div class="flex items-center gap-2 font-mono text-xs shrink-0">
-              <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-chrome-300/15 text-chrome-200">
-                ${qState.currentIndex + 1}/${qState.questions.length}
-              </span>
-              <span class="px-2.5 py-1 rounded-lg bg-chrome-200 text-obsidian-950 font-bold">
-                ${ui.scoreLabel}: ${qState.score}
-              </span>
-              <span class="px-2.5 py-1 rounded-lg bg-obsidian-900 border border-chrome-300/15 text-chrome-200">
-                ${ui.streakLabel}: ${qState.streak}🔥
-              </span>
-            </div>
-          </div>
-
-          <!-- Character Card + Options -->
-          <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center p-5 rounded-3xl bg-obsidian-850/90 border border-chrome-300/15">
-            <!-- Custom SVG Portrait -->
-            <div class="sm:col-span-5 flex flex-col items-center">
-              <div class="w-40 h-40 sm:w-44 sm:h-44 rounded-3xl p-1.5 bg-gradient-to-br from-chrome-100 via-chrome-400 to-obsidian-700 shadow-xl">
-                <div class="w-full h-full rounded-[20px] overflow-hidden bg-obsidian-950">
-                  ${current.svg}
-                </div>
-              </div>
-              <div class="mt-3 text-center">
-                <div class="font-display font-bold text-base text-chrome-100">${current.name}</div>
-                <div class="text-[11px] font-mono text-chrome-400 mt-0.5">${clueText}</div>
-              </div>
-            </div>
-
-            <!-- Multiple Choice Options -->
-            <div class="sm:col-span-7 space-y-3">
-              <div class="font-display font-semibold text-sm sm:text-base text-chrome-100">
-                ${ui.questionPrefix}
-              </div>
-
-              <div class="grid grid-cols-1 gap-2.5">
-                ${current.shuffledOptions.map(opt => {
-                  let btnStyle = "bg-obsidian-900 hover:bg-obsidian-800 border-chrome-300/20 text-chrome-200";
-                  if (qState.answered) {
-                    if (opt === current.correctAnime) {
-                      btnStyle = "bg-emerald-500/20 border-emerald-400 text-emerald-200 font-semibold";
-                    } else if (opt === qState.selectedOption) {
-                      btnStyle = "bg-rose-500/20 border-rose-400 text-rose-200";
-                    } else {
-                      btnStyle = "bg-obsidian-900/50 border-chrome-300/10 text-chrome-500";
-                    }
-                  }
-                  return `
-                    <button
-                      type="button"
-                      ${qState.answered ? "disabled" : ""}
-                      onclick="submitQuizAnswer('${opt.replace(/'/g, "\\'")}')"
-                      class="w-full text-left px-4 py-3 rounded-2xl border text-xs sm:text-sm transition-all flex items-center justify-between ${btnStyle}"
-                    >
-                      <span>${opt}</span>
-                      ${qState.answered && opt === current.correctAnime ? '<span class="font-mono text-xs">✓</span>' : ''}
-                    </button>
-                  `;
-                }).join("")}
-              </div>
-
-              ${qState.answered ? `
-                <div class="pt-2 flex flex-wrap items-center justify-between gap-2">
-                  <span class="text-xs font-mono ${qState.selectedOption === current.correctAnime ? 'text-emerald-300' : 'text-rose-300'}">
-                    ${qState.selectedOption === current.correctAnime ? ui.correctMsg : `${ui.wrongMsg} ${current.correctAnime}`}
-                  </span>
-                  <button onclick="nextQuizQuestion()" class="chrome-btn-primary px-4 py-2 rounded-xl text-xs font-display">
-                    ${ui.nextBtn}
-                  </button>
-                </div>
-              ` : ''}
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function submitQuizAnswer(option) {
-      if (state.quiz.answered) return;
-      const current = state.quiz.questions[state.quiz.currentIndex];
-      state.quiz.answered = true;
-      state.quiz.selectedOption = option;
-      if (option === current.correctAnime) {
-        state.quiz.score += 1;
-        state.quiz.streak += 1;
-      } else {
-        state.quiz.streak = 0;
-      }
-      renderModalContent("quiz");
-    }
-
-    function nextQuizQuestion() {
-      if (state.quiz.currentIndex + 1 >= state.quiz.questions.length) {
-        state.quiz.finished = true;
-      } else {
-        state.quiz.currentIndex += 1;
-        state.quiz.answered = false;
-        state.quiz.selectedOption = null;
-      }
-      renderModalContent("quiz");
-    }
-
-    /**
-     * =========================================================================
-     * DON TOLIVER — "NO IDEA" MUSIC DOCK CONTROLLER
+     * DON TOLIVER — "NO IDEA" SPOTIFY DRAWER CONTROLLER
      * =========================================================================
      */
     function toggleSpotifyDrawer() {
       const pop = document.getElementById("spotify-popover");
       pop.classList.toggle("hidden");
-    }
-
-    function toggleMusicPlay() {
-      // If user configured a local MP3 URL in PORTFOLIO_CONFIG.music.mp3Url, play it directly
-      if (PORTFOLIO_CONFIG.music.mp3Url) {
-        if (!state.htmlAudio) {
-          state.htmlAudio = new Audio(PORTFOLIO_CONFIG.music.mp3Url);
-          state.htmlAudio.loop = true;
-        }
-        if (state.musicPlaying) {
-          state.htmlAudio.pause();
-          setMusicUIState(false);
-        } else {
-          state.htmlAudio.play().then(() => setMusicUIState(true)).catch(() => toggleSpotifyDrawer());
-        }
-        return;
-      }
-
-      // Otherwise toggle the Spotify embed drawer AND subtle ambient synth mode
-      const pop = document.getElementById("spotify-popover");
-      if (pop.classList.contains("hidden")) {
-        pop.classList.remove("hidden");
-      }
-      toggleSynthFallback();
-    }
-
-    function toggleSynthFallback() {
-      if (state.synthActive) {
-        clearInterval(state.synthInterval);
-        state.synthInterval = null;
-        state.synthActive = false;
-        setMusicUIState(false);
-        return;
-      }
-
-      try {
-        if (!state.audioCtx) {
-          state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (state.audioCtx.state === "suspended") {
-          state.audioCtx.resume();
-        }
-
-        // Subtle nocturnal 2026 ambient chord progression (Cm9 - Fm9 - Abmaj7 - Gm7)
-        const chords = [
-          [130.81, 155.56, 196.00, 233.08, 293.66],
-          [174.61, 207.65, 261.63, 311.13, 392.00],
-          [207.65, 261.63, 311.13, 392.00],
-          [196.00, 233.08, 293.66, 349.23]
-        ];
-        let step = 0;
-
-        const playChord = () => {
-          if (!state.audioCtx || !state.synthActive) return;
-          const now = state.audioCtx.currentTime;
-          const notes = chords[step % chords.length];
-          step++;
-
-          notes.forEach((freq) => {
-            const osc = state.audioCtx.createOscillator();
-            const gain = state.audioCtx.createGain();
-            osc.type = "sine";
-            osc.frequency.setValueAtTime(freq, now);
-
-            gain.gain.setValueAtTime(0.0001, now);
-            gain.gain.exponentialRampToValueAtTime(0.018, now + 0.45);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.3);
-
-            osc.connect(gain);
-            gain.connect(state.audioCtx.destination);
-            osc.start(now);
-            osc.stop(now + 2.4);
-          });
-        };
-
-        state.synthActive = true;
-        setMusicUIState(true);
-        playChord();
-        state.synthInterval = setInterval(playChord, 2400);
-      } catch (err) {
-        toggleSpotifyDrawer();
-      }
-    }
-
-    function setMusicUIState(isPlaying) {
-      state.musicPlaying = isPlaying;
-      const playIcon = document.getElementById("icon-play");
-      const pauseIcon = document.getElementById("icon-pause");
-      const eq = document.getElementById("music-eq");
-
-      if (isPlaying) {
-        playIcon.classList.add("hidden");
-        pauseIcon.classList.remove("hidden");
-        eq.classList.add("eq-playing");
-      } else {
-        playIcon.classList.remove("hidden");
-        pauseIcon.classList.add("hidden");
-        eq.classList.remove("eq-playing");
-      }
     }
 
     /**
@@ -2294,21 +1525,21 @@
         y += 2;
 
         addWrappedText("Delegation Regionale de l'Education de Base (Cameroun) - Stage (Aout 2024)", 9.5, true);
-        addWrappedText("- Maintenance informatique, gestion du site internet, assistance aux utilisateurs, resolution d'incidents et mise a jour du parc.", 8.8, false, 2);
+        addWrappedText("- Maintenance informatique, assistance aux utilisateurs, resolution d'incidents et mise a jour du parc.", 8.8, false, 2);
         y += 3;
 
         // FORMATION
         addSectionTitle("FORMATION");
         addWrappedText("ECE Ecole d'Ingenieurs - Bordeaux (2025 - 2028) | Bachelor Developpeur en IA (2e annee)", 9.5, true);
-        addWrappedText("Enseignements : Python, C, C++, Reseaux, DevOps, Developpement Web, Bases de donnees, SQL.", 8.8, false, 2);
+        addWrappedText("Enseignements : Python, C, Reseaux, DevOps, Developpement Web, Bases de donnees, SQL.", 8.8, false, 2);
         y += 3;
 
         // COMPETENCES TECHNIQUES
         addSectionTitle("COMPETENCES TECHNIQUES & LANGUES");
-        addWrappedText("Systemes : Windows 10/11, support utilisateurs, maintenance et diagnostic materiel, installation de postes.", 8.8);
-        addWrappedText("Reseaux : TCP/IP, DHCP, routage, ping, adressage IP, routeurs, Cisco Packet Tracer.", 8.8);
-        addWrappedText("Cloud & Outils : Microsoft 365 (Teams, SharePoint, OneDrive), Google Workspace, Excel, WordPress, VirtualBox, VS Code, Ninite, Git.", 8.8);
-        addWrappedText("Langues & Qualites : Bilingue Francais / Anglais (langues maternelles), Espagnol | Esprit d'analyse, sens du service, autonomie.", 8.8);
+        addWrappedText("Skills: Windows 10/11, user support, hardware diagnostics & maintenance, workstation setup.", 8.8);
+        addWrappedText("Networks: TCP/IP, DHCP, routing, ping, IP addressing, routers, Cisco Packet Tracer.", 8.8);
+        addWrappedText("Cloud & Tools: Microsoft 365 (Teams, SharePoint, OneDrive), Google Workspace, Excel, WordPress, VirtualBox, VS Code, Ninite, Git.", 8.8);
+        addWrappedText("Languages & Soft Skills: Bilingual French / English | Analytical mindset, service-oriented, autonomy.", 8.8);
 
         doc.save("CV_Maria_Essindi_Bidjo.pdf");
         showToast(I18N[state.lang].pdfGeneratedToast);
