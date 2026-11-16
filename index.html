@@ -294,12 +294,22 @@
           </button>
 
           <!-- Expandable Spotify Embed Popover -->
-          <div id="spotify-popover" class="hidden absolute right-0 mt-2 w-[300px] sm:w-[320px] rounded-2xl bento-card p-3 z-50 shadow-2xl">
+          <div id="spotify-popover" class="hidden absolute right-0 mt-2 w-[300px] sm:w-[340px] rounded-2xl bento-card p-3 z-50 shadow-2xl">
             <div class="flex items-center justify-between mb-2">
               <span class="font-mono text-[10px] uppercase tracking-wider text-chrome-300">Spotify Player</span>
               <button type="button" onclick="toggleSpotifyDrawer()" class="text-chrome-400 hover:text-white text-xs px-1.5 py-0.5 rounded">✕</button>
             </div>
-           <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3PEwQ1uaMwg0ehoTeVm7Yq?utm_source=generator&si=77d9aa07432c4ca1" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe
+              data-testid="embed-iframe"
+              style="border-radius:12px"
+              src="https://open.spotify.com/embed/track/3PEwQ1uaMwg0ehoTeVm7Yq?utm_source=generator&si=77d9aa07432c4ca1"
+              width="100%"
+              height="152"
+              frameBorder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
           </div>
         </div>
 
@@ -601,9 +611,8 @@
       music: {
         title: "No Idea",
         artist: "Don Toliver",
-        // Optional: Set "./no-idea.mp3" if you place the local MP3 file next to index.html
         mp3Url: "",
-        spotifyEmbedUrl: "https://open.spotify.com/embed/track/3VyjsVV24RmBIbWJAeUJQg?utm_source=generator&theme=0"
+        spotifyEmbedUrl: "https://open.spotify.com/embed/track/3PEwQ1uaMwg0ehoTeVm7Yq?utm_source=generator&si=77d9aa07432c4ca1"
       },
 
       // Add or edit your featured projects here — they appear automatically in Station 02!
@@ -2910,6 +2919,371 @@
         this.renderer.render(this.scene, this.camera);
       }
     };
+
+    /**
+     * =========================================================================
+     * NAVIGATION, LANGUAGE, MODAL & ANIME QUIZ CONTROLLERS
+     * =========================================================================
+     */
+    function switchMode(targetMode) {
+      state.mode = targetMode;
+      const hubView = document.getElementById("hub-view");
+      const studioView = document.getElementById("studio-view");
+      const holoLayer = document.getElementById("holo-labels-layer");
+      const hubBtn = document.getElementById("nav-hub-btn");
+      const studioBtn = document.getElementById("nav-studio-btn");
+
+      if (targetMode === "hub") {
+        hubView.classList.remove("hidden");
+        studioView.classList.add("hidden");
+        holoLayer.classList.add("opacity-0", "pointer-events-none");
+        hubBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all bg-chrome-200 text-obsidian-950 shadow-sm";
+        studioBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all text-chrome-300 hover:text-white flex items-center gap-1.5";
+        Studio3DEngine.setOrbitOverviewMode(true);
+      } else {
+        hubView.classList.add("hidden");
+        studioView.classList.remove("hidden");
+        holoLayer.classList.remove("opacity-0");
+        studioBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all bg-chrome-200 text-obsidian-950 shadow-sm flex items-center gap-1.5";
+        hubBtn.className = "px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all text-chrome-300 hover:text-white";
+        Studio3DEngine.setOrbitOverviewMode(false);
+      }
+    }
+
+    function setLanguage(lang) {
+      state.lang = lang;
+      const t = I18N[lang];
+
+      document.getElementById("lang-fr").className = lang === "fr"
+        ? "px-2.5 py-1 rounded-lg font-semibold transition-all bg-chrome-200 text-obsidian-950"
+        : "px-2.5 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white";
+      document.getElementById("lang-en").className = lang === "en"
+        ? "px-2.5 py-1 rounded-lg font-semibold transition-all bg-chrome-200 text-obsidian-950"
+        : "px-2.5 py-1 rounded-lg font-medium transition-all text-chrome-400 hover:text-white";
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (t[key]) el.textContent = t[key];
+      });
+
+      document.getElementById("hero-status").textContent = t.heroStatus;
+      document.getElementById("hero-title").textContent = t.heroTitle;
+      document.getElementById("hero-bio").textContent = t.heroBio;
+
+      Studio3DEngine.updateHoloLabelTexts();
+      if (state.activeStationId) {
+        renderModalContent(state.activeStationId);
+      }
+    }
+
+    function openNearestStation() {
+      const nearest = Studio3DEngine.getNearestStation();
+      if (nearest) {
+        openStationModal(nearest.id);
+      } else {
+        openStationModal("profile");
+      }
+    }
+
+    function openStationModal(stationId) {
+      state.activeStationId = stationId;
+      const modal = document.getElementById("station-modal");
+      modal.classList.remove("hidden");
+      if (stationId === "quiz" && state.quiz.questions.length === 0) {
+        initQuiz();
+      }
+      renderModalContent(stationId);
+    }
+
+    function closeStationModal() {
+      state.activeStationId = null;
+      document.getElementById("station-modal").classList.add("hidden");
+    }
+
+    function navigateModalStation(dir) {
+      const list = I18N[state.lang].stations;
+      const idx = list.findIndex(s => s.id === state.activeStationId);
+      if (idx === -1) return;
+      const nextIdx = (idx + dir + list.length) % list.length;
+      const nextId = list[nextIdx].id;
+      Studio3DEngine.navigateToStation(nextId, false);
+      openStationModal(nextId);
+    }
+
+    function setExpFilter(cat) {
+      state.expFilter = cat;
+      renderModalContent("experience");
+    }
+
+    function renderModalContent(stationId) {
+      const t = I18N[state.lang];
+      const stMeta = t.stations.find(s => s.id === stationId);
+      const body = document.getElementById("modal-body");
+      if (!stMeta || !body) return;
+
+      document.getElementById("modal-station-num").textContent = stMeta.num;
+      document.getElementById("modal-station-title").textContent = stMeta.title;
+      document.getElementById("modal-station-subtitle").textContent = stMeta.subtitle;
+
+      if (stationId === "profile") {
+        const p = t.profileData;
+        body.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            ${p.highlights.map(h => `
+              <div class="p-4 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15">
+                <div class="font-mono text-[10px] uppercase tracking-wider text-chrome-400">${h.label}</div>
+                <div class="font-display text-sm font-semibold text-chrome-100 mt-1">${h.value}</div>
+              </div>
+            `).join("")}
+          </div>
+
+          <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="font-mono text-xs uppercase tracking-wider text-chrome-400">${p.headingEdu}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-chrome-200/10 font-mono text-xs text-chrome-200">${p.eduPeriod}</span>
+            </div>
+            <div>
+              <h4 class="font-display text-lg font-bold text-chrome-100">${p.eduSchool}</h4>
+              <p class="text-sm text-chrome-300 mt-0.5">${p.eduDegree}</p>
+            </div>
+            <div class="flex flex-wrap gap-2 pt-2">
+              ${p.eduModules.map(m => `<span class="px-3 py-1 rounded-xl bg-obsidian-800 border border-chrome-300/15 font-mono text-xs text-chrome-200">${m}</span>`).join("")}
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
+            <div class="font-mono text-xs uppercase tracking-wider text-chrome-400">${p.headingQualities}</div>
+            <div class="flex flex-wrap gap-2">
+              ${p.qualities.map(q => `<span class="px-3.5 py-1.5 rounded-xl bg-chrome-200/10 border border-chrome-300/20 text-xs font-medium text-chrome-100">${q}</span>`).join("")}
+            </div>
+          </div>
+        `;
+      } else if (stationId === "experience") {
+        const categories = ["ALL", ...new Set(t.experiencesData.map(e => e.category))];
+        const filtered = state.expFilter === "ALL"
+          ? t.experiencesData
+          : t.experiencesData.filter(e => e.category === state.expFilter);
+
+        body.innerHTML = `
+          <div class="flex flex-wrap items-center gap-2">
+            ${categories.map(cat => `
+              <button onclick="setExpFilter('${cat}')" class="px-3.5 py-1.5 rounded-xl font-mono text-xs transition-all ${state.expFilter === cat ? 'bg-chrome-200 text-obsidian-950 font-semibold' : 'bg-obsidian-850 text-chrome-300 border border-chrome-300/15 hover:text-white'}">
+                ${cat === "ALL" ? (state.lang === "fr" ? "Tout" : "All") : cat}
+              </button>
+            `).join("")}
+          </div>
+
+          <div class="space-y-4">
+            ${filtered.map(exp => `
+              <article class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                  <div>
+                    <h4 class="font-display text-base sm:text-lg font-bold text-chrome-100">${exp.role}</h4>
+                    <p class="text-xs sm:text-sm font-medium text-chrome-300">${exp.company}</p>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-chrome-200/10 border border-chrome-300/20 font-mono text-xs text-chrome-200">${exp.period}</span>
+                </div>
+                <ul class="space-y-1.5 text-xs sm:text-sm text-chrome-300/90 list-disc pl-5">
+                  ${exp.bullets.map(b => `<li>${b}</li>`).join("")}
+                </ul>
+                <div class="flex flex-wrap gap-1.5 pt-2">
+                  ${exp.badges.map(b => `<span class="px-2.5 py-0.5 rounded-lg bg-obsidian-800 border border-chrome-300/15 font-mono text-[11px] text-chrome-200">${b}</span>`).join("")}
+                </div>
+              </article>
+            `).join("")}
+          </div>
+        `;
+      } else if (stationId === "skills") {
+        body.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            ${t.skillsCategories.map(cat => `
+              <div class="p-5 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-3">
+                <h4 class="font-display text-base font-bold text-chrome-100">${cat.title}</h4>
+                <div class="flex flex-wrap gap-2">
+                  ${cat.items.map(item => `<span class="px-3 py-1.5 rounded-xl bg-obsidian-800 border border-chrome-300/15 text-xs text-chrome-200">${item}</span>`).join("")}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      } else if (stationId === "quiz") {
+        renderQuizBody(body, t.quizUI);
+      } else if (stationId === "contact") {
+        const c = t.contactUI;
+        body.innerHTML = `
+          <div class="p-6 rounded-2xl bg-obsidian-850/90 border border-chrome-300/15 space-y-4">
+            <h4 class="font-display text-xl font-bold text-chrome-100">${c.heading}</h4>
+            <p class="text-sm text-chrome-300 leading-relaxed">${c.sub}</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <a href="mailto:${PORTFOLIO_CONFIG.email}" class="p-4 rounded-2xl bg-obsidian-800 hover:bg-obsidian-700 border border-chrome-300/20 flex items-center justify-between transition-colors">
+                <div>
+                  <div class="font-mono text-[10px] uppercase text-chrome-400">Email</div>
+                  <div class="text-sm font-medium text-chrome-100">${PORTFOLIO_CONFIG.email}</div>
+                </div>
+                <span class="font-mono text-xs text-chrome-300">→</span>
+              </a>
+
+              <a href="tel:${PORTFOLIO_CONFIG.phoneHref}" class="p-4 rounded-2xl bg-obsidian-800 hover:bg-obsidian-700 border border-chrome-300/20 flex items-center justify-between transition-colors">
+                <div>
+                  <div class="font-mono text-[10px] uppercase text-chrome-400">${t.phoneLabel}</div>
+                  <div class="text-sm font-medium text-chrome-100">${PORTFOLIO_CONFIG.phoneDisplay}</div>
+                </div>
+                <span class="font-mono text-xs text-chrome-300">→</span>
+              </a>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-3">
+              <button onclick="downloadCV()" class="chrome-btn-primary px-5 py-3 rounded-2xl text-sm font-display">
+                ${c.downloadAction}
+              </button>
+              <a href="${PORTFOLIO_CONFIG.socials.linkedin}" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-obsidian-800 hover:bg-obsidian-700 border border-chrome-300/20 text-xs font-mono text-chrome-100">
+                LinkedIn ↗
+              </a>
+              <a href="${PORTFOLIO_CONFIG.socials.github}" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-2xl bg-obsidian-800 hover:bg-obsidian-700 border border-chrome-300/20 text-xs font-mono text-chrome-100">
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    /**
+     * =========================================================================
+     * ANIME & MANGA CHARACTER QUIZ LOGIC (RANDOMIZED 8-OF-20 POOL)
+     * =========================================================================
+     */
+    function initQuiz() {
+      const shuffled = [...ANIME_CHARACTERS].sort(() => Math.random() - 0.5).slice(0, 8);
+      state.quiz = {
+        questions: shuffled,
+        currentIndex: 0,
+        score: 0,
+        streak: 0,
+        answered: false,
+        selectedOption: null,
+        finished: false
+      };
+      if (state.activeStationId === "quiz") {
+        renderModalContent("quiz");
+      }
+    }
+
+    function answerQuiz(option) {
+      if (state.quiz.answered || state.quiz.finished) return;
+      const q = state.quiz.questions[state.quiz.currentIndex];
+      state.quiz.answered = true;
+      state.quiz.selectedOption = option;
+
+      if (option === q.correctAnime) {
+        state.quiz.score += 1;
+        state.quiz.streak += 1;
+      } else {
+        state.quiz.streak = 0;
+      }
+      renderModalContent("quiz");
+    }
+
+    function nextQuizQuestion() {
+      if (state.quiz.currentIndex + 1 >= state.quiz.questions.length) {
+        state.quiz.finished = true;
+      } else {
+        state.quiz.currentIndex += 1;
+        state.quiz.answered = false;
+        state.quiz.selectedOption = null;
+      }
+      renderModalContent("quiz");
+    }
+
+    function renderQuizBody(body, qUI) {
+      if (state.quiz.finished) {
+        body.innerHTML = `
+          <div class="p-8 rounded-3xl bg-obsidian-850/90 border border-chrome-300/20 text-center space-y-4">
+            <div class="font-mono text-xs uppercase tracking-widest text-chrome-400">${qUI.scoreLabel}</div>
+            <div class="font-display text-4xl font-bold liquid-chrome-text">${state.quiz.score} / ${state.quiz.questions.length}</div>
+            <h4 class="font-display text-xl font-bold text-chrome-100">${qUI.finishTitle}</h4>
+            <p class="text-sm text-chrome-300 max-w-md mx-auto">${qUI.finishSub}</p>
+            <button onclick="initQuiz()" class="chrome-btn-primary px-6 py-3 rounded-2xl text-sm font-display">
+              ${qUI.restartBtn}
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      const q = state.quiz.questions[state.quiz.currentIndex];
+      const shuffledOptions = [...q.options];
+
+      body.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+          <span class="text-chrome-400">${qUI.intro}</span>
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-xl bg-obsidian-850 border border-chrome-300/20 text-chrome-100">${state.quiz.currentIndex + 1}/${state.quiz.questions.length}</span>
+            <span class="px-3 py-1 rounded-xl bg-chrome-200/15 border border-chrome-300/25 text-chrome-100">${qUI.scoreLabel}: ${state.quiz.score}</span>
+            <span class="px-3 py-1 rounded-xl bg-obsidian-850 border border-chrome-300/20 text-emerald-300">${qUI.streakLabel}: ${state.quiz.streak}</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-5 rounded-3xl bg-obsidian-850/90 border border-chrome-300/15">
+          <div class="md:col-span-4 flex flex-col items-center gap-2">
+            <div class="w-40 h-40 rounded-3xl overflow-hidden border border-chrome-300/25 shadow-xl">
+              ${q.svg}
+            </div>
+            <div class="font-display font-bold text-base text-chrome-100">${q.name}</div>
+            <div class="font-mono text-[11px] text-chrome-400 text-center">${q.clue[state.lang]}</div>
+          </div>
+
+          <div class="md:col-span-8 space-y-3">
+            <div class="font-display text-base font-semibold text-chrome-100">${qUI.questionPrefix}</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${shuffledOptions.map(opt => {
+                let btnStyle = "bg-obsidian-800 hover:bg-obsidian-700 border-chrome-300/20 text-chrome-100";
+                if (state.quiz.answered) {
+                  if (opt === q.correctAnime) {
+                    btnStyle = "bg-emerald-500/25 border-emerald-400 text-emerald-200 font-semibold";
+                  } else if (opt === state.quiz.selectedOption) {
+                    btnStyle = "bg-rose-500/25 border-rose-400 text-rose-200";
+                  } else {
+                    btnStyle = "bg-obsidian-900/60 border-chrome-300/10 text-chrome-500";
+                  }
+                }
+                return `
+                  <button onclick="answerQuiz('${opt.replace(/'/g, "\\'")}')" ${state.quiz.answered ? "disabled" : ""} class="p-3.5 rounded-2xl border text-left text-xs sm:text-sm transition-all ${btnStyle}">
+                    ${opt}
+                  </button>
+                `;
+              }).join("")}
+            </div>
+
+            ${state.quiz.answered ? `
+              <div class="pt-3 flex flex-wrap items-center justify-between gap-3 border-t border-chrome-300/10">
+                <span class="text-xs font-mono ${state.quiz.selectedOption === q.correctAnime ? 'text-emerald-300' : 'text-rose-300'}">
+                  ${state.quiz.selectedOption === q.correctAnime ? qUI.correctMsg : `${qUI.wrongMsg} ${q.correctAnime}`}
+                </span>
+                <button onclick="nextQuizQuestion()" class="chrome-btn-primary px-4 py-2 rounded-xl text-xs font-display">
+                  ${qUI.nextBtn}
+                </button>
+              </div>
+            ` : ""}
+          </div>
+        </div>
+      `;
+    }
+
+    /**
+     * =========================================================================
+     * BOOTSTRAP APPLICATION ON WINDOW LOAD
+     * =========================================================================
+     */
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("hub-linkedin-link").href = PORTFOLIO_CONFIG.socials.linkedin;
+      document.getElementById("hub-github-link").href = PORTFOLIO_CONFIG.socials.github;
+      drawMiniHeroAvatar();
+      initQuiz();
+      Studio3DEngine.init();
+      setLanguage("fr");
+    });
   </script>
 </body>
 </html>
